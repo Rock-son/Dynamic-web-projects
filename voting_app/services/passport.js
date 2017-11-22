@@ -1,7 +1,7 @@
 "use strict"
 const passport = require("passport"),
       User = require("../models/user"),
-      config = require("../config"),
+      secret = process.env.JWT_SECRET,
       JwtStrategy = require("passport-jwt").Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
       LocalStrategy = require("passport-local");
@@ -34,7 +34,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 // Setup options for JWT strategy - for signup
 const jwtOptions = {
       jwtFromRequest: ExtractJwt.fromHeader("authorization"),
-      secretOrKey: config.secret
+      secretOrKey: secret
 };
 // Create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {

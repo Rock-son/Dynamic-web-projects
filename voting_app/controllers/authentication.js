@@ -2,7 +2,7 @@
 
 const User = require("../models/user"),
       jwt = require("jwt-simple"),
-      secret = process.env.SECRET;
+      secret = process.env.JWT_SECRET;
       
 
 
