@@ -1,0 +1,18 @@
+extends layout   
+
+block content
+    .body-container
+        .body-container__header 
+        h1 Free Code Camp - Dynamic Web Projects
+        p Check this out #{author.toUpperCase()}!
+
+        ul
+        each article, i in articles
+            li= article.title
+
+
+        .body-container__main
+        p Here comes a couple of images #{view}
+
+        .body-container__footer
+        p And here comes... the footer!
