@@ -3,9 +3,6 @@
 var Authentication = require("./controllers/authentication"),
     fs = require("fs"),
     path = require("path"),
-    postcssMiddleware = require("postcss-middleware"),
-    autoprefixer = require("autoprefixer"),
-    postcss_scss = require("postcss-scss"),
     // PASSPORT service
     passportService = require("./services/passport"),
     passport = require("passport"),
