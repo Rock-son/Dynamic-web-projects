@@ -1,6 +1,6 @@
 const User = require("../models/user"),
       jwt = require("jwt-simple"),
-      config = require("../config");
+      config = require("../config") || process.env.CONFIG;
 
 
     function tokenForUser(user) {
