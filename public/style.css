@@ -11,7 +11,8 @@ body {
     font-size: 1.5rem;
     color: #333;
     background-color: rgb(33, 134, 201);
-
+    box-shadow: 1px 1px 15px black;
+    width: calc(100% - 200px)
 }
 
 @import "./scss/header.scss";
