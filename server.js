@@ -6,10 +6,13 @@ const express = require("express"),
       http = require("http"),
       path = require("path"),
       fs = require("fs"),
+      bodyParser = require("body-parser"),
+      // templating and scss      
+      pug = require("pug"),
+      postcss = require("postcss"),
       postcssMiddleware = require("postcss-middleware"),
       autoprefixer = require("autoprefixer"),
       postcss_scss = require("postcss-scss"),
-      bodyParser = require("body-parser"),
       // ROUTES
       votingApp = require("./voting_app/voting_app"),
       // SECURITY
@@ -27,12 +30,22 @@ const express = require("express"),
       app = express();
 
 
-
-
 // App Setup
 app.use(bodyParser.json({type: "*/*"}));
 app.use(morgan({stream: accessLogStream}));
-app.set(express.static(path.join(__dirname, "public")));
+app.use('/^\/css\/([a-z-]+)\.css$/', postcssMiddleware({
+
+      src: (req) => {            
+            path.join("public", req.params[0],"*css"); // callback added to express req obj - build a path to folder or file wish to be read/parsed
+      }, 
+      plugins: [autoprefixer, postcss_scss],
+      options: {
+            parser: postcss_scss
+      }
+}));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+app.use(express.static(path.join(__dirname, 'public')));
 // CSS Setup
 
 app.use("/voting-app", votingApp);
@@ -41,14 +54,6 @@ app.use("/voting-app", votingApp);
 // SECURITY middleware (Helmet, Helmet-csp)
 app.use(helmet({dnsPrefetchControl: {allow: true}}));
 
-/*app.use(function(req, res, next) {
-      res.set({
-      "Access-Control-Allow-Origin" : "*",
-      "Access-Control-Allow-Headers" : "Origin, X-Requested-With, content-type, Accept"
-      });
-      app.disable('x-powered-by');
-      next();
-});*/
 
 
 
@@ -75,7 +80,30 @@ reportOnly: function (req, res) {
 // DB Setup
 mongoose.connect(dbUrl);
 
+app.get("/", function(req, res) {
+      const articles = [
+            {
+                  id: 1,
+                  title: "Article One",
+                  author: "Brad Cavanaugh",
+                  body: "This is article One"
+            },
+            {
+                  id: 2,
+                  title: "Article Two",
+                  author: "Ziggy Filters",
+                  body: "This is article two"
+            },
+            {
+                  id: 3,
+                  title: "Article Three",
+                  author: "Tobacco Man",
+                  body: "This is article three"
+            }
 
+      ]
+      res.render("index", {author: "ROK", view: req.path, articles})
+});
 
 // logging (Helmet-csp) CSP blocked requests
 app.post("/report-violation", Log.logged);
@@ -84,3 +112,23 @@ app.post("/report-violation", Log.logged);
 //Server Setup
 const server = http.createServer(app);
 server.listen(port, () => console.log("Listening on port: " + port));
+
+
+
+
+
+
+
+
+
+
+
+
+/*app.use(function(req, res, next) {
+      res.set({
+      "Access-Control-Allow-Origin" : "*",
+      "Access-Control-Allow-Headers" : "Origin, X-Requested-With, content-type, Accept"
+      });
+      app.disable('x-powered-by');
+      next();
+});*/
