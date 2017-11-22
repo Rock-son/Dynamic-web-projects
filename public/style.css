@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    min-height: 100%;
+    min-width: 100%;
+    font-size: 1rem;
+}
+.body-container {
+    font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+    font-size: 1.5rem;
+    color: #333;
+    background-color: rgb(33, 134, 201);
+
+}
+
+@import "./scss/header.scss";
+@import "./scss/body.scss";
+@import "./scss/footer.scss"

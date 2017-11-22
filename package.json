@@ -1,0 +1,39 @@
+{
+  "name": "dynamic-web-projects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rock-son/Dynamic-web-projects.git"
+  },
+  "author": "RZ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rock-son/Dynamic-web-projects/issues"
+  },
+  "homepage": "https://github.com/Rock-son/Dynamic-web-projects#readme",
+  "dependencies": {
+    "autoprefixer": "^7.1.6",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "helmet": "^3.9.0",
+    "helmet-csp": "^2.6.0",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.13.3",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "postcss-middleware": "^1.1.4",
+    "postcss-scss": "^1.0.2",
+    "pug": "^2.0.0-rc.4"
+  }
+}
