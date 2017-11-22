@@ -1,11 +1,11 @@
 const User = require("../models/user"),
       jwt = require("jwt-simple"),
-      config = process.env.SECRET || require("../config");
+      secret = process.env.SECRET || require("../config");
 
 
     function tokenForUser(user) {
         const timestamp = new Date().getTime();
-        return jwt.encode({ sub: user._id, iat: timestamp }, config.secret);  // "sub" as a subject & "iat" as in Issued at Time, config.secret as a signature
+        return jwt.encode({ sub: user._id, iat: timestamp }, secret);  // "sub" as a subject & "iat" as in Issued at Time, config.secret as a signature
     }
 
 
