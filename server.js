@@ -20,7 +20,7 @@ const express = require("express"),
       helmet_csp = require("helmet-csp"),  
       // LOGGING
       morgan = require('morgan'),
-      accessLogStream = fs.createWriteStream(path.join(__dirname, "logs", 'access.log'), {flags: 'a'}), // writable stream - for MORGAN logging
+      //accessLogStream = fs.createWriteStream(path.join(__dirname, "logs", 'access.log'), {flags: 'a'}), // writable stream - for MORGAN logging
       Log = require("./services/morganLog"),    
       // DB
       mongoose = require("mongoose"),      
@@ -32,7 +32,7 @@ const express = require("express"),
 
 // App Setup
 app.use(bodyParser.json({type: "*/*"}));
-app.use(morgan({stream: accessLogStream}));
+//app.use(morgan({stream: accessLogStream}));
 app.use('/^\/css\/([a-z-]+)\.css$/', postcssMiddleware({
 
       src: (req) => {            
