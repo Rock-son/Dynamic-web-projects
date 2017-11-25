@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet({dnsPrefetchControl: {allow: true}}));
 app.use(helmet_csp({
 directives: {
-      defaultSrc: ["'self'"],
+  //    defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "https://cdnjs.cloudflare.com"],
       fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
