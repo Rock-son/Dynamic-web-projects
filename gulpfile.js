@@ -3,7 +3,8 @@ const gulp = require("gulp"),
       postcss = require("gulp-postcss"),
       autoprefixer = require("autoprefixer"),
       sass = require("gulp-sass"),
-      stylesPath = "./public/assets/styles/";
+      mainStylesPath = "./public/assets/styles/",
+      votingAppStylePath = "./voting_app/public/assets/styles";
       
 
 gulp.task("default", function() {
@@ -19,12 +20,20 @@ gulp.task("html", function() {
 
 
 // SCSS
-gulp.task("styles", function() {
+gulp.task("homePageStyles", function() {
     
-    return gulp.src(stylesPath + "/scss/main.scss")
+    return gulp.src(mainStylesPath + "/scss/main.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
-        .pipe(gulp.dest(stylesPath));
+        .pipe(gulp.dest(mainStylesPath));
+});
+
+gulp.task("votingPageStyles", function() {
+    
+    return gulp.src(votingAppStylePath + "/scss/main.scss")
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
+        .pipe(gulp.dest(votingAppStylePath));
 });
 
 
@@ -34,7 +43,10 @@ gulp.task("watch", function() {
     watch("./views/index.pug", function() {
         gulp.start("html");
     });
-    watch(stylesPath + "**/*.scss", function() {
-        gulp.start("styles");
+    watch(mainStylesPath + "**/*.scss", function() {
+        gulp.start("homePageStyles");
+    });
+    watch(votingAppStylePath + "**/*.scss", function() {
+        gulp.start("votingPageStyles");
     });
 });
