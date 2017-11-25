@@ -12,6 +12,7 @@ const express = require("express"),
       // ROUTES
       votingApp = require("./voting_app/voting_app"),
       // SECURITY
+      fontArr = require("./public/assets/fonts/fontAllow"),
       helmet = require("helmet"),
       helmet_csp = require("helmet-csp"),  
       /* LOGGING
