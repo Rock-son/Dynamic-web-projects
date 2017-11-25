@@ -12,14 +12,13 @@ const express = require("express"),
       // ROUTES
       votingApp = require("./voting_app/voting_app"),
       // SECURITY
-      fontArr = require("./public/assets/fonts/fontAllow"),
       helmet = require("helmet"),
       helmet_csp = require("helmet-csp"),  
-      // LOGGING
+      /* LOGGING
       morgan = require('morgan'),
       Log = require("./logs/services/morganLog"), 
-      //accessLogStream = fs.createWriteStream(path.join(__dirname, "logs", 'access.log'), {flags: 'a'}), // writable stream - for MORGAN logging   
-      // DB
+      accessLogStream = fs.createWriteStream(path.join(__dirname, "logs", 'access.log'), {flags: 'a'}), // writable stream - for MORGAN logging   
+      */// DB
       mongoose = require("mongoose"),      
       dbUrl = process.env.DBLINK,
       // PORT & ROUTER
@@ -43,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(helmet({dnsPrefetchControl: {allow: true}}));
 app.use(helmet_csp({
 directives: {
-  //    defaultSrc: ["'self'"],
+      defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "https://cdnjs.cloudflare.com"],
       fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
