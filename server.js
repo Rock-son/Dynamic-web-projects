@@ -93,7 +93,7 @@ app.get("/public/assets/fonts/*", function(req, res) {
 
 
 // logging (Helmet-csp) CSP blocked requests
-app.post("/report-violation", Log.logged);
+//app.post("/report-violation", Log.logged);
 
 
 //Server Setup
