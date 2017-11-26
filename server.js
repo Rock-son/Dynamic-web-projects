@@ -27,6 +27,8 @@ const express = require("express"),
       app = express();
 
 
+
+
 // App Setup
 app.use(bodyParser.json({type: "*/*"}));
 app.use(bodyParser.json({
@@ -47,7 +49,7 @@ directives: {
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "https://cdnjs.cloudflare.com"],
       fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
-      imgSrc: ["'self'", "https:", "www.dl.dropboxusercontent.com", "https://www.dl.dropboxusercontent.com"],
+      imgSrc: ["'self'", "https:", "www.dl.dropboxusercontent.com", "https://www.dl.dropboxusercontent.com", 'data:'],
       sandbox: ['allow-forms', 'allow-scripts'],
       reportUri: '/report-violation' // set up a POST route for notifying / logging data to server
 },
