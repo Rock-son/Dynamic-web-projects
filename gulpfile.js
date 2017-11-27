@@ -3,30 +3,43 @@ const gulp = require("gulp"),
       postcss = require("gulp-postcss"),
       autoprefixer = require("autoprefixer"),
       sass = require("gulp-sass"),
-      mainStylePath = "./public/assets/styles/",
-      votingAppStylePath = "./voting_app/public/assets/styles/";
+      // OUTPUT DIRs
+      homeOutputPath = "./public/assets/styles/",
+      votingOutputPath = "./voting_app/public/assets/styles/",
+      // STARTING DIRs
+      homeStylePath = homeOutputPath + "scss/home/",
+      registerStylePath = homeOutputPath + "scss/register/",
+      votingAppStylePath = votingOutputPath + "scss/index/";
 
 gulp.task('start', ['watch']);
 
-// TRANSFORM SCSS
-gulp.task("homePageStyles", function() {
-    
-    return gulp.src(mainStylePath + "scss/main.scss")
+// TRANSFORM SCSS TO CSS
+gulp.task("homePageStyles", function() {    
+    return gulp.src(homeStylePath + "index.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
-        .pipe(gulp.dest(mainStylePath));
+        .pipe(gulp.dest(homeOutputPath));
 });
-gulp.task("votingPageStyles", function() {
-    
-    return gulp.src(votingAppStylePath + "scss/main.scss")
+gulp.task("registerPageStyles", function() {    
+    return gulp.src(registerStylePath + "register.scss")
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
+        .pipe(gulp.dest(homeOutputPath));
+});
+gulp.task("votingPageStyles", function() {    
+    return gulp.src(votingAppStylePath + "index.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
-        .pipe(gulp.dest(votingAppStylePath));
+        .pipe(gulp.dest(votingOutputPath));
 });
 
 // WATCH
 gulp.task("watch", function() {
 
-    watch(mainStylePath + "**/*.scss", () => gulp.start("homePageStyles"));
-    watch(votingAppStylePath + "**/*.scss", () => gulp.start("votingPageStyles"));    
+    watch(homeStylePath + "*.scss", () => gulp.start("homePageStyles"));
+    watch(registerStylePath + "*.scss", () => gulp.start("registerPageStyles"));
+    watch(votingAppStylePath + "*.scss", () => gulp.start("votingPageStyles"));    
 });
+
+
+// e.g.  watch(votingAppStylePath + "**/*.scss", () => gulp.start("votingPageStyles"));

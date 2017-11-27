@@ -15,6 +15,8 @@ const express = require("express"),
       requireSignin = passport.authenticate("local", {session: false}),
       // pug    
       pug = require("pug"),
+      homepageCSS = "./assets/styles/index.css",
+      register_loginCSS = "./assets/styles/register.css",
       // ROUTES
       votingApp = require("./voting_app/voting_app"),
       // SECURITY
@@ -56,7 +58,7 @@ const express = require("express"),
 
 
       app.get("/", function(req, res) {
-            res.render("index", {author: "ROK"})
+            res.render("index", {cssPath: homepageCSS});
       });
 
 
