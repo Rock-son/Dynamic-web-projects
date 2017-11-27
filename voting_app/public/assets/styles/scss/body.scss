@@ -1,24 +1,27 @@
 
-.body {
-    position: relative;
-    height: 80vh;
-    width: 85vw;
+.context {
+    position: fixed;    
+    height: 72vh;
+    width: 100vw;
     font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
     font-size: 1rem;
     color: #333;
     text-align: center;
     margin: 0 auto;
+    background: url("https://www.dropbox.com/s/0ic1j552cl8ua8z/island-bridge.jpg?dl=1") no-repeat scroll center;
+    background-size: cover;
+    &__pollcontainer {
+        position: relative;
+        width: 80vw;
+        text-align: center;
+        margin: 0 auto;
+        padding-top: 5vh;
+    }
 }
 
-.container {
-    position: relative;
-    width: 80vw;
-    text-align: center;
-    margin: 0 auto;
-    padding-top: 5vh;
-}
 
-@import "./body_thumbnails.scss";
+
+
 
 @media (max-width: 1605px) {
     .body {

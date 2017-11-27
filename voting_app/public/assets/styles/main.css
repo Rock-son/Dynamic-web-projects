@@ -6,7 +6,7 @@
 @font-face {
   font-family: 'Roboto Condensed';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   src: url("/public/assets/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.eot");
   /* IE9 Compat Modes */
   src: local("Roboto Condensed"), local("RobotoCondensed-Regular"), url("/public/assets/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.eot?#iefix") format("embedded-opentype"), url("/public/assets/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.woff") format("woff"), url("/public/assets/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.ttf") format("truetype"), url("/public/assets/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.svg#RobotoCondensed") format("svg");
@@ -16,7 +16,7 @@
 @font-face {
   font-family: 'Advent Pro';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   src: url("/public/assets/fonts/AdventPro/advent-pro-v7-latin-regular.eot");
   /* IE9 Compat Modes */
   src: local("Advent Pro Regular"), local("AdventPro-Regular"), url("/public/assets/fonts/AdventPro/advent-pro-v7-latin-regular.eot?#iefix") format("embedded-opentype"), url("/public/assets/fonts/AdventPro/advent-pro-v7-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/AdventPro/advent-pro-v7-latin-regular.woff") format("woff"), url("/public/assets/fonts/AdventPro/advent-pro-v7-latin-regular.ttf") format("truetype"), url("/public/assets/fonts/AdventPro/advent-pro-v7-latin-regular.svg#AdventPro") format("svg");
@@ -26,7 +26,7 @@
 @font-face {
   font-family: 'ABeeZee';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   src: url("/public/assets/fonts/Abeezee/abeezee-v11-latin-regular.eot");
   /* IE9 Compat Modes */
   src: local("ABeeZee Regular"), local("ABeeZee-Regular"), url("/public/assets/fonts/Abeezee/abeezee-v11-latin-regular.eot?#iefix") format("embedded-opentype"), url("/public/assets/fonts/Abeezee/abeezee-v11-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/Abeezee/abeezee-v11-latin-regular.woff") format("woff"), url("/public/assets/fonts/Abeezee/abeezee-v11-latin-regular.ttf") format("truetype"), url("/public/assets/fonts/Abeezee/abeezee-v11-latin-regular.svg#ABeeZee") format("svg");
@@ -36,7 +36,7 @@
 @font-face {
   font-family: 'Vollkorn SC';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   src: url("/public/assets/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.eot");
   /* IE9 Compat Modes */
   src: local("Vollkorn SC Regular"), local("VollkornSC-Regular"), url("/public/assets/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.eot?#iefix") format("embedded-opentype"), url("/public/assets/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.woff") format("woff"), url("/public/assets/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.ttf") format("truetype"), url("/public/assets/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.svg#VollkornSC") format("svg");
@@ -50,157 +50,139 @@ body {
   font-size: 1rem;
   color: #666b70; }
 
+.btn {
+  display: inline-block;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: .1rem 1rem;
+  margin: .5rem 1rem 1rem auto;
+  border-radius: 5px;
+  font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+  border: 1px solid #10771a;
+  background-color: #279732;
+  text-decoration: none;
+  -webkit-transition: all .1s ease-in-out;
+  transition: all .1s ease-in-out; }
+  .btn:hover {
+    text-decoration: none;
+    background-color: #188623;
+    border: 1px solid #279732;
+    outline-width: 0; }
+  .btn:active {
+    text-decoration: none;
+    background-color: #279732;
+    border: 1px solid #279732;
+    background-image: none;
+    outline-width: 0; }
+
 .header {
   position: relative;
-  height: 10vh;
-  width: 100vw;
+  width: 100%;
   color: #fff;
-  background-color: #296DAD;
   -webkit-box-shadow: 1px 1px 15px black;
           box-shadow: 1px 1px 15px black;
-  font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+  font-family: "Advent Pro", Colibri, Arial, sans-serif;
   font-size: 2.8rem;
-  line-height: 2.5rem;
-  text-align: center; }
+  text-align: center;
+  background-color: #292222;
+  /*apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif*/ }
+  .header__nav {
+    display: block;
+    width: auto; }
+    .header__nav__homeDiv {
+      display: inline-block;
+      width: 45%; }
+      .header__nav__homeDiv__home {
+        font-size: 2.5rem;
+        color: #999;
+        text-decoration: none; }
+        .header__nav__homeDiv__home .fa-home {
+          color: #000;
+          text-shadow: 1px 1px 1px #fff, -1px -1px 2px #bbb; }
+          .header__nav__homeDiv__home .fa-home:hover {
+            color: #999;
+            text-decoration: none;
+            text-shadow: 1px 1px 1px #000, -1px -1px 2px #000; }
+    .header__nav__loginDiv {
+      display: inline-block;
+      width: 45%;
+      text-align: right; }
+      .header__nav__loginDiv__items {
+        font-size: 2.5rem;
+        color: #999;
+        text-decoration: none; }
+        .header__nav__loginDiv__items .fa-user {
+          margin-right: 5%;
+          color: #999;
+          text-shadow: 1px 1px 1px #000, -1px -1px 2px #000; }
+          .header__nav__loginDiv__items .fa-user:hover {
+            color: #fff;
+            text-decoration: none;
+            text-shadow: 1px 1px 1px #000, -1px -1px 2px #000; }
+        .header__nav__loginDiv__items .fa-github {
+          margin: 0 5px;
+          color: #000;
+          text-shadow: 1px 1px 1px #fff, -1px -1px 2px #bbb; }
+          .header__nav__loginDiv__items .fa-github:hover {
+            color: #eee;
+            text-decoration: none;
+            text-shadow: 1px 1px 1px #000, -1px -1px 2px #000; }
+        .header__nav__loginDiv__items .fa-twitter {
+          color: #1da1f2; }
+          .header__nav__loginDiv__items .fa-twitter:hover {
+            color: #01a2ff; }
+    .header__nav__line {
+      opacity: .5;
+      display: block;
+      clear: both;
+      margin: 0;
+      color: #514444;
+      -webkit-box-shadow: 0 10px 10px -10px #8c8c8c outset;
+              box-shadow: 0 10px 10px -10px #8c8c8c outset; }
+  .header__txt {
+    clear: both;
+    display: block;
+    margin: .5% auto 0 auto; }
+    .header__txt__title {
+      clear: both;
+      position: relative;
+      display: block;
+      margin: .5% auto;
+      line-height: 2rem;
+      opacity: .8;
+      text-shadow: 1px 1px 2px black, -1px -1px 2px black, 0px 0px 3px green; }
+    .header__txt__subtitle {
+      position: relative;
+      font-size: 1.8rem;
+      color: #378f71;
+      text-shadow: 0px 0px 1px #333; }
+    .header__txt__stub {
+      position: relative;
+      padding-top: 10px;
+      line-height: 3rem;
+      font-size: 2rem;
+      color: #fff; }
+    .header__txt__signup {
+      display: block; }
 
-.header__title {
-  width: auto;
-  position: relative;
-  margin-top: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-  text-shadow: 1px 1px 2px black, -1px -1px 2px black; }
-
-.body {
-  position: relative;
-  height: 80vh;
-  width: 85vw;
+.context {
+  position: fixed;
+  height: 72vh;
+  width: 100vw;
   font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
   font-size: 1rem;
   color: #333;
   text-align: center;
-  margin: 0 auto; }
-
-.container {
-  position: relative;
-  width: 80vw;
-  text-align: center;
   margin: 0 auto;
-  padding-top: 5vh; }
-
-.container__app:nth-child(2) {
-  color: #000;
-  text-shadow: 1px 1px 2px white, -1px -1px 2px white;
-  text-shadow: 1px 1px 2px black, -1px -1px 2px gold;
-  image-rendering: crisp-edges;
-  background: url("https://www.dropbox.com/s/32ey0kn4108lbkv/chart.jpg?dl=1") no-repeat scroll center;
+  background: url("https://www.dropbox.com/s/0ic1j552cl8ua8z/island-bridge.jpg?dl=1") no-repeat scroll center;
   background-size: cover; }
-
-.container__app:nth-child(3) {
-  color: #ff0713;
-  text-shadow: 1px 1px 2px yellow, -1px -1px 2px black;
-  image-rendering: crisp-edges;
-  background: url("https://www.dropbox.com/s/ae9acjawzfh8z1t/nightlife.jpg?dl=1") no-repeat scroll center;
-  background-size: cover; }
-
-.container__app:nth-child(4) {
-  color: #f5f106;
-  text-shadow: 1px 1px 2px black, -1px -1px 2px black;
-  image-rendering: crisp-edges;
-  background: url("https://www.dropbox.com/s/bjeiljb6mirofnz/stock-exchange.jpg?dl=1") no-repeat scroll center;
-  background-size: cover; }
-
-.container__app:nth-child(5) {
-  color: #fff;
-  text-shadow: 1px 1px 2px black, -1px -1px 2px black;
-  image-rendering: crisp-edges;
-  background: url("https://www.dropbox.com/s/bw3ohtsog5rnh43/books.jpg?dl=1") no-repeat scroll center;
-  background-size: cover; }
-
-.container__app:nth-child(6) {
-  color: #fff;
-  text-shadow: 1px 1px 2px black, -1px -1px 2px black;
-  image-rendering: crisp-edges;
-  background: url("https://www.dropbox.com/s/2drvztgzew1fpu1/pinterest.png?dl=1") no-repeat scroll center;
-  background-size: cover; }
-
-.container__app {
-  position: relative;
-  font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
-  display: inline-block;
-  margin: 0 2rem 4rem 2rem;
-  padding: 2rem 2rem 2rem 2rem;
-  height: 18vh;
-  width: 16vw;
-  min-height: 150px;
-  min-width: 300px;
-  font-size: 1.2rem;
-  background-color: #333;
-  border-radius: 5px; }
-  .container__app__title {
-    max-width: 100%;
-    font-weight: 700;
-    font-size: 1.5rem; }
-  .container__app__desc {
-    max-width: 90%; }
-  .container__app__greyout {
-    position: absolute;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    color: #a59e9e;
-    opacity: 0;
-    top: 0;
-    right: 0;
-    border-radius: 5px;
-    -webkit-transition: all .7s ease-out;
-    transition: all .7s ease-out;
-    -webkit-transform: rotateY(180deg);
-            transform: rotateY(180deg); }
-    .container__app__greyout:hover {
-      opacity: 1;
-      -webkit-transform: rotateY(0deg);
-              transform: rotateY(0deg);
-      color: #333;
-      cursor: pointer;
-      border: 1px outset #333; }
-    .container__app__greyout .fa {
-      position: absolute;
-      top: 15%;
-      left: 50%;
-      font-size: 10rem;
-      color: #2fff5c;
-      -webkit-transform: translateX(-50%);
-              transform: translateX(-50%);
-      -webkit-transition: color 0.5s ease-in;
-      transition: color 0.5s ease-in; }
-    .container__app__greyout p {
-      position: absolute;
-      top: 0%;
-      left: 50%;
-      color: #2fff5c;
-      -webkit-transform: translateX(-50%);
-              transform: translateX(-50%);
-      -webkit-transition: color 0.3s ease-in;
-      transition: color 0.3s ease-in; }
-
-@-webkit-keyframes myRotate {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
-
-@keyframes myRotate {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
+  .context__pollcontainer {
+    position: relative;
+    width: 80vw;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 5vh; }
 
 @media (max-width: 1605px) {
   .body {
@@ -217,25 +199,41 @@ body {
     width: 50vw; } }
 
 .footer {
-  height: 10vh;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 3vh;
   margin: 0 auto;
-  font-size: 0.5rem;
+  font-size: .8rem;
   color: #333;
   text-align: center;
   margin: 0 auto;
-  background-color: #bbb; }
-
-.footer__codedby {
-  color: #333;
-  text-align: center;
-  margin: 0 auto; }
-
-a {
-  color: #333;
-  text-decoration: none; }
-
-a:hover {
-  text-decoration: underline; }
+  background-color: transparent; }
+  .footer__codedby {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    color: 333;
+    text-align: center;
+    margin: 0 auto;
+    font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+    background-color: transparent; }
+    .footer__codedby .fa-heart-o {
+      color: red; }
+    .footer__codedby__link {
+      text-decoration: none;
+      color: #333;
+      background-color: transparent; }
+      .footer__codedby__link:hover {
+        text-decoration: underline; }
+      .footer__codedby__link:visited {
+        text-decoration: underline;
+        color: #333; }
+      .footer__codedby__link:active {
+        text-decoration: underline;
+        color: #333; }
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
