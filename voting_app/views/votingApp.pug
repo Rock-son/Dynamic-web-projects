@@ -1,13 +1,38 @@
 extends votingAppLayout   
 
 block content
-    .header
-        .header__title Free Code Camp - Voting App
-    .body
-        .container
+    section.header
+        nav.header__nav
+            .header__nav__homeDiv
+                a(class="header__nav__homeDiv__home" href="../")
+                    i(class="fa fa-home" title="Home")
+            .header__nav__loginDiv
+                a(class="header__nav__loginDiv__items" href="/profile")
+                    i(class="fa fa-user" title="Profile")
+                a(class="header__nav__loginDiv__items" href="/github-signup")
+                    i(class="fa fa-github" title="Login with GitHub")
+                a(class="header__nav__loginDiv__items" href="/twitter-signup")
+                    i(class="fa fa-twitter" title="Login with Twitter")
+            hr.header__nav__line
+        article.header__txt
+            .header__txt__title Voting App
+            .header__txt__subtitle A Free Code Camp Project
+            .header__txt__stub A Place where you can make, host and share Polls
+            .header__txt__signup
+                a(class="btn" href="#" title="Credentials for testing: user  pa$$word") Register
+                a(class="btn" href="/auth/github" title="Credentials for testing: user  pa$$word") Login
+    section.context
+        .context__pollcontainer
 
 
-    .footer
-        hr 
-        footer.footer__codedby
-            p: a(href="https://codepen.io/Roky/full/YqGqWg" target="_blank") Coded By Roky
+
+
+
+
+    section.footer
+        footer.footer__codedby Made with 
+            i(class="fa fa-heart-o")
+            span &nbspby&nbsp
+            a(class="footer__codedby__link" href="https://codepen.io/Roky/full/YqGqWg" target="_blank") Roky
+            span &nbsp | &nbsp
+            a(class="footer__codedby__link" href="https://github.com/Rock-son/Dynamic-web-projects") GitHub Repository
