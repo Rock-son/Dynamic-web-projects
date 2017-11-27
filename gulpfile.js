@@ -4,8 +4,7 @@ const gulp = require("gulp"),
       autoprefixer = require("autoprefixer"),
       sass = require("gulp-sass"),
       mainStylePath = "./public/assets/styles/",
-      votingAppStylePath = "./voting_app/public/assets/styles/",
-      cleanCSS = require("gulp-clean-css");
+      votingAppStylePath = "./voting_app/public/assets/styles/";
 
 gulp.task('start', ['watch']);
 
@@ -15,7 +14,6 @@ gulp.task("homePageStyles", function() {
     return gulp.src(mainStylePath + "scss/main.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
-        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(gulp.dest(mainStylePath));
 });
 gulp.task("votingPageStyles", function() {
@@ -23,7 +21,6 @@ gulp.task("votingPageStyles", function() {
     return gulp.src(votingAppStylePath + "scss/main.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
-        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(gulp.dest(votingAppStylePath));
 });
 
