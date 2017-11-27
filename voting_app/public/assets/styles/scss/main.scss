@@ -1,4 +1,4 @@
-::after, ::before {
+::after, ::before, * { 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -66,37 +66,33 @@ body {
     -webkit-font-smoothing: antialiased;
     font-size: 1rem;
     color:#666b70;
-}
-.btn {
-    display: inline-block;
-    color: #fff;
-    font-size: 1rem;
-    line-height: 2rem;
-    padding: .1rem 1rem;
-    margin: .5rem 1rem 1rem auto;
-    border-radius: 5px;
-    font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
-    border: 1px solid rgb(16, 119, 26);
-    background-color: rgb(39, 151, 50);
-    text-decoration: none;    
-    transition: all .1s ease-in-out;
-    &:hover {
-        text-decoration: none;
-        background-color: rgb(24, 134, 35);
-        border: 1px solid rgb(39, 151, 50);
-        outline-width: 0;
-    }
-    &:active {
-        text-decoration: none;
-        background-color: rgb(39, 151, 50);
-        border: 1px solid rgb(39, 151, 50);
-        background-image: none;
-        outline-width: 0;
-    }
+    overflow-x: hidden;
 }
 
-
+ 
+@import "./buttons.scss";
 @import "./header.scss";
 @import "./body.scss";
 @import "./footer.scss";
+
+
+@media (max-width: 1605px) {
+    .body {
+        height: auto !important;
+    }
+    .container__app {
+        height: 25vh;
+        width: 25vw;
+    }
+}
+@media (max-width: 1070px) {
+    .body {
+        height: auto !important;
+    }
+    .container__app {
+        height: 30vh;
+        width: 50vw;
+    }
+}
+
 @import "./normalize.scss"; 
