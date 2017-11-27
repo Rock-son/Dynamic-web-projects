@@ -14,7 +14,7 @@ var fs = require("fs"),
 
 
     app.get("/", function(req, res) {
-        res.render("votingApp", {author: "ROK"})
+        res.render("indexVoting", {author: "ROK"})
     });
 
 
