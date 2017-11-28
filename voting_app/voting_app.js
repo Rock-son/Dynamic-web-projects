@@ -5,7 +5,8 @@ var fs = require("fs"),
     // PASSPORT service
     express = require("express"),
     app = express(),
-    pug = require("pug");
+    pug = require("pug"),
+    indexCSS = "./assets/styles/index.css";
 
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "pug");
@@ -14,7 +15,7 @@ var fs = require("fs"),
 
 
     app.get("/", function(req, res) {
-        res.render("indexVoting", {author: "ROK"})
+        res.render("indexVoting", { cssPath: indexCSS })
     });
 
 

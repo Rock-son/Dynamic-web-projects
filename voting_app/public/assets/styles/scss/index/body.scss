@@ -1,4 +1,4 @@
-@import "../images/chart.scss";
+@import "../../images/chart.scss";
 
 .context {
     height: 100vh;
@@ -9,10 +9,23 @@
     background: #333 url($votingAppUrl) no-repeat center center fixed;
     background-size: cover;
     z-index: -1;
-    &__card:nth-child(1) {
-       
-    }
-    &__card {
+}
+.context__card:nth-child(4n + 1) {
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+
+}
+.context__card:nth-child(4n + 3) {
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+}
+.context__card {
         position: relative;
         top: -70vh;
         display: block;
@@ -28,7 +41,7 @@
             text-align: left;
             padding: 0 0 1% 0;
             &__title {
-                background-color: #41cc87;
+                background-color: #26c978;
                 padding-left: 5%;
                 margin: 0 0 2% 0;
                 color: #fff;
@@ -69,6 +82,23 @@
             }
         }
     }
+
+
+@keyframes moveInRight {
+
+    0%  { right:-70vw }
+    52% { right: 5vw }
+    64% { right:-5vw }
+    76% { right: 2vw }
+    88% { right:-2vw }
+    100% {right:    0 }
 }
+@keyframes moveInLeft {
 
-
+    0%  { left:-70vw }
+    52% { left: 5vw }
+    64% { left:-5vw }
+    76% { left: 2vw }
+    88% { left:-2vw }
+    100% {left:    0 }
+}
