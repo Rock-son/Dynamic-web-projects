@@ -15,7 +15,7 @@
     animation-duration: 1s;
     animation-fill-mode: backwards;
     animation-iteration-count: 1;
-    animation-timing-function: ease-out;
+    animation-timing-function: cubic-bezier(0,.4,.37,1.28);
 
 }
 .context__card:nth-child(4n + 3) {
@@ -23,7 +23,7 @@
     animation-duration: 1s;
     animation-fill-mode: backwards;
     animation-iteration-count: 1;
-    animation-timing-function: ease-out;
+    animation-timing-function: cubic-bezier(0,.4,.37,1.28);
 }
 .context__card {
         position: relative;
@@ -102,3 +102,13 @@
     88% { left:-2vw }
     100% {left:    0 }
 }
+@keyframes moveInRight {
+    
+        0%  { right:-70vw }
+        100% {right:    0 }
+    }
+    @keyframes moveInLeft {
+    
+        0%  { left:-70vw }
+        100% {left:    0 }
+    }
