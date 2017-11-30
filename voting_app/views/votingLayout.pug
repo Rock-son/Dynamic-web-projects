@@ -1,5 +1,9 @@
 doctype html
 html(lang="en")
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     head
         title Free Code Camp - Dynamic Web Projecs
         meta(charset="utf-8")
@@ -9,4 +13,7 @@ html(lang="en")
         link(type="text/css" rel="stylesheet" href=cssPath)
         link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous")
     body
+        <!--[if lt IE 7]>
+            p(class="browsehappy") You are using an #[strong outdated] browser. Please #[a(href="#") upgrade your browser] to improve your experience.
+        <![endif]-->
         block content

@@ -22,4 +22,10 @@ module.exports = [
 "vollkorn-sc-v1-latin-regular.woff",
 "vollkorn-sc-v1-latin-regular.woff2",
 "vollkorn-sc-v1-latin-regular.ttf",
+
+"lato-v14-latin-regular.eot",
+"lato-v14-latin-regular.svg",
+"lato-v14-latin-regular.woff",
+"lato-v14-latin-regular.woff2",
+"lato-v14-latin-regular.ttf",
 ];

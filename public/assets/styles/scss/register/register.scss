@@ -1,0 +1,38 @@
+
+$path: "/public/assets";
+/* lato-regular - latin */
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('#{$path}/fonts/lato-v14-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Lato Regular'), local('Lato-Regular'),
+         url('#{$path}/fonts/lato-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/lato-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/lato-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/lato-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/lato-v14-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
+}
+/* abeezee-regular - latin */
+@font-face {
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 300;
+    src: url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('ABeeZee Regular'), local('ABeeZee-Regular'),
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.svg#ABeeZee') format('svg'); /* Legacy iOS */
+  }  
+
+body {
+    min-width: 100%;
+    min-height: 100%;
+} 
+
+@import "./header.scss";
+@import "./form";
+@import "./footer.scss";
+@import "./normalize.scss";
