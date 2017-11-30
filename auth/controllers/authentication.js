@@ -14,7 +14,7 @@ const User = require("../models/user"),
 
 
 
-exports.signin = function(req, res, next) {
+exports.login = function(req, res, next) {
 
     // User has already auth'd their email and password, we just need to give them a token
     res.send({token: tokenForUser(req.user)});
@@ -24,7 +24,7 @@ exports.signin = function(req, res, next) {
 
 
 
-exports.signup = function(req, res, next) {
+exports.register = function(req, res, next) {
 
     const email = req.body.email,
           password = req.body.password;

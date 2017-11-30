@@ -17,7 +17,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
             if (err) { return done(err, false); }
 
             if (!user) { done(null, false); }
-                  // compare passwords - `password`: {$eq: user.password}
+
             user.comparePassword(password, function(err, isMatch) {
                   if (err) { return done(err); }
 
@@ -31,7 +31,7 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 
 
 
-// Setup options for JWT strategy - for signup
+// Setup options for JWT strategy - for register
 const jwtOptions = {
       jwtFromRequest: ExtractJwt.fromHeader("authorization"),
       secretOrKey: secret
