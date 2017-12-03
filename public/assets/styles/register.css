@@ -2,10 +2,10 @@
 @font-face {
   font-family: 'Lato';
   font-style: normal;
-  font-weight: 400;
-  src: url("/public/assets/fonts/lato-v14-latin-regular.eot");
+  font-weight: 300;
+  src: url("/public/assets/fonts/Lato/lato-v14-latin-regular.eot");
   /* IE9 Compat Modes */
-  src: local("Lato Regular"), local("Lato-Regular"), url("/public/assets/fonts/lato-v14-latin-regular.eot?#iefix") format("embedded-opentype"), url("/public/assets/fonts/lato-v14-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/lato-v14-latin-regular.woff") format("woff"), url("/public/assets/fonts/lato-v14-latin-regular.ttf") format("truetype"), url("/public/assets/fonts/lato-v14-latin-regular.svg#Lato") format("svg");
+  src: local("Lato Regular"), local("Lato-Regular"), url("/public/assets/fonts/Lato/lato-v14-latin-regular.eot?#iefix") format("embedded-opentype"), url("/public/assets/fonts/Lato/lato-v14-latin-regular.woff2") format("woff2"), url("/public/assets/fonts/Lato/lato-v14-latin-regular.woff") format("woff"), url("/public/assets/fonts/Lato/lato-v14-latin-regular.ttf") format("truetype"), url("/public/assets/fonts/Lato/lato-v14-latin-regular.svg#Lato") format("svg");
   /* Legacy iOS */ }
 
 /* abeezee-regular - latin */
@@ -27,62 +27,82 @@ body {
   width: 100%;
   color: #fff;
   top: 0;
+  height: 4vh;
   font-family: "Advent Pro", Colibri, Arial, sans-serif;
-  font-size: 2.9rem;
-  text-align: center;
   background-color: #292222;
   z-index: 2; }
   .header__nav {
     display: block;
     width: auto; }
-    .header__nav__homeDiv {
-      display: inline-block;
-      width: 55%; }
-      .header__nav__homeDiv__home {
-        font-size: 2.5rem;
+    .header__nav__left {
+      width: 18%;
+      text-align: right;
+      display: inline-block; }
+      .header__nav__left__items {
+        font-size: 2rem;
         color: #999;
         text-decoration: none; }
-        .header__nav__homeDiv__home .fa-home {
+        .header__nav__left__items .fa-home {
           color: #000;
-          text-shadow: 1px 1px 1px #fff, -1px -1px 2px #bbb; }
-          .header__nav__homeDiv__home .fa-home:hover {
+          text-shadow: 0px 0px 1px #fff, 0px 0px 2px #bbb; }
+          .header__nav__left__items .fa-home:hover {
             color: #999;
             text-decoration: none;
             text-shadow: 1px 1px 1px #000, -1px -1px 2px #000; }
-    .header__nav__loginDiv {
+        .header__nav__left__items.polls {
+          display: inline-table;
+          vertical-align: bottom;
+          margin-left: 5%;
+          font-size: 1rem;
+          color: #999;
+          padding: .5rem; }
+          .header__nav__left__items.polls:hover {
+            text-decoration: none;
+            color: #eee;
+            background-color: rgba(5, 5, 5, 0.2); }
+    .header__nav__right {
       display: inline-block;
-      width: 45%;
+      width: 80%;
       text-align: right; }
-      .header__nav__loginDiv__items:nth-child(1) {
-        margin-right: 10%;
-        font-size: 2rem; }
-      .header__nav__loginDiv__items {
-        margin-right: 2%;
-        font-size: 1.7rem;
+      .header__nav__right__items {
+        margin-right: 1.3%;
+        font-size: 2rem;
         color: #999;
         text-decoration: none; }
-        .header__nav__loginDiv__items .fa-user {
-          color: #fff;
-          text-shadow: 1px 1px 1px #000, -1px -1px 2px #000; }
-          .header__nav__loginDiv__items .fa-user:hover {
+        .header__nav__right__items.authBtn {
+          display: inline-table;
+          vertical-align: bottom;
+          margin-left: 1%;
+          font-size: 1rem;
+          color: #999;
+          padding: .5rem; }
+          .header__nav__right__items.authBtn:hover {
+            text-decoration: none;
+            color: #eee;
+            background-color: rgba(5, 5, 5, 0.2); }
+        .header__nav__right__items .fa-facebook-official {
+          color: #3b5998; }
+          .header__nav__right__items .fa-facebook-official:hover {
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
-        .header__nav__loginDiv__items .fa-github {
+        .header__nav__right__items .fa-github {
           color: #000;
           text-shadow: 0px 0px 1px #000, 0px 0px 1px #000; }
-          .header__nav__loginDiv__items .fa-github:hover {
+          .header__nav__right__items .fa-github:hover {
             color: #eee;
             text-decoration: none;
             text-shadow: 0px 0px 5px #bbb,0px 0px 10px #bbb; }
-        .header__nav__loginDiv__items .fa-twitter {
+        .header__nav__right__items .fa-twitter {
           color: #1da1f2; }
-          .header__nav__loginDiv__items .fa-twitter:hover {
+          .header__nav__right__items .fa-twitter:hover {
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
-        .header__nav__loginDiv__items.google svg:hover {
+        .header__nav__right__items.google svg {
+          color: #fff; }
+        .header__nav__right__items.google svg:hover {
           border-radius: 50%;
-          -webkit-box-shadow: 0px 0px 10px #fff,0px 0px 10px #fff;
-                  box-shadow: 0px 0px 10px #fff,0px 0px 10px #fff; }
+          -webkit-box-shadow: 0px 0px 10px #fff, 0px 0px 10px #fff;
+                  box-shadow: 0px 0px 10px #fff, 0px 0px 10px #fff; }
     .header__nav__line {
       opacity: .5;
       display: block;
@@ -93,22 +113,86 @@ body {
 
 .context {
   width: 100vw;
-  height: 92vh;
-  background-color: #bbb; }
-  .context__form {
+  height: 96vh;
+  background-color: #595252; }
+
+.form__container {
+  position: relative;
+  height: auto;
+  width: 25vw;
+  margin: auto;
+  top: 40%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-family: "Lato", "Abeezee", Arial, sans-serif;
+  border: 5px solid #999;
+  border-radius: 5px;
+  background-color: #fff;
+  -webkit-box-shadow: -1px -1px 12px black, 1px 1px 20px black;
+          box-shadow: -1px -1px 12px black, 1px 1px 20px black; }
+  .form__container__title {
+    text-align: center;
+    color: #333;
+    font-weight: 300; }
+  .form__container__subtitle {
+    text-align: center;
+    color: #8f8f8f;
+    font-weight: 300; }
+  .form__container__line {
+    color: #bbb;
+    opacity: .3;
+    width: 96%; }
+  .form__container__footnote {
+    margin: 0% auto 5% auto;
     position: relative;
-    height: auto;
-    width: 25vw;
-    margin: auto;
-    top: 50%;
-    font-family: Lato, "Abeezee", Arial, sans-serif;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    border: 5px solid #555;
+    display: table;
+    text-decoration: none;
+    color: #3ea1c9; }
+    .form__container__footnote:hover {
+      text-decoration: underline; }
+    .form__container__footnote:active {
+      color: blue; }
+    .form__container__footnote:visited {
+      color: #3ea1c9; }
+
+.form {
+  margin: 5% auto 5% auto;
+  padding: 1%; }
+  .form__control {
+    display: block;
+    width: 80%;
+    margin: 0 auto 5% auto;
+    padding: 3% 1%;
+    font-size: .8rem;
+    line-height: 1rem;
+    letter-spacing: .5px;
+    color: #333;
+    font-family: "Lato", "Abeezee", Colibri, Arial, sans-serif;
+    -webkit-box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.1);
+            box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.1);
+    background: #eee;
     border-radius: 5px;
-    background-color: #fff;
-    -webkit-box-shadow: -1px -1px 2px black, 1px 1px 2px black, 1px 1px 30px white;
-            box-shadow: -1px -1px 2px black, 1px 1px 2px black, 1px 1px 30px white; }
+    border: none; }
+  .form__submit {
+    width: 84%;
+    margin: 10% auto 2% auto;
+    padding: 3%;
+    color: #fff;
+    font-family: "Lato", "Abeezee", Colibri, Arial, sans-serif;
+    font-size: 1rem;
+    font-stretch: 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    background: -webkit-gradient(linear, left top, left bottom, from(#b8e1fc), color-stop(10%, #a9d2f3), color-stop(25%, #90bae4), color-stop(37%, #90bcea), color-stop(50%, #90bff0), color-stop(83%, #a2daf5), to(#bdf3fd));
+    background: linear-gradient(to bottom, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #a2daf5 83%, #bdf3fd 100%); }
+    .form__submit:hover {
+      background: -webkit-gradient(linear, left top, left bottom, from(#c5e7fd), color-stop(10%, #b9daf5), color-stop(25%, #a3c6e9), color-stop(37%, #a4c8ee), color-stop(50%, #a3caf3), color-stop(83%, #b3e0f7), to(#c9f5fd));
+      background: linear-gradient(to bottom, #c5e7fd 0%, #b9daf5 10%, #a3c6e9 25%, #a4c8ee 37%, #a3caf3 50%, #b3e0f7 83%, #c9f5fd 100%); }
+    .form__submit:active {
+      background: -webkit-gradient(linear, left top, left bottom, from(#c9f5fd), color-stop(17%, #b3e0f7), color-stop(50%, #a3caf3), color-stop(63%, #a4c8ee), color-stop(75%, #a3c6e9), color-stop(90%, #b9daf5), to(#c5e7fd));
+      background: linear-gradient(to bottom, #c9f5fd 0%, #b3e0f7 17%, #a3caf3 50%, #a4c8ee 63%, #a3c6e9 75%, #b9daf5 90%, #c5e7fd 100%); }
 
 .footer {
   position: fixed;
@@ -118,7 +202,7 @@ body {
   height: 3vh;
   margin: 0 auto;
   font-size: .8rem;
-  color: #333;
+  color: #222;
   text-align: center;
   margin: 0 auto;
   background-color: transparent; }
@@ -127,7 +211,7 @@ body {
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-    color: 333;
+    color: #222;
     text-align: center;
     margin: 0 auto;
     font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
@@ -136,16 +220,16 @@ body {
       color: red; }
     .footer__codedby__link {
       text-decoration: none;
-      color: #333;
+      color: #222;
       background-color: transparent; }
       .footer__codedby__link:hover {
         text-decoration: underline; }
       .footer__codedby__link:visited {
         text-decoration: underline;
-        color: #333; }
+        color: #222; }
       .footer__codedby__link:active {
         text-decoration: underline;
-        color: #333; }
+        color: #222; }
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
