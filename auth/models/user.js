@@ -5,7 +5,7 @@ const mongoose = require("mongoose"),
 // Define Model
 const userSchema = new Schema({
     // unique String.toLowerCase() - so no doubles are possible
-    email: { type: Schema.Types.String, unique: true, lowercase: true },
+    username: { type: Schema.Types.String, unique: true, lowercase: true },
     password: String
 });
 
