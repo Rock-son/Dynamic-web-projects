@@ -1,32 +1,24 @@
-extends layout   
-
+extends layout    
+    
 block content
-    section.header
-        nav.header__nav
-            .header__nav__homeDiv
-                a(class="header__nav__homeDiv__home" href="../")
-                    i(class="fa fa-home" title="Home")
-            .header__nav__loginDiv
-                a(class="header__nav__loginDiv__items" href="/profile")
-                    i(class="fa fa-user" title="Profile")
-                a(class="header__nav__loginDiv__items" href="/github-signup")
-                    i(class="fa fa-github" title="Login with GitHub")
-                a(class="header__nav__loginDiv__items" href="/twitter-signup")
-                    i(class="fa fa-twitter" title="Login with Twitter")
-                a(class="header__nav__loginDiv__items" href="/google-signup")
-                    i(class="fa fa-google" title="Login with Google")
-            hr.header__nav__line
     section.context
-        form(class="context__form" method="POST" action=type)
-            .context__form__header
-                h3.context__form__header__title Sign Up
-                p.context__form__header__subtitle You want to fill out this form
-            hr.form__line
-            .form__inputFields
-                input(class="form__inputFields__user" maxlength="21" required placeholder="Username" name="username" autofocus="" type="text")
-                input(class="form__inputFields__pass" required placeholder="Password" name="password" type="password")
-
-                input(class="form__inputFields__submit" type="submit" value="Register" name="submit")
+        div.form__container
+            if action == "/auth/register"
+                h1.form__container__title Sign Up
+                h5.form__container__subtitle Please fill out the Form
+            else
+                h1.form__container__title Login
+                h5.form__container__subtitle Please fill in the Login Data
+            hr.form__container__line
+            form.form(method='POST' action=action)
+                input.form__control(type='text' placeholder='Username' name='username')
+                input.form__control(type='password' placeholder='Password' name='password')
+                if action == "/auth/register"
+                    input.form__control(type='password' placeholder='Confirm Password' name='confirmPassword')
+                    input.form__submit.form__control(type='submit' name="submit" value="Register")
+                if action == "/auth/login"
+                    input.form__submit.form__control(type='submit' name="submit" value="Login")
+            a.form__container__footnote(href=reverseType) #{footnote}
     section.footer
         footer.footer__codedby Made with 
             i(class="fa fa-heart-o")

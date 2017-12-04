@@ -8,8 +8,8 @@ module.exports = function(app) {
     app.use(helmet({dnsPrefetchControl: {allow: true}}));
     app.use(helmet_csp({
     directives: {
-            defaultSrc: ["'self'"],
-            scriptSrc: ["'self'"],
+            defaultSrc: ["'self'", 'https://fcc-dynamic-webapps-roky.herokuapp.com'],
+            scriptSrc: ["'self'", 'https://fcc-dynamic-webapps-roky.herokuapp.com'],
             styleSrc: ["'self'", "https://cdnjs.cloudflare.com"],
             fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
             imgSrc: ["'self'", "https:", "www.dl.dropboxusercontent.com", "https://www.dl.dropboxusercontent.com", 'data:'],

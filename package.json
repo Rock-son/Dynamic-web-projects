@@ -24,13 +24,15 @@
     "helmet": "^3.9.0",
     "helmet-csp": "^2.6.0",
     "jwt-simple": "^0.5.1",
+    "mongo-sanitize": "^1.0.0",
     "mongoose": "^4.13.3",
     "morgan": "^1.9.0",
     "normalize.css": "^7.0.0",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "xss-filters": "^1.2.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",

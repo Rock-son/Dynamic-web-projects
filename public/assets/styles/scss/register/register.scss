@@ -1,17 +1,18 @@
 
 $path: "/public/assets";
+
 /* lato-regular - latin */
 @font-face {
     font-family: 'Lato';
     font-style: normal;
-    font-weight: 400;
-    src: url('#{$path}/fonts/lato-v14-latin-regular.eot'); /* IE9 Compat Modes */
+    font-weight: 300;
+    src: url('#{$path}/fonts/Lato/lato-v14-latin-regular.eot'); /* IE9 Compat Modes */
     src: local('Lato Regular'), local('Lato-Regular'),
-         url('#{$path}/fonts/lato-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('#{$path}/fonts/lato-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-         url('#{$path}/fonts/lato-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
-         url('#{$path}/fonts/lato-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-         url('#{$path}/fonts/lato-v14-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
+         url('#{$path}/fonts/Lato/lato-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/Lato/lato-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/Lato/lato-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/Lato/lato-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/Lato/lato-v14-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
 }
 /* abeezee-regular - latin */
 @font-face {

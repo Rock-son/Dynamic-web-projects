@@ -6,6 +6,8 @@ var fs = require("fs"),
     express = require("express"),
     pug = require("pug"),
     indexCSS = "./assets/styles/index.css",
+    passportService = require("../auth/services/passport"),
+    passport = require("passport"),
     
     app = express();
 
@@ -15,10 +17,14 @@ var fs = require("fs"),
 
 
 
-    app.get("/", function(req, res) {
-        res.render("indexVoting", { cssPath: indexCSS })
+    app.route("/") 
+        .get(function(req, res, next) {
+          passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+                if (err) { return next(err) }
+                if (!user) {return res.render("indexVoting", { cssPath: indexCSS, auth: false}); }
+                return res.render("indexVoting", {cssPath: indexCSS, auth: true});
+        })(req, res, next);
     });
-
 
 
 module.exports = app;

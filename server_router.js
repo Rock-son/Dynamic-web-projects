@@ -6,30 +6,64 @@ module.exports = function(app) {
 const Authentication = require("./auth/controllers/authentication"),
       passportService = require("./auth/services/passport"),
       passport = require("passport"),
-      homepageCSS = "./assets/styles/index.css",
-      register_loginCSS = "../assets/styles/register.css",
+      homepageCSS = "/assets/styles/index.css",
+      register_loginCSS = "/assets/styles/register.css",
       fontArr = require("./public/assets/fonts/fontAllow"),
-      
-      requireAuth = passport.authenticate("jwt", {session: false}),
-      requireLogin = passport.authenticate("local", {session: false});
+      fs = require("fs"),
+      path = require("path"),
+      // SANITIZE USER INPUT
+      xssFilters = require('xss-filters'),
 
-app.get("/", function(req, res) {
-        res.render("index", {cssPath: homepageCSS});
-});
+      requireAuth = passport.authenticate("jwt", {session: false}),     // jwt - one strategy
+      requireLogin = passport.authenticate("local", {session: false}),  // login - input user & pass - for POST
+      checkAuth = passport.authenticate(['jwt', 'twitter', 'google', 'github'], {session: false}); // iterate through all strategies until succes or fail
 
 
-// AUTHORIZE
+//app.use(bodyParser.json({type: "*/*"}));// for parsing application/json 
 
-// REGISTER & LOGIN PAGE
-app.get("/auth/register", function(req, res) {
 
-      res.render("register", {type: "/register", cssPath: register_loginCSS});
-});
-app.get("/auth/login", function(req, res) {
-      
-      
-      res.render("register", {type: "/login", cssPath: register_loginCSS});
-});
+// HOME ROUTE
+app.route("/") 
+      .get(function(req, res, next) {
+            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+                  if (err) { return next(err) }
+                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "" }); }
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user) });
+            })(req, res, next);
+      });
+
+
+
+
+// AUTHORIZATION - REGISTER & LOGIN PAGE
+app.route("/auth/register")
+      .get(function(req, res, next) {
+            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+                  if (err) { return next(err) }
+                  if (!user) {return res.render("register", {action: "/auth/register", reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: false}); }
+                  return res.redirect(req.headers.referer);
+            })(req, res, next);
+      })
+      .post(Authentication.register);
+
+
+
+app.route("/auth/login")
+.get(function(req, res, next) {
+      passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+            if (err) { return next(err) }
+            if (!user) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
+            return res.redirect(req.headers.referer);
+      })(req, res, next);
+})
+      .post(requireLogin, Authentication.login); 
+  
+      // PURE AUTHORIZATION - stopped if not logged in
+  /*  app.get("/", requireAuth, function(req, res) {
+    res.send({hi: "there"});
+});*/
+
+
 
 
 
@@ -46,20 +80,9 @@ app.get("/auth/github", function(req, res) {
       console.log("not implemented yet!");
       res.end();
   });
-
-
-
-  
-  /*  app.get("/", requireAuth, function(req, res) {
-    res.send({hi: "there"});
-});*/
-
  
-//TODO:!!!
-// sign up
-app.post("/register", Authentication.register);
-// sign in
-app.post("/login", requireLogin, Authentication.login);       
+
+
 
 
 // FONTS

@@ -1,24 +1,28 @@
 "use strict"
+
 const passport = require("passport"),
       User = require("../models/user"),
-      secret = process.env.JWT_SECRET,
       JwtStrategy = require("passport-jwt").Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
-      LocalStrategy = require("passport-local");
+      LocalStrategy = require("passport-local"),
+      // SANITATION
+      mongoSanitize = require("mongo-sanitize");
 
 
 
-// Create local strategy - SIGNIN
-const localOptions = {usernameField: "email"};
+// LOCAL strategy - REGISTER with a password
+const localOptions = {usernameField: "username"};
 
-const localLogin = new LocalStrategy(localOptions, function(email, password, done) {
+const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
       // verify this email and password, call done w/ user if correct, else call don w/false
-      User.findOne({email: email}, function(err, user) {
+      const userName = mongoSanitize(username),
+            pass = mongoSanitize(password);
+      User.findOne({username: userName}, function(err, user) {
             if (err) { return done(err, false); }
 
             if (!user) { done(null, false); }
 
-            user.comparePassword(password, function(err, isMatch) {
+            user.comparePassword(pass, function(err, isMatch) {
                   if (err) { return done(err); }
 
                   if (!isMatch) { return done(null, false); }
@@ -30,22 +34,25 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
 
 
 
-
-// Setup options for JWT strategy - for register
+/* JWT token strategy - LOGIN automatically if token exists ("/", requireAuth, func(req, res) {..})
+      requireAuth = passport.authenticate("jwt", {session: false})*/
 const jwtOptions = {
       jwtFromRequest: ExtractJwt.fromHeader("authorization"),
-      secretOrKey: secret
+      secretOrKey: process.env.JWT_SECRET
 };
-// Create JWT Strategy
+
+
+// JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
       // See if user payload exists in our db - if yes, call done w/user obj, else call done w/out a user object
       User.findById(payload.sub, function(err, user) {
             if (err) { return done(err, false); }
 
             if (user) { 
-                  done(null, user); 
+                  return done(null, user); 
             } else {
-                  done(null, false);
+                  return done(null, false);
+                  // or you could create a new account
             }
       });
 });

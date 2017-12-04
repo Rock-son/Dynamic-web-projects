@@ -24,27 +24,34 @@ const express = require("express"),
 
 
 
-
       // APP
-      app.use(bodyParser.json({type: "*/*"}));
+      app.use(bodyParser.json({type: "application/json"}));
       app.use(bodyParser.json({
             type: ['json', 'application/csp-report']
-      }))
+      }));
+      app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+
       //app.use(morgan({stream: accessLogStream}));
       app.set("views", path.join(__dirname, "views"));
       app.set("view engine", "pug");
       app.use(express.static(path.join(__dirname, 'public')));
 
+
+
       // SECURITY
       helmet(app);
+
 
 
       // ROUTER
       app.use("/voting-app", votingApp);
 
 
+
       // DB
       mongoose.connect(dbUrl);
+
+
 
       // ROUTES
       router(app);
