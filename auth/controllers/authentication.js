@@ -16,9 +16,9 @@ const User = require("../models/user"),
 
 
 exports.login = function(req, res, next) {
-
+    
     // User has already auth'd their email and password, we just need to give them a token
-    res.send({token: tokenForUser(req.user)});
+    res.send({token: tokenForUser(mongoSanitize(req.user))});
 
 };
 
@@ -52,7 +52,7 @@ exports.register = function(req, res, next) {
         });
         user.save(function(err) {
             if (err) { return next(err); }
-            console.log(this.password);
+            
             // send back an authentication token
             res.json({token: tokenForUser(user)});
         });
