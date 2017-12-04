@@ -1,9 +1,12 @@
 "use strict"
+
 const passport = require("passport"),
       User = require("../models/user"),
       JwtStrategy = require("passport-jwt").Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
-      LocalStrategy = require("passport-local");
+      LocalStrategy = require("passport-local"),
+      // SANITATION
+      mongoSanitize = require("mongo-sanitize");
 
 
 
@@ -12,12 +15,14 @@ const localOptions = {usernameField: "username"};
 
 const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
       // verify this email and password, call done w/ user if correct, else call don w/false
-      User.findOne({username: username}, function(err, user) {
+      const userName = mongoSanitize(username),
+            pass = mongoSanitize(password);
+      User.findOne({username: userName}, function(err, user) {
             if (err) { return done(err, false); }
 
             if (!user) { done(null, false); }
 
-            user.comparePassword(password, function(err, isMatch) {
+            user.comparePassword(pass, function(err, isMatch) {
                   if (err) { return done(err); }
 
                   if (!isMatch) { return done(null, false); }
