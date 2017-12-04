@@ -11,6 +11,8 @@ const Authentication = require("./auth/controllers/authentication"),
       fontArr = require("./public/assets/fonts/fontAllow"),
       fs = require("fs"),
       path = require("path"),
+      // SANITIZE USER INPUT
+      xssFilters = require('xss-filters'),
 
       requireAuth = passport.authenticate("jwt", {session: false}),     // jwt - one strategy
       requireLogin = passport.authenticate("local", {session: false}),  // login - input user & pass - for POST
@@ -25,8 +27,8 @@ app.route("/")
       .get(function(req, res, next) {
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   if (err) { return next(err) }
-                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false }); }
-                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false });
+                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "" }); }
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user) });
             })(req, res, next);
       });
 
@@ -39,15 +41,10 @@ app.route("/auth/register")
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   if (err) { return next(err) }
                   if (!user) {return res.render("register", {action: "/auth/register", reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: false}); }
-                  return res.render("register", {action: "/auth/register", reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: true});
+                  return res.redirect(req.headers.referer);
             })(req, res, next);
       })
-      .post(function(req, res, next) {
-            req.body.username = req.sanitize(req.body.username);
-            req.body.password = req.sanitize(req.body.password);
-            req.body.confirmPassword = req.sanitize(req.body.confirmPassword);
-            next();
-      },Authentication.register);
+      .post(Authentication.register);
 
 
 
@@ -56,14 +53,10 @@ app.route("/auth/login")
       passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
             if (err) { return next(err) }
             if (!user) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
-            return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: true});
+            return res.redirect(req.headers.referer);
       })(req, res, next);
 })
-      .post(function(req, res, next) {
-            req.body.username = req.sanitize(req.body.username);
-            req.body.password = req.sanitize(req.body.password);
-            next();
-      }, requireLogin, Authentication.login); 
+      .post(requireLogin, Authentication.login); 
   
       // PURE AUTHORIZATION - stopped if not logged in
   /*  app.get("/", requireAuth, function(req, res) {

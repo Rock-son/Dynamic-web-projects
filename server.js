@@ -7,7 +7,6 @@ const express = require("express"),
       path = require("path"),
       fs = require("fs"),
       bodyParser = require("body-parser"),
-      expressSanitizer = require('express-sanitizer'),
       // pug    
       pug = require("pug"),
       // ROUTES
@@ -30,8 +29,7 @@ const express = require("express"),
       app.use(bodyParser.json({
             type: ['json', 'application/csp-report']
       }));
-      app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded 
-      app.use(expressSanitizer([])); // this line follows bodyParser() instantiations 
+      app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
       //app.use(morgan({stream: accessLogStream}));
       app.set("views", path.join(__dirname, "views"));
