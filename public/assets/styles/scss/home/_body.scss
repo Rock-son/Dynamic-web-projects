@@ -1,0 +1,41 @@
+
+.body {
+    position: relative;
+    height: 83vh;
+    width: 85vw;
+    font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+    font-size: 1rem;
+    color: #333;
+    text-align: center; 
+    margin: 0 auto; 
+}
+
+.container {
+    position: relative;
+    width: 80vw;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 5vh;
+}
+
+@import "./_body_thumbnails.scss";
+@import "../mixins/mixin.scss";
+
+@include atSmall {
+    .body {
+        height: auto !important;
+    }
+    .container__app {
+        height: 25vh;
+        width: 25vw;
+    }
+}
+@include atMedium {
+    .body {
+        height: auto !important;
+    }
+    .container__app {
+        height: 30vh;
+        width: 50vw;
+    }
+}

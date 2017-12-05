@@ -2,7 +2,6 @@
 &__nav {
     display: block;
     width: auto;
-    border-bottom: 1px solid #399966;
     &__left {
         width: 18%;
         text-align: right;
@@ -19,7 +18,7 @@
                     text-decoration: none;
                     text-shadow: 1px 1px 1px #000, -1px -1px 2px #000;
                 }
-            }
+            } 
             &.polls {
                 display: inline-table;
                 vertical-align: bottom;
@@ -27,8 +26,6 @@
                 font-size: 1rem;
                 color: #999;
                 padding: .5rem;
-                /*border-left: 1px solid #444;
-                border-right: 1px solid #444;*/
                 &:hover {
                     text-decoration: none;
                     color: #eee;
@@ -49,7 +46,6 @@
             &.authBtn {
                 display: inline-table;
                 vertical-align: bottom;
-                margin-right: 20%;
                 font-size: 1rem;
                 color: #999;
                 padding: .5rem;
@@ -58,36 +54,53 @@
                     color: #eee;
                     background-color: rgba(5,5,5,.2);
                 }
-            }                
-            & .fa-facebook-official {
+            }
+            &.authBtn:nth-child(2) {
+                margin-right: 3%;
+            }
+            & .fa-facebook-square  {
                 color: #3b5998;
+                background-color: #FCFCFC;
+                border-radius: 50px;
+                line-height: 1.65rem;
+                text-shadow: 0px 0px 1px #2e5196;
                 &:hover {
                     text-decoration: none;
                     text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff;
                 }
             }
-            & .fa-github {
-                color: #000;
-                text-shadow: 0px 0px 1px #000, 0px 0px 1px #000;
+            & .fa-github-square {
+                color: #24292E;
+                background-color: #FCFCFC;
+                border-radius: 50px;
+                line-height: 1rem;
+                text-shadow: 0px 0px 1px #24292E; 
                 &:hover {
-                    color: #eee;
                     text-decoration: none;
-                    text-shadow: 0px 0px 5px #bbb,0px 0px 10px #bbb;
+                    text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff;
                 }
             }
-            & .fa-twitter {
+            & .fa-twitter-square {
                 color: #1da1f2;
+                background-color: #FCFCFC;
+                border-radius: 50px;
+                line-height: 1.65rem;
+                text-shadow: 0px 0px 1px #1da1f2;
                 &:hover {
                     text-decoration: none;
                     text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff;
                 }
             }
-            &.google svg {
-                color: #fff;
-            }
-            &.google svg:hover {
-                    border-radius: 50%;
-                    box-shadow: 0px 0px 10px #fff, 0px 0px 10px #fff;                
+            & .fa-google-plus-square {
+                color: #ea4335;
+                background-color: #FCFCFC;
+                border-radius: 50px;
+                line-height: 1rem;
+                text-shadow: 0px 0px 1px #ea4335;
+                &:hover {
+                    text-decoration: none;
+                    text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff;
+                }
             }
         }
     }

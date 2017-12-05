@@ -1,0 +1,19 @@
+.header {
+    position: fixed;
+    width: 100%;
+    color: #fff;
+    top: 0;
+    font-family: "Advent Pro", Colibri, Arial, sans-serif;
+    font-size: 2rem;
+    background-color: #292222;
+    z-index: 2;
+    box-shadow: 1px 1px 15px #000, 1px 1px 25px #000;
+    // NAVBAR
+    @import "../../../../../../public/assets/shared/_navbar.scss"; 
+    // TEXT CONTAINER
+    @import "./_header_txt_container.scss";
+}
+
+.header__nav {    
+    border-bottom: 1px solid rgb(35, 92, 42);
+}

@@ -1,15 +1,14 @@
 .header {
-    position: fixed;
+    position: relative;
     width: 100%;
     color: #fff;
     top: 0;
+    height: 4vh;
     font-family: "Advent Pro", Colibri, Arial, sans-serif;
     font-size: 2rem;
-    text-align: center;
     background-color: #292222;
     z-index: 2;
-    // NAVBAR
-    @import "./header_navbar.scss";
-    // TEXT CONTAINER
-    @import "./header_txt_container.scss";
+    box-shadow: 1px 1px 15px #000, 1px 1px 25px #000;
+
+@import "../../../shared/_navbar.scss";
 }

@@ -1,7 +1,7 @@
 "use strict"
 
 const User = require("../models/user"),
-      jwt = require("jwt-simple"),
+      jwt = require("jsonwebtoken"),
       mongoSanitize = require("mongo-sanitize"),
       secret = process.env.JWT_SECRET;
       
@@ -9,7 +9,15 @@ const User = require("../models/user"),
 
     function tokenForUser(user) {
         const timestamp = new Date().getTime();
-        return jwt.encode({ sub: user._id, iat: timestamp }, secret);  // "sub" as a subject & "iat" as in Issued at Time, config.secret as a signature
+        return jwt.sign({
+                sub: user._id, 
+                iat: timestamp
+            }, 
+            secret, 
+            { 
+                expiresIn: "1h",
+            }
+        );  
     }
 
 
@@ -18,8 +26,7 @@ const User = require("../models/user"),
 exports.login = function(req, res, next) {
     
     // User has already auth'd their email and password, we just need to give them a token
-    res.send({token: tokenForUser(mongoSanitize(req.user))});
-
+    res.send(tokenForUser(mongoSanitize(req.body.username)));
 };
 
 
@@ -54,7 +61,7 @@ exports.register = function(req, res, next) {
             if (err) { return next(err); }
             
             // send back an authentication token
-            res.json({token: tokenForUser(user)});
+            res.json(tokenForUser(user));
         });
     });
 };

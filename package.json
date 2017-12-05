@@ -23,6 +23,7 @@
     "express": "^4.16.2",
     "helmet": "^3.9.0",
     "helmet-csp": "^2.6.0",
+    "jsonwebtoken": "^8.1.0",
     "jwt-simple": "^0.5.1",
     "mongo-sanitize": "^1.0.0",
     "mongoose": "^4.13.3",
