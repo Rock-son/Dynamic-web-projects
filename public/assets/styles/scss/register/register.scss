@@ -1,3 +1,4 @@
+@import "./_normalize.scss";
 
 $path: "/public/assets";
 
@@ -33,7 +34,6 @@ body {
     min-height: 100%;
 } 
 
-@import "./header.scss";
-@import "./form";
-@import "./footer.scss";
-@import "./normalize.scss";
+@import "./_header.scss";
+@import "./_form";
+@import "./_footer.scss";

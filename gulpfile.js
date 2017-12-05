@@ -9,7 +9,7 @@ const gulp = require("gulp"),
       // STARTING DIRs
       homeStylePath = homeOutputPath + "scss/home/",
       registerStylePath = homeOutputPath + "scss/register/",
-      votingAppStylePath = votingOutputPath + "scss/index/";
+      votingAppStylePath = votingOutputPath + "scss/";
 
 gulp.task('start', ['watch']);
 
@@ -17,7 +17,7 @@ gulp.task('start', ['watch']);
 gulp.task("homePageStyles", function() {    
     return gulp.src(homeStylePath + "index.scss")
         .pipe(sass().on('error', sass.logError))
-        .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
+        .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)        
         .pipe(gulp.dest(homeOutputPath));
 });
 gulp.task("registerPageStyles", function() {    
@@ -35,10 +35,11 @@ gulp.task("votingPageStyles", function() {
 
 // WATCH
 gulp.task("watch", function() {
-
+    
     watch(homeStylePath + "*.scss", () => gulp.start("homePageStyles"));
-    watch(registerStylePath + "*.scss", () => gulp.start("registerPageStyles"));
-    watch(votingAppStylePath + "*.scss", () => gulp.start("votingPageStyles"));    
+    watch(homeOutputPath + "**/*.scss", () => gulp.start("homePageStyles", "registerPageStyles"));
+    watch("./public/assets/shared/*.scss", () => gulp.start(["homePageStyles", "votingPageStyles", "registerPageStyles"]));
+    watch(votingAppStylePath + "**/*.scss", () => gulp.start("votingPageStyles"));    
 });
 
 

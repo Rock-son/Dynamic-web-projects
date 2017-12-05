@@ -18,9 +18,10 @@
     padding-top: 5vh;
 }
 
-@import "./body_thumbnails.scss";
+@import "./_body_thumbnails.scss";
+@import "../mixins/mixin.scss";
 
-@media (max-width: 1605px) {
+@include atSmall {
     .body {
         height: auto !important;
     }
@@ -29,7 +30,7 @@
         width: 25vw;
     }
 }
-@media (max-width: 1070px) {
+@include atMedium {
     .body {
         height: auto !important;
     }
