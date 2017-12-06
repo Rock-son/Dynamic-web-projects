@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,6 @@
     "postcss-nested": "^2.1.2",
     "postcss-scss": "^1.0.2",
     "postcss-simple-vars": "^4.1.0",
-    "webpack": "^3.10.0"
+    "webpack": "^2.7.0"
   }
 }
