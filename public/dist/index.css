@@ -555,7 +555,7 @@ body {
 .header__nav__right__items.authBtn {
   color: #eee; }
 
-.header1 {
+.subHeader {
   position: relative;
   height: 10vh;
   width: 100vw;
@@ -568,7 +568,7 @@ body {
   line-height: 2.5rem;
   text-align: center; }
 
-.header1__title {
+.subHeader__title {
   width: auto;
   position: relative;
   margin-top: 0;
