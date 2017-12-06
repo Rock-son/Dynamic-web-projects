@@ -20,6 +20,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
+    "classlist-polyfill": "^1.2.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "helmet": "^3.9.0",
@@ -34,6 +35,7 @@
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.1",
+    "waypoints": "^4.0.1",
     "xss-filters": "^1.2.7"
   },
   "devDependencies": {
