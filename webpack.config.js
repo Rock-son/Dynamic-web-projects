@@ -1,8 +1,9 @@
+const path = require("path");
 
-{
-    entry: "./public/assets/scripts/main.js",
+module.exports = {
+    entry: path.resolve(__dirname, "./public/assets/scripts/main.js"),
     output: {
-        path: "./public/dest",
+        path: path.resolve(__dirname, "./public/dist"),
         filename: "main.js"
     }
 }
