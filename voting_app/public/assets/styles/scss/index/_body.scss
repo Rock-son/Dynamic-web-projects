@@ -1,5 +1,3 @@
-@import "../../images/chart.scss";
-
 .context {
     height: 100vh;
     width: 100vw;
@@ -104,11 +102,11 @@
 }
 @keyframes moveInRight {
     
-        0%  { right:-70vw }
-        100% {right:    0 }
-    }
-    @keyframes moveInLeft {
-    
-        0%  { left:-70vw }
-        100% {left:    0 }
-    }
+    0%  { right:-70vw }
+    100% {right:    0 }
+}
+@keyframes moveInLeft {
+
+    0%  { left:-70vw }
+    100% {left:    0 }
+}

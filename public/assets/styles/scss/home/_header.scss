@@ -9,7 +9,7 @@
     background-color: #106597;
     z-index: 2;
     border-bottom: 1px solid #43797b;
-    @import "../../../shared/_navbar.scss";
+    @import "../../shared/_navbar.scss";
 }
 .header__nav__left__items.polls {
     color: #eee;
@@ -17,7 +17,7 @@
 .header__nav__right__items.authBtn {
     color: #eee;
 }
-.header1 {
+.subHeader {
     position: relative;
     height: 10vh;
     width: 100vw;
@@ -29,7 +29,7 @@
     line-height: 2.5rem;
     text-align: center;
 }
-.header1__title { 
+.subHeader__title { 
     width: auto;
     position: relative;
     margin-top: 0;

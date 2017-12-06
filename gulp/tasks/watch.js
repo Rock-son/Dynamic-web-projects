@@ -15,6 +15,6 @@ gulp.task("watch", function() {
     
     watch(homeStylePath + "*.scss", () => gulp.start("homePageStyles"));
     watch(homeOutputPath + "**/*.scss", () => gulp.start("homePageStyles", "registerPageStyles"));
-    watch("./public/assets/shared/*.scss", () => gulp.start(["homePageStyles", "votingPageStyles", "registerPageStyles"]));
+    watch("./public/assets/styles/shared/*.scss", () => gulp.start(["homePageStyles", "votingPageStyles", "registerPageStyles"]));
     watch(votingAppStylePath + "**/*.scss", () => gulp.start("votingPageStyles"));    
 });

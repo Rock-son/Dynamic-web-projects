@@ -5,7 +5,7 @@ var fs = require("fs"),
     // PASSPORT service
     express = require("express"),
     pug = require("pug"),
-    indexCSS = "./assets/styles/index.css",
+    indexCSS = "./dist/index.css",
     passportService = require("../auth/services/passport"),
     passport = require("passport"),
     
