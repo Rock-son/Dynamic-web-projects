@@ -9,6 +9,7 @@ classList();
 class StickyHeader {
 
     constructor(element, parent) {
+        this.lazyImages = document.getElementsByClassName("lazyload");
         this.pageSections = document.getElementsByTagName("section");
         this.headerLinks = document.getElementsByClassName("nav-headers");
         this.siteHeader = element;
@@ -16,12 +17,21 @@ class StickyHeader {
         this.createHeaderWaypoint();
         this.createPageSectionWaypoints();
         this.addSmoothScrolling();
+        this.refreshWaypoints();
+    }
+    // WAYPOINT UPDATES EVERY TIME AN IMAGE LAZYLOADS!
+    refreshWaypoints() {
+        this.lazyImages.addEventListener("load", function() {
+            Waypoint.refreshAll();
+        });
     }
 
+    // SMOOTH SCROLLING TO SECTIONS
     addSmoothScrolling() {
         this.headerLinks.smoothScroll();
     }
 
+    // MAKE HEADER DARK
     createHeaderWaypoint() {
 
         const that = this;
@@ -37,6 +47,7 @@ class StickyHeader {
         });
     }
 
+    // HIGHLIGHT SECTION BUTTONS IN HEADER
     createPageSectionWaypoints() {
         
         const that = this;
