@@ -36,6 +36,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
+    "picturefill": "^3.0.2",
     "pug": "^2.0.0-rc.1",
     "waypoints": "^4.0.1",
     "xss-filters": "^1.2.7"
