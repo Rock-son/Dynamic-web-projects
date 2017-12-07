@@ -3,7 +3,8 @@ const path = require("path");
 module.exports = {
     entry: {
         main: path.resolve(__dirname, "./public/assets/scripts/main.js"),
-        vendor: path.resolve(__dirname, "./public/assets/scripts/vendor.js")
+        vendor: path.resolve(__dirname, "./public/assets/scripts/vendor.js"),
+        voting_app: path.resolve(__dirname, "./voting_app/public/assets/scripts/main_voting.js")
     },
     output: {
         path: path.resolve(__dirname, "./public/dist"),
