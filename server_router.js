@@ -7,7 +7,7 @@ const Authentication = require("./auth/controllers/authentication"),
       passportService = require("./auth/services/passport"),
       passport = require("passport"),
       homepageCSS = "/dist/index.css",
-      mainScriptPath = "/dist/main.js",
+      mainJS = "/dist/main.js",
       register_loginCSS = "/dist/register.css",
       fontArr = require("./public/assets/fonts/fontAllow"),
       fs = require("fs"),
@@ -28,8 +28,8 @@ app.route("/")
       .get(function(req, res, next) {
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   if (err) { return next(err) }
-                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "", scriptPath: mainScriptPath }); }
-                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user), scriptPath: mainScriptPath });
+                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "", mainJS: mainJS }); }
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user), mainJS: mainJS });
             })(req, res, next);
       });
 
