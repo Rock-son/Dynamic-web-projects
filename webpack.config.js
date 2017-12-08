@@ -3,12 +3,11 @@ const path = require("path");
 module.exports = {
     entry: {
         main: path.resolve(__dirname, "./public/assets/scripts/main.js"),
-        vendor: path.resolve(__dirname, "./public/assets/scripts/vendor.js"),
-        voting_app: path.resolve(__dirname, "./voting_app/public/assets/scripts/main_voting.js")
+        vendor: path.resolve(__dirname, "./public/assets/scripts/vendor.js")
     },
     output: {
         path: path.resolve(__dirname, "./public/dist"),
-        filename: "[name].js"
+        filename: "[name][chunkhash].js"
     },
     module: {
         rules: [
