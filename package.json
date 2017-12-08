@@ -23,6 +23,7 @@
     "classlist-polyfill": "^1.2.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
+    "escape-html": "^1.0.3",
     "express": "^4.16.2",
     "helmet": "^3.9.0",
     "helmet-csp": "^2.6.0",
@@ -39,8 +40,7 @@
     "passport-local": "^1.0.0",
     "picturefill": "^3.0.2",
     "pug": "^2.0.0-rc.1",
-    "waypoints": "^4.0.1",
-    "xss-filters": "^1.2.7"
+    "waypoints": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
