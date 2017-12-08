@@ -15,16 +15,16 @@ gulp.task("deleteDistFolder", function() {
 
 // NOT IN USE - images are put in css as data:
 gulp.task("optimizeImages", function() {
-    return gulp.src(["./public/assets/images/*", "!./public/assets/images/*.scss"])
+    return gulp.src(["./public/assets/images/*", "!./public/assets/images/*.scss"]) // include - ! exclude
         .pipe(imagemin({
             progressive: true,  // optimize jpeg
-            interlaced: true,   // gif images
-            multipass: true     // svg files
+            interlaced: true,   // -- || -- gif
+            multipass: true     // -- || -- svg
         }))
         .pipe(gulp.dest("./public/dist"))
 });
 
-// NOT IN USE - have pug not html files
+// NOT IN USE - have pug not html files - Deteils video toward the end of course
 gulp.task("usemin", ["deleteDistFolder"], function() {
     return gulp.src("./index.html")
         .pipe(usemin({
