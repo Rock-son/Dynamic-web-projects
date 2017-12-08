@@ -8,5 +8,15 @@ gulp.task("modernizr", function() {
                 "setClasses"
             ]
         }))
-        .pipe(gulp.dest("./public/assets/scripts/"));
+        .pipe(gulp.dest("./public/assets/scripts/modules/"));
+});
+
+gulp.task("modernizrVoting", function() {
+    return gulp.src(["./voting_app/public/dist/*.css", "./voting_app/public/dist/*.js"])
+        .pipe(modernizr({
+            "options": [
+                "setClasses"
+            ]
+        }))
+        .pipe(gulp.dest("./voting_app/public/assets/scripts/modules/"));
 });
