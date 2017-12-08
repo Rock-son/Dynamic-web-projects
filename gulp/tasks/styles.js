@@ -28,3 +28,5 @@ gulp.task("votingPageStyles", function() {
         .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
         .pipe(gulp.dest("./voting_app/public/dist"));
 });
+
+gulp.task("styles", ["homePageStyles", "registerPageStyles", "votingPageStyles"]);
