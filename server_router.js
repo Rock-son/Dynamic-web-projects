@@ -6,12 +6,12 @@ module.exports = function(app) {
 const Authentication = require("./auth/controllers/authentication"),
       passportService = require("./auth/services/passport"),
       passport = require("passport"),
-      homepageCSS = "/dist/index.css",
-      mainJS = "/dist/main.js",
-      register_loginCSS = "/dist/register.css",
-      fontArr = require("./public/assets/fonts/fontAllow"),
       fs = require("fs"),
       path = require("path"),
+      homepageCSS = (function() {return "/dist/"+ (/(index[-\w]*\.css)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["index.js"] )[0] })(),
+      mainJS = (function() {return "/dist/"+ (/(main[-\w]*\.js)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
+      register_loginCSS = (function() {return "/dist/"+ (/(register[-\w]*\.css)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
+      fontArr = require("./public/assets/fonts/fontAllow"),
       // SANITIZE USER INPUT
       xssFilters = require('xss-filters'),
 
@@ -20,9 +20,7 @@ const Authentication = require("./auth/controllers/authentication"),
       checkAuth = passport.authenticate(['jwt', 'twitter', 'google', 'github'], {session: false}); // iterate through all strategies until succes or fail
 
 
-//app.use(bodyParser.json({type: "*/*"}));// for parsing application/json 
-
-
+console.log(homepageCSS, mainJS, register_loginCSS);
 // HOME ROUTE
 app.route("/") 
       .get(function(req, res, next) {
