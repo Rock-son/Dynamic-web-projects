@@ -20,15 +20,17 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
       User.findOne({username: userName}, function(err, user) {
             if (err) { return done(err, false); }
 
-            if (!user) { done(null, false); }
-
-            user.comparePassword(pass, function(err, isMatch) {
-                  if (err) { return done(err); }
-
-                  if (!isMatch) { return done(null, false); }
-
-                  return done(null, user);
-            });
+            if (!user || user == null) {
+                  return done(null, false); 
+            } else {
+                  user.comparePassword(pass, function(err, isMatch) {
+                        if (err) { return done(err); }
+      
+                        if (!isMatch) { return done(null, false); }
+      
+                        return done(null, user);
+                  });
+            }
       });            
 });
 
