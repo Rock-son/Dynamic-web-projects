@@ -3,6 +3,7 @@
 require("dotenv").config();
 
 const express = require("express"),
+      cookieParser = require("cookie-parser"),
       http = require("http"),
       path = require("path"),
       fs = require("fs"),
@@ -22,9 +23,9 @@ const express = require("express"),
       port = process.env.PORT || 3000,
       app = express();
 
-
-
-      // APP
+      
+      // COOKIE & BODY PARSERS
+      app.use(cookieParser());
       app.use(bodyParser.json({type: "application/json"}));
       app.use(bodyParser.json({
             type: ['json', 'application/csp-report']

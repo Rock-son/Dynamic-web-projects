@@ -5,7 +5,7 @@ const passport = require("passport"),
       JwtStrategy = require("passport-jwt").Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
       LocalStrategy = require("passport-local"),
-      // SANITATION
+      // SANITIZATION
       mongoSanitize = require("mongo-sanitize");
 
 
@@ -20,30 +20,39 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
       User.findOne({username: userName}, function(err, user) {
             if (err) { return done(err, false); }
 
-            if (!user) { done(null, false); }
-
-            user.comparePassword(pass, function(err, isMatch) {
-                  if (err) { return done(err); }
-
-                  if (!isMatch) { return done(null, false); }
-
-                  return done(null, user);
-            });
+            if (!user || user == null) {
+                  return done(null, false); 
+            } else {
+                  user.comparePassword(pass, function(err, isMatch) {
+                        if (err) { return done(err); }
+      
+                        if (!isMatch) { return done(null, false); }
+      
+                        return done(null, user);
+                  });
+            }
       });            
 });
 
 
 
 /* JWT token strategy - LOGIN automatically if token exists ("/", requireAuth, func(req, res) {..})
-      requireAuth = passport.authenticate("jwt", {session: false})*/
+                              where requireAuth = passport.authenticate("jwt", {session: false})*/
 const jwtOptions = {
-      jwtFromRequest: ExtractJwt.fromHeader("authorization"),
+      jwtFromRequest: function(req) {
+            let token = null;
+            if (req && req.cookies) {
+                  token = req.cookies["_t1"];
+            }
+            return token;
+      },
+      //jwtFromRequest: ExtractJwt.fromHeader("authorization"), // returns extracted JWT token
       secretOrKey: process.env.JWT_SECRET
 };
 
-
 // JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+      
       // See if user payload exists in our db - if yes, call done w/user obj, else call done w/out a user object
       User.findById(payload.sub, function(err, user) {
             if (err) { return done(err, false); }
