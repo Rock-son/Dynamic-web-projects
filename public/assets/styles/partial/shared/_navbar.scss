@@ -29,7 +29,7 @@
                 &:hover {
                     text-decoration: none;
                     color: #eee;
-                    background-color: rgba(5,5,5,.2);
+                    background-color: rgba(5,5,5,.2);  
                 }
             }
         }
@@ -52,7 +52,14 @@
                 &:hover {
                     text-decoration: none;
                     color: #eee;
-                    background-color: rgba(5,5,5,.2);
+                    background-color: rgba(5,5,5,.2);                
+                }           
+                &--no-link {
+                    display: inline-table;
+                    vertical-align: bottom;
+                    font-size: 1rem;
+                    color: #bbb;
+                    padding: .6rem;
                 }
             }
             &.authBtn:nth-child(2) {
