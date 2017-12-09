@@ -1,6 +1,7 @@
 "use strict"
 
 const User = require("../models/user"),
+      cookie = require("cookie"),
       jwt = require("jsonwebtoken"),
       mongoSanitize = require("mongo-sanitize"),
       secret = process.env.JWT_SECRET;
@@ -8,9 +9,10 @@ const User = require("../models/user"),
 
 
     function tokenForUser(user) {
+        
         const timestamp = new Date().getTime();
         return jwt.sign({
-                sub: user._id, 
+                sub: user._id,
                 iat: timestamp
             }, 
             secret, 
@@ -26,7 +28,17 @@ const User = require("../models/user"),
 exports.login = function(req, res, next) {
     
     // User has already auth'd their email and password, we just need to give them a token
-    res.send({token: tokenForUser(mongoSanitize(req.body.username))});
+    res.set({'Set-Cookie': cookie.serialize('_t1', tokenForUser(mongoSanitize(req.body.username)), {
+            httpOnly: true,
+            secure: true,
+            sameSite: true,
+            maxAge: 60 * 60 * 24 * 7 // 1 week 
+        })
+    });
+    res.statusCode = 302;
+    res.set({'Location': '/'});
+    res.end();
+    return;
 };
 
 
@@ -60,8 +72,18 @@ exports.register = function(req, res, next) {
         user.save(function(err) {
             if (err) { return next(err); }
             
-            // send back an authentication token
-            res.json({token: tokenForUser(user)});
+            // send back a cookie with authentication token
+            res.set({'Set-Cookie': cookie.serialize('_t1', tokenForUser(mongoSanitize(req.body.username)), {
+                httpOnly: true,
+                secure: true,
+                sameSite: true,
+                maxAge: 60 * 60 * 24 * 7 // 1 week 
+                })
+            });
+            res.statusCode = 302;
+            res.setHeader('Location', '/');
+            res.end();
+            return;
         });
     });
 };
