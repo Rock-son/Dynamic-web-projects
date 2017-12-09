@@ -21,8 +21,8 @@ var fs = require("fs"),
         .get(function(req, res, next) {
           passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                 if (err) { return next(err) }
-                if (!user) {return res.render("indexVoting", { cssPath: indexCSS, auth: false}); }
-                return res.render("indexVoting", {cssPath: indexCSS, auth: true});
+                if (!user) { return res.render("indexVoting", { cssPath: indexCSS, auth: false, user: "" }); }
+                return res.render("indexVoting", { cssPath: indexCSS, auth: true, user: user.username });
         })(req, res, next);
     });
 
