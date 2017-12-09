@@ -14,7 +14,7 @@ const passport = require("passport"),
 const localOptions = {usernameField: "username"};
 
 const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
-      // verify this email and password, call done w/ user if correct, else call don w/false
+      // verify this email and password, call done w/ user if correct, else call done w/false
       const userName = mongoSanitize(username),
             pass = mongoSanitize(password);
       User.findOne({username: userName}, function(err, user) {
@@ -27,7 +27,7 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
                         if (err) { return done(err); }
       
                         if (!isMatch) { return done(null, false); }
-      
+                        
                         return done(null, user);
                   });
             }

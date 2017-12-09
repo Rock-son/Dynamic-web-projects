@@ -3,7 +3,7 @@ const gulp = require("gulp"),
     autoprefixer = require("autoprefixer"),
     sass = require("gulp-sass"),
     // STARTING DIRs
-    mainPath = "/public/assets/styles/scss/",
+    mainPath = "/public/assets/styles/partial/",
     homeStylePath = "." + mainPath + "home/",
     registerStylePath = "." + mainPath + "register/",
     votingAppStylePath = "./voting_app" + mainPath + "index/";
