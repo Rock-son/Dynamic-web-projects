@@ -27,12 +27,16 @@ html(lang="en")
                             i(class="fa fa-google-plus-square " title="Login with Google" aria-hidden="true") 
                     else 
                         a.header__nav__right__items.authBtn(href="/auth/logout") Logout
+                        span.header__nav__right__items.authBtn--no-link Welcome #{user.toUpperCase()}                        
             article.header__txt
                 .header__txt__title Voting App
                 .header__txt__subtitle A Free Code Camp Project
                 .header__txt__stub A Place where you can make, host and share Polls
                 .header__txt__signup
-                    a(class="btn" + " btn--full" href="/auth/register" title="Credentials for testing: user  pa$$word") Register
-                    a(class="btn" + " btn--full" href="/auth/login" title="Credentials for testing: user  pa$$word") Login
-
+                    if auth == true
+                        a(class="btn btn--hidden" + " btn--full" href="/auth/register" title="Credentials for testing: user  pa$$word") Register
+                        a(class="btn btn--hidden" + " btn--full" href="/auth/login" title="Credentials for testing: user  pa$$word") Login
+                    else 
+                        a(class="btn" + " btn--full" href="/auth/register" title="Credentials for testing: user  pa$$word") Register
+                        a(class="btn" + " btn--full" href="/auth/login" title="Credentials for testing: user  pa$$word") Login
         block content
