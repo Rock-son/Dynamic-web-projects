@@ -13,21 +13,22 @@ const Authentication = require("./auth/controllers/authentication"),
       register_loginCSS = (function() {return "/dist/"+ (/(register[-\w]*\.css)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
       fontArr = require("./public/assets/fonts/fontAllow"),
       // SANITIZE USER INPUT
-      xssFilters = require('xss-filters'),
+      escapeHtml = require('escape-html'),
 
-      requireAuth = passport.authenticate("jwt", {session: false}),     // jwt - one strategy
-      requireLogin = passport.authenticate("local", {session: false}),  // login - input user & pass - for POST
-      checkAuth = passport.authenticate(['jwt', 'twitter', 'google', 'github'], {session: false}); // iterate through all strategies until succes or fail
+      ensureAuthenticated = passport.authenticate("jwt", {session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
+      requireLoginData = passport.authenticate("local", {session: false});  // login - input user & pass - for POST
+     
 
 
-console.log(homepageCSS, mainJS, register_loginCSS);
+
 // HOME ROUTE
 app.route("/") 
       .get(function(req, res, next) {
+            console.log(req.cookies, req.signedCookies);
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   if (err) { return next(err) }
                   if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "", mainJS: mainJS }); }
-                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user), mainJS: mainJS });
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: escapeHtml(user), mainJS: mainJS });
             })(req, res, next);
       });
 
@@ -51,14 +52,14 @@ app.route("/auth/login")
 .get(function(req, res, next) {
       passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
             if (err) { return next(err) }
-            if (!user) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
+            if (!user || user == null) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
             return res.redirect(req.headers.referer);
       })(req, res, next);
 })
-      .post(requireLogin, Authentication.login); 
+      .post(requireLoginData, Authentication.login); 
   
       // PURE AUTHORIZATION - stopped if not logged in
-  /*  app.get("/", requireAuth, function(req, res) {
+  /*  app.get("/", ensureAuthenticated, function(req, res) {
     res.send({hi: "there"});
 });*/
 
@@ -67,7 +68,7 @@ app.route("/auth/login")
 
 
   // GITHUB oAuth
-app.get("/auth/github", function(req, res) {
+app.get("/auth/login/github", function(req, res) {
 
       //TODO: PUT IN SERVICES
       const CLIENT_ID = process.env.GITHUB_ID,
