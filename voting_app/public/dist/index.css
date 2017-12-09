@@ -541,6 +541,12 @@ body {
             text-decoration: none;
             color: #eee;
             background-color: rgba(5, 5, 5, 0.2); }
+          .header__nav__right__items.authBtn--no-link {
+            display: inline-table;
+            vertical-align: bottom;
+            font-size: 1rem;
+            color: #bbb;
+            padding: .6rem; }
         .header__nav__right__items.authBtn:nth-child(2) {
           margin-right: 3%; }
         .header__nav__right__items .fa-facebook-square {
@@ -615,6 +621,12 @@ body {
 
 .header__nav {
   border-bottom: 1px solid #235c2a; }
+
+.header__nav__right__items.authBtn, .header__nav__left__items.polls {
+  color: #eee; }
+
+.btn--hidden {
+  visibility: hidden; }
 
 .context {
   height: 100vh;

@@ -16,7 +16,7 @@ const Authentication = require("./auth/controllers/authentication"),
       escapeHtml = require('escape-html'),
 
       ensureAuthenticated = passport.authenticate("jwt", {session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
-      requireLoginData = passport.authenticate("local", {session: false});  // login - input user & pass - for POST
+      verifyLogin = passport.authenticate("local", {session: false});  // login - input user & pass - for POST
      
 
 
@@ -24,11 +24,11 @@ const Authentication = require("./auth/controllers/authentication"),
 // HOME ROUTE
 app.route("/") 
       .get(function(req, res, next) {
-            console.log(req.cookies, req.signedCookies);
-            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+
+            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {                  
                   if (err) { return next(err) }
-                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "", mainJS: mainJS }); }
-                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: escapeHtml(user), mainJS: mainJS });
+                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "test", mainJS: mainJS }); }
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: escapeHtml(user.username), mainJS: mainJS });
             })(req, res, next);
       });
 
@@ -38,30 +38,52 @@ app.route("/")
 // AUTHORIZATION - REGISTER & LOGIN PAGE
 app.route("/auth/register")
       .get(function(req, res, next) {
+
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   if (err) { return next(err) }
                   if (!user) {return res.render("register", {action: "/auth/register", reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: false}); }
-                  return res.redirect(req.headers.referer);
+                  return res.redirect("/");
             })(req, res, next);
       })
+
       .post(Authentication.register);
 
 
 
+
 app.route("/auth/login")
-.get(function(req, res, next) {
-      passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
-            if (err) { return next(err) }
-            if (!user || user == null) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
-            return res.redirect(req.headers.referer);
-      })(req, res, next);
-})
-      .post(requireLoginData, Authentication.login); 
+      .get(function(req, res, next) {
+
+            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {                  
+                  if (err) { return next(err) }
+                  if (!user || user == null) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
+                  return res.redirect("/");
+            })(req, res, next);
+      })
+      
+      .post(verifyLogin, Authentication.login); 
   
-      // PURE AUTHORIZATION - stopped if not logged in
-  /*  app.get("/", ensureAuthenticated, function(req, res) {
-    res.send({hi: "there"});
-});*/
+
+
+
+app.route("/auth/logout")
+      .get(function(req, res, next) {
+            
+            res.cookie("_t1", "", {
+                  httpOnly: true,
+                  secure: false,
+                  sameSite: true,
+                  maxAge: -1,
+                  exp: new Date(1).getTime()
+          });
+          res.statusCode = 302;
+          res.set({'Location': req.headers.referer});
+          res.end();
+          return;
+      });
+      
+       
+       
 
 
 
