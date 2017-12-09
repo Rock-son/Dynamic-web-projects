@@ -1,8 +1,8 @@
 "use strict"
 
 const User = require("../models/user"),
-      cookie = require("cookie"),
-      jwt = require("jsonwebtoken"),
+      //jwt = require("jsonwebtoken"),
+      jwt = require("jwt-simple"),
       mongoSanitize = require("mongo-sanitize"),
       secret = process.env.JWT_SECRET;
       
@@ -11,29 +11,26 @@ const User = require("../models/user"),
     function tokenForUser(user) {
         
         const timestamp = new Date().getTime();
-        return jwt.sign({
+        return jwt.encode({
                 sub: user._id,
-                iat: timestamp
+                iat: timestamp,
+                exp: timestamp + 3600000
             }, 
-            secret, 
-            { 
-                expiresIn: "1h",
-            }
+            secret
         );  
     }
 
 
 
 
-exports.login = function(req, res, next) {
+exports.login = function(req, res, next) {   
     
-    // User has already auth'd their email and password, we just need to give them a token
-    res.set({'Set-Cookie': cookie.serialize('_t1', tokenForUser(mongoSanitize(req.body.username)), {
+    // User has already auth'd their email and password with verifyLogin - local strategy
+    res.cookie("_t1", tokenForUser(req.user), {
             httpOnly: true,
-            secure: true,
+            secure: false,
             sameSite: true,
             maxAge: 60 * 60 * 24 * 7 // 1 week 
-        })
     });
     res.statusCode = 302;
     res.set({'Location': '/'});
@@ -56,15 +53,13 @@ exports.register = function(req, res, next) {
         return res.status(422).send({error: "Your passwords don't match!"});  
     }
     
-    // see if a user exists
     User.findOne({username: username}, function(err, existingUser) {
         if (err) { return next(err); }
     
-        // if (user.exists) return an error
         if (existingUser) {
             return res.status(422).send({error: "Username is in use"}); 
         }
-        // if (!user.exists) => create new user
+
         const user = new User({
             username: username,
             password: password
@@ -73,12 +68,11 @@ exports.register = function(req, res, next) {
             if (err) { return next(err); }
             
             // send back a cookie with authentication token
-            res.set({'Set-Cookie': cookie.serialize('_t1', tokenForUser(mongoSanitize(req.body.username)), {
+            res.cookie('_t1', tokenForUser(user), {
                 httpOnly: true,
-                secure: true,
+                secure: false,
                 sameSite: true,
-                maxAge: 60 * 60 * 24 * 7 // 1 week 
-                })
+                maxAge: 60 * 60 * 24 * 7 // 1 week
             });
             res.statusCode = 302;
             res.setHeader('Location', '/');
