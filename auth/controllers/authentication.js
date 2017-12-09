@@ -30,7 +30,7 @@ exports.login = function(req, res, next) {
             httpOnly: true,
             secure: false,
             sameSite: true,
-            maxAge: 60 * 60 * 24 * 7 // 1 week 
+            maxAge: 60 * 60 * 1000// 1 hour 
     });
     res.statusCode = 302;
     res.set({'Location': '/'});
@@ -72,7 +72,7 @@ exports.register = function(req, res, next) {
                 httpOnly: true,
                 secure: false,
                 sameSite: true,
-                maxAge: 60 * 60 * 24 * 7 // 1 week
+                maxAge: 60 * 60 * 1000 // 1 hour
             });
             res.statusCode = 302;
             res.setHeader('Location', '/');
