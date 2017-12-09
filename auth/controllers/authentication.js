@@ -2,7 +2,7 @@
 
 const User = require("../models/user"),
       //jwt = require("jsonwebtoken"),
-      jwt = require("jwt-simple"),
+      jwt = require("jsonwebtoken"),
       mongoSanitize = require("mongo-sanitize"),
       secret = process.env.JWT_SECRET;
       
@@ -11,7 +11,7 @@ const User = require("../models/user"),
     function tokenForUser(user) {
         
         const timestamp = new Date().getTime();
-        return jwt.encode({
+        return jwt.sign({
                 sub: user._id,
                 iat: timestamp,
                 exp: timestamp + 3600000
