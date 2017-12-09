@@ -29,7 +29,6 @@
     "helmet-csp": "^2.6.0",
     "jquery-smooth-scroll": "^2.2.0",
     "jsonwebtoken": "^8.1.0",
-    "jwt-simple": "^0.5.1",
     "lazysizes": "^4.0.1",
     "mongo-sanitize": "^1.0.0",
     "mongoose": "^4.13.3",
