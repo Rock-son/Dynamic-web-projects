@@ -450,7 +450,6 @@ body {
   width: 100%;
   color: #fff;
   top: 0;
-  height: 4vh;
   font-family: "Advent Pro", Colibri, Arial, sans-serif;
   background-color: #106597;
   z-index: 2;
@@ -468,7 +467,9 @@ body {
         text-decoration: none; }
         .header__nav__left__items .fa-home {
           color: #000;
-          text-shadow: 0px 0px 1px #fff, 0px 0px 2px #bbb; }
+          text-shadow: 0px 0px 1px #fff, 0px 0px 2px #bbb;
+          -webkit-transition: all .3s;
+          transition: all .3s; }
           .header__nav__left__items .fa-home:hover {
             color: #999;
             text-decoration: none;
@@ -479,7 +480,9 @@ body {
           margin-left: 5%;
           font-size: 1rem;
           color: #999;
-          padding: .6rem; }
+          padding: .6rem;
+          -webkit-transition: all .3s;
+          transition: all .3s; }
           .header__nav__left__items.polls:hover {
             text-decoration: none;
             color: #eee;
@@ -492,7 +495,9 @@ body {
         margin-right: 1.3%;
         font-size: 2rem;
         color: #999;
-        text-decoration: none; }
+        text-decoration: none;
+        -webkit-transition: all .3s;
+        transition: all .3s; }
         .header__nav__right__items.authBtn {
           display: inline-table;
           vertical-align: bottom;
@@ -511,6 +516,9 @@ body {
             padding: .6rem; }
         .header__nav__right__items.authBtn:nth-child(2) {
           margin-right: 3%; }
+        .header__nav__right__items .fa {
+          -webkit-transition: all .3s;
+          transition: all .3s; }
         .header__nav__right__items .fa-facebook-square {
           color: #3b5998;
           background-color: #FCFCFC;
@@ -563,7 +571,6 @@ body {
 
 .subHeader {
   position: relative;
-  height: 10vh;
   width: 100vw;
   color: #fff;
   background-color: #296DAD;
@@ -578,14 +585,11 @@ body {
   width: auto;
   position: relative;
   margin-top: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  padding: 2% 0;
   text-shadow: 1px 1px 2px black, -1px -1px 2px black; }
 
 .body {
   position: relative;
-  height: 83vh;
   width: 85vw;
   font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
   font-size: 1rem;
