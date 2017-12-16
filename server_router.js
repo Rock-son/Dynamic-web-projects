@@ -90,14 +90,8 @@ app.route("/auth/logout")
 
 
   // GITHUB oAuth
-app.get("/auth/login/github", function(req, res) {
+app.get("/auth/github/callback", function(req, res) {
 
-      //TODO: PUT IN SERVICES
-      const CLIENT_ID = process.env.GITHUB_ID,
-            GITHUB_SECRET = process.env.GITHUB_SECRET,
-            SCOPE = "user:email",
-            CSRF_KEY = process.env.GITHUB_CSRF_KEY,
-            REDIRECT_URI = "https://fcc-dynamic-webapps-roky.herokuapp.com/voting_app";
      
       console.log("not implemented yet!");
       res.end();

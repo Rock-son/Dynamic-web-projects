@@ -3,6 +3,10 @@
 const passport = require("passport"),
       User = require("../models/user"),
       JwtStrategy = require("passport-jwt").Strategy,
+      GitHubStrategy = require('passport-github').Strategy,
+      TwitterStrategy = require('passport-twitter').Strategy,
+      FacebookStrategy = require('passport-facebook').Strategy,
+      GoogleStrategy = require('passport-google-oauth20').Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
       LocalStrategy = require("passport-local"),
       // SANITIZATION
@@ -66,6 +70,21 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
       });
 });
 
-// Tell passport to use this strategy
+// GITHUB STRATEGY
+const gitHubStrategy = new GitHubStrategy({
+      clientID: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+    },
+    function(accessToken, refreshToken, profile, cb) {
+     // User.findOrCreate({ githubId: profile.id }, function (err, user) {
+     //   return cb(err, user);
+     // });
+    }
+  );
+
+
+
 passport.use(jwtLogin);
 passport.use(localLogin);
+//passport.use(gitHubStrategy)
