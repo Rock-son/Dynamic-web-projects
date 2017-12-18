@@ -8,9 +8,9 @@ const localSchema = new Schema({
     username: { type: Schema.Types.String, unique: true, lowercase: true },
     password: String
 });
-const gitHubSchema = new Schema({
-    // unique String.toLowerCase() - so no doubles are possible
-    id: { type: Schema.Types.String, unique: true, lowercase: true },
+const randomSchema = new Schema({    
+    userID: { type: Schema.Types.String, unique: true, lowercase: false },
+    displayName: String
 });
 
 
@@ -30,9 +30,6 @@ localSchema.pre("save", function(next) {
     });
 });
 
-
-
-
 localSchema.methods.comparePassword = function(candidatePassword, callback) {
     const user = this;
     bcrypt.compare(candidatePassword, user.password, function(err, isMatch) {
@@ -42,9 +39,10 @@ localSchema.methods.comparePassword = function(candidatePassword, callback) {
     });
 };
 
-// Create Model Class from Schema and collection name
-const LocalUser = mongoose.model("user", localSchema, "users");
 
 // Export Model
-module.exports.LocalUser = LocalUser;
-//module.exports.GitHubUser = GithubUser;
+module.exports.LocalUser    = mongoose.model("localUser"   ,localSchema , "local_users");
+module.exports.GitHubUser   = mongoose.model("gitHubUser"  ,randomSchema, "github_users");
+module.exports.FacebookUser = mongoose.model("facebookUser",randomSchema, "facebook_users");
+module.exports.GoogleUser   = mongoose.model("googleUser"  ,randomSchema, "google_users");
+module.exports.TwitterUser  = mongoose.model("twitterUser" ,randomSchema, "twitter_users");
