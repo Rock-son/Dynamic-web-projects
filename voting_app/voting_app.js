@@ -8,6 +8,7 @@ var fs = require("fs"),
     indexCSS = "./dist/index.css",
     passportService = require("../auth/services/passport"),
     passport = require("passport"),
+    escapeHtml = require('escape-html'),
     
     app = express();
 
@@ -22,7 +23,7 @@ var fs = require("fs"),
           passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                 if (err) { return next(err) }
                 if (!user) { return res.render("indexVoting", { cssPath: indexCSS, auth: false, user: "" }); }
-                return res.render("indexVoting", { cssPath: indexCSS, auth: true, user: user.username });
+                return res.render("indexVoting", { cssPath: indexCSS, auth: true, user: escapeHtml(user.username || user.displayName) });
         })(req, res, next);
     });
 
