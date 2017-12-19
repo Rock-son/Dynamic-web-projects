@@ -17,13 +17,13 @@ html(lang="en")
                     a.header__nav__left__items.polls(href="/") Polls
                 div.header__nav__right
                     if auth == false
-                        a.header__nav__right__items(href="/facebook-signup")
+                        a.header__nav__right__items(href="/auth-facebook")
                             i(class="fa fa-facebook-square " title="Login with Facebook" aria-hidden="true")
                         a.header__nav__right__items(href="/auth-github")
                             i(class="fa fa-github-square" title="Login with GitHub" aria-hidden="true")
-                        a.header__nav__right__items(href="/twitter-signup")
+                        a.header__nav__right__items(href="/auth-twitter")
                             i(class="fa fa-twitter-square" title="Login with Twitter" aria-hidden="true")
-                        a.header__nav__right__items(href="/google-signup")
+                        a.header__nav__right__items(href="/auth-google")
                             i(class="fa fa-google-plus-square " title="Login with Google" aria-hidden="true") 
                     else 
                         a.header__nav__right__items.authBtn(href="/auth/logout") Logout
