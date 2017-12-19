@@ -72,7 +72,7 @@ module.exports = function(app) {
       app.get("/auth/github/callback", function(req, res) {
 
             passport.authenticate("github", {session: false}, function(err, user, info, status) {
-                  Authentication.schemaLogin(req, res, user);
+                  Authentication.schemaLogin(req, res, user, "github");
             })(req, res)
       });
 
@@ -83,7 +83,7 @@ module.exports = function(app) {
 
             passport.authenticate("google", {session: false}, function(err, user, info, status) {
                   console.log(err, user, info, status);
-                  Authentication.schemaLogin(req, res, user);
+                  Authentication.schemaLogin(req, res, user, "google");
             })(req, res)
       });
 
