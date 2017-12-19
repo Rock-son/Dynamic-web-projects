@@ -21,7 +21,7 @@ module.exports = function(app) {
 
       // HOME ROUTE
       app.get ("/", function(req, res, next) {
-
+            
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   
                   if (err) { return next(err) }
@@ -65,6 +65,8 @@ module.exports = function(app) {
 
 
       // OAUTH
+
+      //GITHUB
       app.get("/auth-github", passport.authenticate("github", { session: false }));
 
       app.get("/auth/github/callback", function(req, res) {
@@ -74,6 +76,16 @@ module.exports = function(app) {
             })(req, res)
       });
 
+      //GOOGLE
+      app.get("/auth-google", passport.authenticate("google", { session: false }));
+
+      app.get("/auth/google/callback", function(req, res) {
+
+            passport.authenticate("google", {session: false}, function(err, user, info, status) {
+                  console.log(err, user, info, status);
+                  Authentication.schemaLogin(req, res, user);
+            })(req, res)
+      });
 
 
 

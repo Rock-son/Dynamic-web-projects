@@ -66,7 +66,15 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
             if (err) { return done(err, false); }
             if (user) { return done(null, user); }
       });
-      
+      });
+      FacebookUser.findById(payload.sub, function(err, user) {
+            if (err) { return done(err, false); }
+            if (user) { return done(null, user); }
+      });
+      TwitterUser.findById(payload.sub, function(err, user) {
+            if (err) { return done(err, false); }
+            if (user) { return done(null, user); }
+      });
       //return done(null, false);
 });
 
@@ -94,7 +102,28 @@ const gitHubStrategy = new GitHubStrategy({
     }
   );
 
+  const googleStrategy = new GoogleStrategy({
+      scope: "profile",
+      clientID: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      callbackURL: "http://localhost:3000/auth/google/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
 
+      GoogleUser.findOne({userID: profile.id}, function(err, user) {
+            if (err) return done(err, false);
+
+            if (user) {
+                  return done(null, user); 
+            } else {
+                  GoogleUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                        if (err) return done(err, false);
+                        return done(null, user);
+                  });
+            }
+      });
+    }
+  );
 
 passport.use(jwtLogin);
 passport.use(localLogin);
