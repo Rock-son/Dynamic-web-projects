@@ -1,6 +1,6 @@
 "use strict"
 
-const User = require("../models/user"),
+const {LocalUser} = require("../models/users"),
       //jwt = require("jsonwebtoken"),
       jwt = require("jsonwebtoken"),
       mongoSanitize = require("mongo-sanitize"),
@@ -38,6 +38,35 @@ exports.login = function(req, res, next) {
     return;
 };
 
+exports.schemaLogin = function(req, res, user) {   
+    
+    // User has already auth'd their email and password with verifyLogin - local strategy
+    res.cookie("_t1", tokenForUser(user), {
+            httpOnly: true,
+            secure: false,
+            sameSite: true,
+            maxAge: 60 * 60 * 1000// 1 hour 
+    });
+    res.statusCode = 302;
+    res.set({'Location': '/'});
+    res.end();
+    return;
+};
+
+exports.logout = function(req, res) {
+
+    res.cookie("_t1", "", {
+        httpOnly: true,
+        secure: false,
+        sameSite: true,
+        maxAge: -1,
+        exp: new Date(1).getTime()
+    });
+    res.statusCode = 302;
+    res.set({'Location': req.headers.referer});
+    res.end();
+    return;
+};
 
 
 
@@ -53,14 +82,14 @@ exports.register = function(req, res, next) {
         return res.status(422).send({error: "Your passwords don't match!"});  
     }
     
-    User.findOne({username: username}, function(err, existingUser) {
+    LocalUser.findOne({username: username}, function(err, existingUser) {
         if (err) { return next(err); }
     
         if (existingUser) {
             return res.status(422).send({error: "Username is in use"}); 
         }
 
-        const user = new User({
+        const user = new LocalUser({
             username: username,
             password: password
         });

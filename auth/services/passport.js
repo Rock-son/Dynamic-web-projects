@@ -1,8 +1,12 @@
 "use strict"
 
 const passport = require("passport"),
-      User = require("../models/user"),
+      { LocalUser, GitHubUser, FacebookUser, GoogleUser, TwitterUser } = require("../models/users"),
       JwtStrategy = require("passport-jwt").Strategy,
+      GitHubStrategy = require('passport-github').Strategy,
+      TwitterStrategy = require('passport-twitter').Strategy,
+      FacebookStrategy = require('passport-facebook').Strategy,
+      GoogleStrategy = require('passport-google-oauth20').Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
       LocalStrategy = require("passport-local"),
       // SANITIZATION
@@ -17,7 +21,7 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
       // verify this email and password, call done w/ user if correct, else call done w/false
       const userName = mongoSanitize(username),
             pass = mongoSanitize(password);
-      User.findOne({username: userName}, function(err, user) {
+      LocalUser.findOne({username: userName}, function(err, user) {
             if (err) { return done(err, false); }
 
             if (!user || user == null) {
@@ -27,8 +31,7 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
                         if (err) { return done(err); }
       
                         if (!isMatch) { return done(null, false); }
-                        
-                        return done(null, user);
+                        if (isMatch)  { return done(null, user);  }
                   });
             }
       });            
@@ -53,19 +56,46 @@ const jwtOptions = {
 // JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
       
-      // See if user payload exists in our db - if yes, call done w/user obj, else call done w/out a user object
-      User.findById(payload.sub, function(err, user) {
-            if (err) { return done(err, false); }
-
-            if (user) { 
-                  return done(null, user); 
-            } else {
-                  return done(null, false);
-                  // or you could create a new account
-            }
+      // See if user payload exists in db - if yes, call done w/user obj, else call done w/out a user object
+      LocalUser.findById(payload.sub, function(err, user) {
+            if (err) { return done(err, false);}
+            if (user) { return done(null, user); }
       });
+      // GITHUB
+      GitHubUser.findById(payload.sub, function(err, user) {
+            if (err) { return done(err, false); }
+            if (user) { return done(null, user); }
+      });
+      
+      //return done(null, false);
 });
 
-// Tell passport to use this strategy
+// GITHUB STRATEGY - just for registering, after that COOKIE & JWT STRATEGY
+const gitHubStrategy = new GitHubStrategy({
+      scope: "user:email",
+      clientID: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+      callbackURL: "http://localhost:3000/auth/github/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+          
+      GitHubUser.findOne({userID: profile.id}, function(err, user) {
+            if (err) return done(err, false);
+
+            if (user) {
+                  return done(null, user); 
+            } else {
+                  GitHubUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                        if (err) return done(err, false);
+                        return done(null, user);
+                  });
+            }
+      });
+    }
+  );
+
+
+
 passport.use(jwtLogin);
 passport.use(localLogin);
+passport.use(gitHubStrategy)

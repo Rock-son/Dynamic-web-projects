@@ -22,7 +22,7 @@ html(lang="en")
                             a.header__nav__right__items.authBtn(href="/auth/register") Register
                         a.header__nav__right__items(href="/facebook-signup")
                             i(class="fa fa-facebook-square " title="Login with Facebook" aria-hidden="true")
-                        a.header__nav__right__items(href="/github-signup")
+                        a.header__nav__right__items(href="/auth-github")
                             i(class="fa fa-github-square" title="Login with GitHub" aria-hidden="true")
                         a.header__nav__right__items(href="/twitter-signup")
                             i(class="fa fa-twitter-square" title="Login with Twitter" aria-hidden="true")
@@ -30,6 +30,6 @@ html(lang="en")
                             i(class="fa fa-google-plus-square " title="Login with Google" aria-hidden="true") 
                     else 
                         a.header__nav__right__items.authBtn(href="/auth/logout") Logout
-                        span.header__nav__right__items.authBtn--no-link Welcome #{user.toUpperCase()}
+                        span.header__nav__right__items.authBtn--no-link Welcome, #{user}
 
         block content
