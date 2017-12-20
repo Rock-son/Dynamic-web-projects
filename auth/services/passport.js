@@ -56,9 +56,8 @@ const jwtOptions = {
 
 // JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
-      
-      // See if user payload exists in db - if yes, call done w/user obj, else call done w/out a user object
-      switch (payload.type) {
+
+      switch (payload.type || "") {
             case LOCAL:
                   LocalUser.findById(payload.sub, function(err, user) {
                         if (err) { return done(err, false);}
@@ -92,7 +91,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
                         if (err) { return done(err, false);}
                         if (user) { return done(null, user); }
                         return done(null, false);
-            });
+                  });
                   break;
             default:
                   return done(null, false);
@@ -157,7 +156,7 @@ const facebookStrategy = new FacebookStrategy({
             FacebookUser.findOne({userID: profile.id}, function(err, user) {
                   if (err) return done(err, false);
                   if (user) { return done(null, user); } 
-                                    
+
                   else {
                         GoogleUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
                               if (err) return done(err, false);
@@ -167,8 +166,35 @@ const facebookStrategy = new FacebookStrategy({
             });
     }
   );
+
+// FACEBOOK STRATEGY
+const twitterStrategy = new TwitterStrategy({
+      scope: "public_profile",
+      clientID: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
+      callbackURL: "http://localhost:3000/auth/twitter/callback"
+      },
+      function(accessToken, refreshToken, profile, done) {
+
+            TwitterUser.findOne({userID: profile.id}, function(err, user) {
+                  if (err) return done(err, false);
+                  if (user) { return done(null, user); } 
+
+                  else {
+                        TwitterUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                              if (err) return done(err, false);
+                              return done(null, user);
+                        });
+                  }
+            });
+    }
+  );
+
+
+
 passport.use(jwtLogin);
 passport.use(localLogin);
 passport.use(gitHubStrategy)
 passport.use(googleStrategy);
 passport.use(facebookStrategy);
+passport.use(twitterStrategy);

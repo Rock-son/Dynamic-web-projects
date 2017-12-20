@@ -17,7 +17,7 @@ module.exports = function(app) {
             ensureAuthenticated = passport.authenticate("jwt", { session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
             verifyLogin = passport.authenticate("local", { session: false });  // login - input user & pass - for POST
 
-
+      /***************************************************** ROUTES ***************************************************************************/
 
       // HOME ROUTE
       app.get ("/", function(req, res, next) {
@@ -33,7 +33,11 @@ module.exports = function(app) {
 
 
 
-      // AUTHORIZATION - REGISTER (LOCAL) & LOGIN PAGE (JWT)
+
+
+      /******************************************* AUTHORIZATION ******************************************************************************/
+
+      // AUTHORIZATION: LOCAL STRATEGY(LOCAL) & JWT STRATEGY(LOGIN)
       app.route("/auth/register")
 
             .get(function(req, res, next) {
@@ -64,9 +68,12 @@ module.exports = function(app) {
 
 
 
-      // OAUTH
 
-      //GITHUB
+
+
+      /******************** OAUTH ***********************/
+
+      // GITHUB
       app.get("/auth-github", passport.authenticate("github", { session: false }));
 
       app.get("/auth/github/callback", function(req, res) {
@@ -76,12 +83,16 @@ module.exports = function(app) {
             })(req, res)
       });
 
-      //GOOGLE
+      // GOOGLE
       app.get("/auth-google", passport.authenticate("google", { session: false }));
 
       app.get("/auth/google/callback", function(req, res) {
 
-            passport.authenticate("google", {session: false}, function(err, user, info, status) {
+            passport.authenticate("google", {session: false}, function(err, user, info, status) {                  
+                  Authentication.schemaLogin(req, res, user, "google");
+            })(req, res)
+      });
+
       // FACEBOOK
       app.get("/auth-facebook", passport.authenticate("facebook", { session: false }));
 
@@ -93,13 +104,20 @@ module.exports = function(app) {
             })(req, res)
       });
 
+      // TWITTER
+      app.get("/auth-twitter", passport.authenticate("twitter", { session: false }));
+
+      app.get("/auth/twitter/callback", function(req, res) {
+
+            passport.authenticate("twitter", {session: false}, function(err, user, info, status) {
                   console.log(err, user, info, status);
-                  Authentication.schemaLogin(req, res, user, "google");
+                  Authentication.schemaLogin(req, res, user, "twitter");
             })(req, res)
       });
 
 
 
+      /******************************************* MISCELANEOUS *******************************************************************/
 
       // FONTS
       app.get("/public/assets/fonts/*", function(req, res) {
