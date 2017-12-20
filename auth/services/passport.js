@@ -5,11 +5,11 @@ const passport = require("passport"),
       GOOOGLE="google", TWITTER="twitter", FACEBOOK="facebook", GITHUB="github", LOCAL="local",
       JwtStrategy = require("passport-jwt").Strategy,
       GitHubStrategy = require('passport-github').Strategy,
-      TwitterStrategy = require('passport-twitter').Strategy,
       FacebookStrategy = require('passport-facebook').Strategy,
       GoogleStrategy = require('passport-google-oauth20').Strategy,
       ExtractJwt = require("passport-jwt").ExtractJwt,
       LocalStrategy = require("passport-local"),
+      OAuth2Strategy = require("passport-oauth2"),
       // SANITIZATION
       mongoSanitize = require("mongo-sanitize");
 
@@ -167,28 +167,6 @@ const facebookStrategy = new FacebookStrategy({
     }
   );
 
-// FACEBOOK STRATEGY
-const twitterStrategy = new TwitterStrategy({
-      scope: "public_profile",
-      clientID: process.env.TWITTER_ID,
-      clientSecret: process.env.TWITTER_SECRET,
-      callbackURL: "http://localhost:3000/auth/twitter/callback"
-      },
-      function(accessToken, refreshToken, profile, done) {
-
-            TwitterUser.findOne({userID: profile.id}, function(err, user) {
-                  if (err) return done(err, false);
-                  if (user) { return done(null, user); } 
-
-                  else {
-                        TwitterUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
-                              if (err) return done(err, false);
-                              return done(null, user);
-                        });
-                  }
-            });
-    }
-  );
 
 
 
@@ -197,4 +175,3 @@ passport.use(localLogin);
 passport.use(gitHubStrategy)
 passport.use(googleStrategy);
 passport.use(facebookStrategy);
-passport.use(twitterStrategy);

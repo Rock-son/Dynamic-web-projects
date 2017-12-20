@@ -104,17 +104,6 @@ module.exports = function(app) {
             })(req, res)
       });
 
-      // TWITTER
-      app.get("/auth-twitter", passport.authenticate("twitter", { session: false }));
-
-      app.get("/auth/twitter/callback", function(req, res) {
-
-            passport.authenticate("twitter", {session: false}, function(err, user, info, status) {
-                  console.log(err, user, info, status);
-                  Authentication.schemaLogin(req, res, user, "twitter");
-            })(req, res)
-      });
-
 
 
       /******************************************* MISCELANEOUS *******************************************************************/
