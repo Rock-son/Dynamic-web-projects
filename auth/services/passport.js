@@ -58,7 +58,6 @@ const jwtOptions = {
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
       
       // See if user payload exists in db - if yes, call done w/user obj, else call done w/out a user object
-
       switch (payload.type) {
             case LOCAL:
                   LocalUser.findById(payload.sub, function(err, user) {
@@ -101,54 +100,75 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
       }
 });
 
-// GITHUB STRATEGY - just for registering, after that COOKIE & JWT STRATEGY
+// GITHUB STRATEGY
 const gitHubStrategy = new GitHubStrategy({
       scope: "user:email",
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       callbackURL: "http://localhost:3000/auth/github/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-          
-      GitHubUser.findOne({userID: profile.id}, function(err, user) {
-            if (err) return done(err, false);
+      },
+      function(accessToken, refreshToken, profile, done) {
 
-            if (user) {
-                  return done(null, user); 
-            } else {
-                  GitHubUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
-                        if (err) return done(err, false);
-                        return done(null, user);
-                  });
-            }
-      });
+            GitHubUser.findOne({userID: profile.id}, function(err, user) {
+                  if (err) return done(err, false);
+                  if (user) { return done(null, user); } 
+                  
+                  else {
+                        GitHubUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                              if (err) return done(err, false);
+                              return done(null, user);
+                        });
+                  }
+            });
     }
   );
-
-  const googleStrategy = new GoogleStrategy({
+// GOOGLE STRATEGY
+const googleStrategy = new GoogleStrategy({
       scope: "profile",
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       callbackURL: "http://localhost:3000/auth/google/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
+      },
+      function(accessToken, refreshToken, profile, done) {
 
-      GoogleUser.findOne({userID: profile.id}, function(err, user) {
-            if (err) return done(err, false);
-
-            if (user) {
-                  return done(null, user); 
-            } else {
-                  GoogleUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
-                        if (err) return done(err, false);
-                        return done(null, user);
-                  });
-            }
-      });
+            GoogleUser.findOne({userID: profile.id}, function(err, user) {
+                  if (err) return done(err, false);
+                  if (user) { return done(null, user); } 
+                  
+                  else {
+                        GoogleUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                              if (err) return done(err, false);
+                              return done(null, user);
+                        });
+                  }
+            });
     }
   );
+  
+// FACEBOOK STRATEGY
+const facebookStrategy = new FacebookStrategy({
+      scope: "public_profile",
+      clientID: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+      callbackURL: "http://localhost:3000/auth/facebook/callback"
+      },
+      function(accessToken, refreshToken, profile, done) {
 
+            FacebookUser.findOne({userID: profile.id}, function(err, user) {
+                  if (err) return done(err, false);
+                  if (user) { return done(null, user); } 
+                                    
+                  else {
+                        GoogleUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                              if (err) return done(err, false);
+                              return done(null, user);
+                        });
+                  }
+            });
+    }
+  );
 passport.use(jwtLogin);
 passport.use(localLogin);
 passport.use(gitHubStrategy)
 passport.use(googleStrategy);
+passport.use(facebookStrategy);

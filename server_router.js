@@ -82,6 +82,17 @@ module.exports = function(app) {
       app.get("/auth/google/callback", function(req, res) {
 
             passport.authenticate("google", {session: false}, function(err, user, info, status) {
+      // FACEBOOK
+      app.get("/auth-facebook", passport.authenticate("facebook", { session: false }));
+
+      app.get("/auth/facebook/callback", function(req, res) {
+
+            passport.authenticate("facebook", {session: false}, function(err, user, info, status) {
+                  console.log(err, user, info, status);
+                  Authentication.schemaLogin(req, res, user, "facebook");
+            })(req, res)
+      });
+
                   console.log(err, user, info, status);
                   Authentication.schemaLogin(req, res, user, "google");
             })(req, res)
