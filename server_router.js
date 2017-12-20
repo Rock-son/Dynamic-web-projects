@@ -17,11 +17,11 @@ module.exports = function(app) {
             ensureAuthenticated = passport.authenticate("jwt", { session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
             verifyLogin = passport.authenticate("local", { session: false });  // login - input user & pass - for POST
 
-
+      /***************************************************** ROUTES ***************************************************************************/
 
       // HOME ROUTE
       app.get ("/", function(req, res, next) {
-
+            
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   
                   if (err) { return next(err) }
@@ -33,7 +33,11 @@ module.exports = function(app) {
 
 
 
-      // AUTHORIZATION - REGISTER (LOCAL) & LOGIN PAGE (JWT)
+
+
+      /******************************************* AUTHORIZATION ******************************************************************************/
+
+      // AUTHORIZATION: LOCAL STRATEGY(LOCAL) & JWT STRATEGY(LOGIN)
       app.route("/auth/register")
 
             .get(function(req, res, next) {
@@ -64,19 +68,44 @@ module.exports = function(app) {
 
 
 
-      // OAUTH
+
+
+
+      /******************** OAUTH ***********************/
+
+      // GITHUB
       app.get("/auth-github", passport.authenticate("github", { session: false }));
 
       app.get("/auth/github/callback", function(req, res) {
 
             passport.authenticate("github", {session: false}, function(err, user, info, status) {
-                  Authentication.schemaLogin(req, res, user);
+                  Authentication.schemaLogin(req, res, user, "github");
+            })(req, res)
+      });
+
+      // GOOGLE
+      app.get("/auth-google", passport.authenticate("google", { session: false }));
+
+      app.get("/auth/google/callback", function(req, res) {
+
+            passport.authenticate("google", {session: false}, function(err, user, info, status) {                  
+                  Authentication.schemaLogin(req, res, user, "google");
+            })(req, res)
+      });
+
+      // FACEBOOK
+      app.get("/auth-facebook", passport.authenticate("facebook", { session: false }));
+
+      app.get("/auth/facebook/callback", function(req, res) {
+
+            passport.authenticate("facebook", {session: false}, function(err, user, info, status) {
+                  Authentication.schemaLogin(req, res, user, "facebook");
             })(req, res)
       });
 
 
 
-
+      /******************************************* MISCELANEOUS *******************************************************************/
 
       // FONTS
       app.get("/public/assets/fonts/*", function(req, res) {

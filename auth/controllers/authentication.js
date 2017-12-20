@@ -8,11 +8,12 @@ const {LocalUser} = require("../models/users"),
       
 
 
-    function tokenForUser(user) {
+    function tokenForUser(user, type) {
         
         const timestamp = new Date().getTime();
         return jwt.sign({
                 sub: user._id,
+                type: type,
                 iat: timestamp,
                 exp: timestamp + 3600000
             }, 
@@ -26,7 +27,7 @@ const {LocalUser} = require("../models/users"),
 exports.login = function(req, res, next) {   
     
     // User has already auth'd their email and password with verifyLogin - local strategy
-    res.cookie("_t1", tokenForUser(req.user), {
+    res.cookie("_t1", tokenForUser(req.user, "local"), {
             httpOnly: true,
             secure: false,
             sameSite: true,
@@ -38,10 +39,10 @@ exports.login = function(req, res, next) {
     return;
 };
 
-exports.schemaLogin = function(req, res, user) {   
+exports.schemaLogin = function(req, res, user, type) {   
     
     // User has already auth'd their email and password with verifyLogin - local strategy
-    res.cookie("_t1", tokenForUser(user), {
+    res.cookie("_t1", tokenForUser(user, type), {
             httpOnly: true,
             secure: false,
             sameSite: true,
@@ -69,7 +70,7 @@ exports.logout = function(req, res) {
 };
 
 
-
+// LOCAL
 exports.register = function(req, res, next) {
 
     const username = mongoSanitize(req.body.username),
@@ -97,7 +98,7 @@ exports.register = function(req, res, next) {
             if (err) { return next(err); }
             
             // send back a cookie with authentication token
-            res.cookie('_t1', tokenForUser(user), {
+            res.cookie('_t1', tokenForUser(user, "local"), {
                 httpOnly: true,
                 secure: false,
                 sameSite: true,

@@ -45,4 +45,3 @@ module.exports.LocalUser    = mongoose.model("localUser"   ,localSchema , "local
 module.exports.GitHubUser   = mongoose.model("gitHubUser"  ,randomSchema, "github_users");
 module.exports.FacebookUser = mongoose.model("facebookUser",randomSchema, "facebook_users");
 module.exports.GoogleUser   = mongoose.model("googleUser"  ,randomSchema, "google_users");
-module.exports.TwitterUser  = mongoose.model("twitterUser" ,randomSchema, "twitter_users");
