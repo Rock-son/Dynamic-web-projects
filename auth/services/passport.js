@@ -149,7 +149,9 @@ const facebookStrategy = new FacebookStrategy({
       scope: "public_profile",
       clientID: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/callback"
+      callbackURL: "http://localhost:3000/auth/facebook/callback",
+      profileFields: ['id', 'displayName'],
+      enableProof: true
       },
       function(accessToken, refreshToken, profile, done) {
 
@@ -158,7 +160,7 @@ const facebookStrategy = new FacebookStrategy({
                   if (user) { return done(null, user); } 
 
                   else {
-                        GoogleUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
+                        FacebookUser.create({userID: profile.id, displayName: profile.displayName}, function(err, user) {
                               if (err) return done(err, false);
                               return done(null, user);
                         });

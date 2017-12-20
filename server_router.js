@@ -99,7 +99,6 @@ module.exports = function(app) {
       app.get("/auth/facebook/callback", function(req, res) {
 
             passport.authenticate("facebook", {session: false}, function(err, user, info, status) {
-                  console.log(err, user, info, status);
                   Authentication.schemaLogin(req, res, user, "facebook");
             })(req, res)
       });
