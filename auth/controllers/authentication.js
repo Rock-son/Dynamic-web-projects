@@ -1,38 +1,34 @@
 "use strict"
 
 const {LocalUser} = require("../models/users"),
-      //jwt = require("jsonwebtoken"),
       jwt = require("jsonwebtoken"),
       mongoSanitize = require("mongo-sanitize"),
-      secret = process.env.JWT_SECRET;
-      
+      cookieOptions = { httpOnly: true,
+                        secure: false,
+                        sameSite: true,
+                        maxAge: 60 * 60 * 24000// 24 hours
+      };
 
 
-    function tokenForUser(user, type) {
-        
-        const timestamp = new Date().getTime();
-        return jwt.sign({
-                sub: user._id,
-                type: type,
-                iat: timestamp,
-                exp: timestamp + 3600000
-            }, 
-            secret
-        );  
-    }
 
-
+function tokenForUser(user, type) {
+    
+    const timestamp = new Date().getTime();
+    
+    return jwt.sign({ sub: user._id,
+                      type: type,
+                      iat: timestamp,
+                      exp: timestamp + (3600000 * 24) // 24 hours
+                    }, 
+                      process.env.JWT_SECRET
+                    );
+}
 
 
 exports.login = function(req, res, next) {   
     
     // User has already auth'd their email and password with verifyLogin - local strategy
-    res.cookie("_t1", tokenForUser(req.user, "local"), {
-            httpOnly: true,
-            secure: false,
-            sameSite: true,
-            maxAge: 60 * 60 * 1000// 1 hour 
-    });
+    res.cookie("_t1", tokenForUser(req.user, "local"), cookieOptions);
     res.statusCode = 302;
     res.set({'Location': '/'});
     res.end();
@@ -42,12 +38,7 @@ exports.login = function(req, res, next) {
 exports.schemaLogin = function(req, res, user, type) {   
     
     // User has already auth'd their email and password with verifyLogin - local strategy
-    res.cookie("_t1", tokenForUser(user, type), {
-            httpOnly: true,
-            secure: false,
-            sameSite: true,
-            maxAge: 60 * 60 * 1000// 1 hour 
-    });
+    res.cookie("_t1", tokenForUser(user, type), cookieOptions);
     res.statusCode = 302;
     res.set({'Location': '/'});
     res.end();
@@ -98,12 +89,7 @@ exports.register = function(req, res, next) {
             if (err) { return next(err); }
             
             // send back a cookie with authentication token
-            res.cookie('_t1', tokenForUser(user, "local"), {
-                httpOnly: true,
-                secure: false,
-                sameSite: true,
-                maxAge: 60 * 60 * 1000 // 1 hour
-            });
+            res.cookie('_t1', tokenForUser(user, "local"), cookieOptions);
             res.statusCode = 302;
             res.setHeader('Location', '/');
             res.end();
