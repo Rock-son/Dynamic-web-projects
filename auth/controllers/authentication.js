@@ -10,7 +10,11 @@ const {LocalUser} = require("../models/users"),
       };
 
 
-
+/**
+ * 
+ * @param {Object} user object with user data
+ * @param {String} type schema type
+ */
 function tokenForUser(user, type) {
     
     const timestamp = new Date().getTime();
@@ -24,7 +28,12 @@ function tokenForUser(user, type) {
                     );
 }
 
-
+/**
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ * @param {Object} next 
+ */
 exports.login = function(req, res, next) {   
     
     // User has already auth'd their email and password with verifyLogin - local strategy
@@ -35,6 +44,13 @@ exports.login = function(req, res, next) {
     return;
 };
 
+/**
+ * 
+ * @param {Object} req 
+ * @param {Object} res 
+ * @param {Object} user object with user data
+ * @param {String} type schema type
+ */
 exports.schemaLogin = function(req, res, user, type) {   
     
     // User has already auth'd their email and password with verifyLogin - local strategy
@@ -44,7 +60,6 @@ exports.schemaLogin = function(req, res, user, type) {
     res.end();
     return;
 };
-
 exports.logout = function(req, res) {
 
     res.cookie("_t1", "", {

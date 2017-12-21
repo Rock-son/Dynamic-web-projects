@@ -3,7 +3,6 @@
 require("dotenv").config();
 
 const express = require("express"),
-      cookieParser = require("cookie-parser"),
       http = require("http"),
       path = require("path"),
       fs = require("fs"),
@@ -15,6 +14,8 @@ const express = require("express"),
       router = require("./server_router"),
       // SECURITY
       helmet = require("./security/helmet"),
+      cookieParser = require("cookie-parser"),
+      cookieEncrypter = require("cookie-encrypter"),
       // LOGGING:  morgan = require('morgan'),  Log = require("./logs/services/morganLog"), accessLogStream = fs.createWriteStream(path.join(__dirname, "logs", 'access.log'), {flags: 'a'}), // writable stream - for MORGAN logging
       // DB
       mongoose = require("mongoose"),      
@@ -25,11 +26,10 @@ const express = require("express"),
 
       
       // COOKIE & BODY PARSERS
-      app.use(cookieParser());
+      app.use(cookieParser(process.env.CRYPTO_KEY));
+      app.use(cookieEncrypter(process.env.CRYPTO_KEY));
       app.use(bodyParser.json({type: "application/json"}));
-      app.use(bodyParser.json({
-            type: ['json', 'application/csp-report']
-      }));
+      app.use(bodyParser.json({ type: ['json', 'application/csp-report'] }));
       app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
       //app.use(morgan({stream: accessLogStream}));
