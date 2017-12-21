@@ -1,8 +1,9 @@
 "use strict"
 
+
 const passport = require("passport"),
-      { LocalUser, GitHubUser, FacebookUser, GoogleUser, TwitterUser } = require("../models/users"),
-      GOOOGLE="google", TWITTER="twitter", FACEBOOK="facebook", GITHUB="github", LOCAL="local",
+      { LocalUser, GitHubUser, FacebookUser, GoogleUser} = require("../models/users"),
+      GOOOGLE="google", FACEBOOK="facebook", GITHUB="github", LOCAL="local",
       JwtStrategy = require("passport-jwt").Strategy,
       GitHubStrategy = require('passport-github').Strategy,
       FacebookStrategy = require('passport-facebook').Strategy,
@@ -40,15 +41,15 @@ const localLogin = new LocalStrategy(localOptions, function(username, password, 
 
 
 
-/* JWT token strategy - LOGIN automatically if token exists ("/", requireAuth, func(req, res) {..})
-                              where requireAuth = passport.authenticate("jwt", {session: false})*/
+// JWT token strategy
 const jwtOptions = {
       jwtFromRequest: function(req) {
-            let token = null;
-            if (req && req.cookies) {
-                  token = req.cookies["_t1"];
+            
+            if (req && (req.cookies || {})["_t1"] != null) {
+                                    
+                  return req.cookies["_t1"];
             }
-            return token;
+            return null;
       },
       //jwtFromRequest: ExtractJwt.fromHeader("authorization"), // returns extracted JWT token
       secretOrKey: process.env.JWT_SECRET
@@ -64,14 +65,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
                         if (user) { return done(null, user); }
                         return done(null, false);
                   });
-                  break;
-            case TWITTER:
-                  TwitterUser.findById(payload.sub, function(err, user) {
-                        if (err) { return done(err, false);}
-                        if (user) { return done(null, user); }
-                        return done(null, false);
-                  });
-                  break;            
+                  break;          
             case FACEBOOK:
                   FacebookUser.findById(payload.sub, function(err, user) {
                         if (err) { return done(err, false);}
