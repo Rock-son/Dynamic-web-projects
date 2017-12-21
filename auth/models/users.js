@@ -41,7 +41,7 @@ localSchema.methods.comparePassword = function(candidatePassword, callback) {
 
 
 // Export Model
-module.exports.LocalUser    = mongoose.model("localUser"   ,localSchema , "local_users");
-module.exports.GitHubUser   = mongoose.model("gitHubUser"  ,randomSchema, "github_users");
-module.exports.FacebookUser = mongoose.model("facebookUser",randomSchema, "facebook_users");
-module.exports.GoogleUser   = mongoose.model("googleUser"  ,randomSchema, "google_users");
+module.exports.LocalUser    = mongoose.model("localUser"   ,localSchema , "local_auth");
+module.exports.GitHubUser   = mongoose.model("gitHubUser"  ,randomSchema, "github_auth");
+module.exports.FacebookUser = mongoose.model("facebookUser",randomSchema, "facebook_auth");
+module.exports.GoogleUser   = mongoose.model("googleUser"  ,randomSchema, "google_auth");
