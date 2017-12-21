@@ -4,6 +4,7 @@ module.exports = function(app) {
       
             // AUTHENTICATION
       const Authentication = require("./auth/controllers/authentication"),
+            passportService = require("./auth/services/passport"),
             passport = require("passport"),
             fs = require("fs"),
             path = require("path"),
@@ -15,8 +16,9 @@ module.exports = function(app) {
             escapeHtml = require('escape-html'),
 
             ensureAuthenticated = passport.authenticate("jwt", { session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
-            verifyLogin = passport.authenticate("local", { session: false });  // login - input user & pass - for POST
+            verifyLoginData = passport.authenticate("local", { session: false });  // login - input user & pass - for POST
 
+            
       /***************************************************** ROUTES ***************************************************************************/
 
       // HOME ROUTE
@@ -31,37 +33,32 @@ module.exports = function(app) {
       });
 
 
-
-
-
-
-      /******************************************* AUTHORIZATION ******************************************************************************/
-
-      // AUTHORIZATION: LOCAL STRATEGY(LOCAL) & JWT STRATEGY(LOGIN)
+      // REGISTER PAGE
       app.route("/auth/register")
-
+            // JWT STRATEGY
             .get(function(req, res, next) {
-
                   passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                         if (err) { return next(err) }
                         if (!user) {return res.render("register", {action: "/auth/register", reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: false}); }
                         return res.redirect("/");
                   })(req, res, next);
             })
+            // LOCAL STRATEGY
             .post(Authentication.register);
 
-
+      // LOGIN PAGE
       app.route("/auth/login")
-
+            // JWT STRATEGY
             .get(function(req, res, next) {
-
                   passport.authenticate('jwt', {session: false}, function(err, user, info, status) {                  
                         if (err) { return next(err) }
                         if (!user || user == null) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
                         return res.redirect("/");
                   })(req, res, next);
-            })      
-            .post(verifyLogin, Authentication.login); 
+            })
+            // LOCAL STRATEGY
+            .post(verifyLoginData, Authentication.login);
+
 
       // LOGOUT
       app.get("/auth/logout", Authentication.logout);
@@ -71,13 +68,15 @@ module.exports = function(app) {
 
 
 
+      /******************************************* AUTHORIZATION ******************************************************************************/
+
+
       /******************** OAUTH ***********************/
 
       // GITHUB
       app.get("/auth-github", passport.authenticate("github", { session: false }));
 
       app.get("/auth/github/callback", function(req, res) {
-
             passport.authenticate("github", {session: false}, function(err, user, info, status) {
                   Authentication.schemaLogin(req, res, user, "github");
             })(req, res)
@@ -87,7 +86,6 @@ module.exports = function(app) {
       app.get("/auth-google", passport.authenticate("google", { session: false }));
 
       app.get("/auth/google/callback", function(req, res) {
-
             passport.authenticate("google", {session: false}, function(err, user, info, status) {                  
                   Authentication.schemaLogin(req, res, user, "google");
             })(req, res)
@@ -97,7 +95,6 @@ module.exports = function(app) {
       app.get("/auth-facebook", passport.authenticate("facebook", { session: false }));
 
       app.get("/auth/facebook/callback", function(req, res) {
-
             passport.authenticate("facebook", {session: false}, function(err, user, info, status) {
                   Authentication.schemaLogin(req, res, user, "facebook");
             })(req, res)
