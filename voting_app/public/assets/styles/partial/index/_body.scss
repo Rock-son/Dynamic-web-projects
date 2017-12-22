@@ -25,7 +25,7 @@
 }
 .context__card {
         position: relative;
-        top: -70vh;
+        top: -60vh;
         display: block;
         margin: 0 auto;
         width: 40%;
@@ -81,6 +81,11 @@
         }
     }
 
+@include atLarge{
+    .context__card {
+        top: -70vh;
+    }
+}
 
 @keyframes moveInRight {
 

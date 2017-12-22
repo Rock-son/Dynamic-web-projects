@@ -673,7 +673,7 @@ body {
 
 .context__card {
   position: relative;
-  top: -70vh;
+  top: -60vh;
   display: block;
   margin: 0 auto;
   width: 40%;
@@ -725,6 +725,10 @@ body {
     .context__card__footer__line {
       color: #f6b7b7;
       margin: 0; }
+
+@media (min-width: 1400px) {
+  .context__card {
+    top: -70vh; } }
 
 @-webkit-keyframes moveInRight {
   0% {
