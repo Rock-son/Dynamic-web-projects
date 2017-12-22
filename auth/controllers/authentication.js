@@ -60,6 +60,11 @@ exports.schemaLogin = function(req, res, user, type) {
     res.end();
     return;
 };
+/**
+ * Logs out user, deleting his cookie
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 exports.logout = function(req, res) {
 
     res.cookie("_t1", "", {
@@ -77,6 +82,12 @@ exports.logout = function(req, res) {
 
 
 // LOCAL
+/**
+ * Registers user with LOCAL STRATEGY
+ * @param { Object } req 
+ * @param { Object } res 
+ * @param { Object } next 
+ */
 exports.register = function(req, res, next) {
 
     const username = mongoSanitize(req.body.username),

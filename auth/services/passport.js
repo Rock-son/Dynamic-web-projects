@@ -56,6 +56,11 @@ const jwtOptions = {
 };
 
 // JWT Strategy
+/**
+ * @param { Object } jwtOptions options for extracting token
+ * @param { Object } payload returned object payload of JWT TOKEN
+ * @param { Object } done function callback which appends req.user and makes a response
+ */
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
 
       switch (payload.type || "") {
