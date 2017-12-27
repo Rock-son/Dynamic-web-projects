@@ -13,9 +13,6 @@ html(lang="en")
         section.header
             nav.header__nav
                 div.header__nav__left
-                    a.header__nav__left__items(href="/")
-                        i(class="fa fa-home" title="Home")
-                    a.header__nav__left__items.polls(href="/") Polls
                 div.header__nav__right
                     if auth == false
                         if action == null
