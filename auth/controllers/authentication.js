@@ -75,7 +75,7 @@ exports.logout = function(req, res) {
         exp: new Date(1).getTime()
     });
     res.statusCode = 302;
-    res.set({'Location': req.headers.referer});
+    res.set({'Location': req.headers.referer || req.headers.origin || "/"});
     res.end();
     return;
 };
