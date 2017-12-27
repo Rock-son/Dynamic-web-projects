@@ -28,7 +28,7 @@
         top: -60vh;
         display: block;
         margin: 0 auto;
-        width: 40%;
+        width: 80%;
         background-color: #fff;
         border-radius: 10px;
         z-index: 0;
@@ -80,10 +80,16 @@
             }
         }
     }
+@include atMedium{
+    .context__card {
+        width: 60%;
+    }
+}
 
 @include atLarge{
     .context__card {
         top: -70vh;
+        width: 40%;
     }
 }
 
