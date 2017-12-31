@@ -6,7 +6,6 @@ const gulp = require("gulp"),
       // STARTING DIRs
       homeStylePath = homeOutputPath + "home/",
       registerStylePath = homeOutputPath + "register/",
-      votingAppStylePath = votingOutputPath + "index/",
       scriptsPath = "./public/assets/scripts/",      
       votingScriptsPath = "./voting_app/public/assets/scripts/"
 
@@ -17,8 +16,8 @@ gulp.task("watch", function() {
     
     watch(homeStylePath + "*.scss", () => gulp.start("homePageStyles"));
     watch(registerStylePath + "*.scss", () => gulp.start("registerPageStyles"));
-    watch(homeOutputPath + "shared/*.scss", () => gulp.start(["homePageStyles", "votingPageStyles", "registerPageStyles"]));
-    watch(votingOutputPath + "**/*.scss", () => gulp.start("votingPageStyles"));
+    watch(homeOutputPath + "shared/*.scss", () => gulp.start([ "homePageStyles", "votingHomeStyles", "registerPageStyles"]));
+    watch(votingOutputPath + "**/*.scss", () => gulp.start([ "votingHomeStyles", "votingCreatePollStyles" ]));
     watch(scriptsPath + "*.js", () => gulp.start("scripts"));
     watch(votingScriptsPath + "*.js", () => gulp.start("scriptsVoting"));
 });

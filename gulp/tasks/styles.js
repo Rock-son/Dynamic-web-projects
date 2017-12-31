@@ -6,7 +6,7 @@ const gulp = require("gulp"),
     mainPath = "/public/assets/styles/partial/",
     homeStylePath = "." + mainPath + "home/",
     registerStylePath = "." + mainPath + "register/",
-    votingAppStylePath = "./voting_app" + mainPath + "index/";
+    votingAppStylePath = "./voting_app" + mainPath;
 
 
 // TRANSFORM SCSS TO CSS
@@ -22,11 +22,17 @@ gulp.task("registerPageStyles", function() {
         .pipe(postcss([autoprefixer])) // order matters - FIFO (first in, first out)
         .pipe(gulp.dest("./public/dist/"));
 });
-gulp.task("votingPageStyles", function() {    
-    return gulp.src(votingAppStylePath + "index.scss")
+gulp.task("votingHomeStyles", function() {    
+    return gulp.src(votingAppStylePath + "/homePage/homePage.scss")
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
+        .pipe(gulp.dest("./voting_app/public/dist"));
+});
+gulp.task("votingCreatePollStyles", function() {    
+    return gulp.src(votingAppStylePath + "/createPoll/createPoll.scss")
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
         .pipe(gulp.dest("./voting_app/public/dist"));
 });
 
-gulp.task("styles", ["homePageStyles", "registerPageStyles", "votingPageStyles"]);
+gulp.task("styles", ["homePageStyles", "registerPageStyles", "votingHomeStyles", "votingNewPollStyles"]);
