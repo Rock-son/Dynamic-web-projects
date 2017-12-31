@@ -5,7 +5,7 @@ const {LocalUser} = require("../models/users"),
       mongoSanitize = require("mongo-sanitize"),
       cookieOptions = { httpOnly: true,
                         secure: false,
-                        sameSite: true,
+                        sameSite: false,
                         maxAge: 60 * 60 * 24000// 24 hours
       };
 
@@ -36,12 +36,10 @@ function tokenForUser(user, type) {
  */
 exports.login = function(req, res, next) {   
     
+    const token = (function(req, tokenForUser) { return tokenForUser(req.user, "local")})(req, tokenForUser);
     // User has already auth'd their email and password with verifyLogin - local strategy
-    res.cookie("_t1", tokenForUser(req.user, "local"), cookieOptions);
-    res.statusCode = 302;
-    res.set({'Location': '/'});
-    res.end();
-    return;
+    res.cookie("_t1", token, cookieOptions);
+    return res.redirect("/");
 };
 
 /**
@@ -51,14 +49,12 @@ exports.login = function(req, res, next) {
  * @param {Object} user object with user data
  * @param {String} type schema type
  */
-exports.schemaLogin = function(req, res, user, type) {   
+exports.schemaLogin = function(req, res, user, type) {    
     
+    const token = (function(user, type, tokenForUser) { return tokenForUser(user, type)})(user, type, tokenForUser);
     // User has already auth'd their email and password with verifyLogin - local strategy
-    res.cookie("_t1", tokenForUser(user, type), cookieOptions);
-    res.statusCode = 302;
-    res.set({'Location': '/'});
-    res.end();
-    return;
+    res.cookie("_t1", token, cookieOptions);
+    return res.redirect("/");
 };
 /**
  * Logs out user, deleting his cookie
