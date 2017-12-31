@@ -46,7 +46,6 @@ const jwtOptions = {
       jwtFromRequest: function(req) {
             
             if (req && (req.cookies || {})["_t1"] != null) {
-                                    
                   return req.cookies["_t1"];
             }
             return null;
