@@ -5,7 +5,7 @@ const mongoose = require("mongoose"),
 const pollSchema = new Schema({    
     
     createdBy:  { type: String, required: true },
-    options:    { type: [ Schema.Types.Mixed ], required: true },
+    options:    { type: [ [String, Number] ], required: true },
     usersVoted: { type: [String] },
     updatedUTC: { type: Date },
     createdUTC: { type: Date, default: Date.now },
