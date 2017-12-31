@@ -1,6 +1,8 @@
-extends layout
+extends includes/head.pug
 
 block content
+    include includes/navbar.pug
+    include includes/headerText.pug
     section.context
     section(class="context cards")
         .context__card

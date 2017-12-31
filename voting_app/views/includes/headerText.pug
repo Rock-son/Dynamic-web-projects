@@ -1,0 +1,10 @@
+section.header__txt
+    .header__txt__title Voting App
+    .header__txt__subtitle A Free Code Camp Project
+    .header__txt__stub A Place where you can make, host and share Polls
+    .header__txt__signup
+        if auth == true
+            a(class="btn btn--hidden" + " btn--full" href="/voting-app/createPoll" title="Register") Create Poll
+        else 
+            a(class="btn" + " btn--full" href="/auth/register" title="Register") Register
+            a(class="btn" + " btn--full" href="/auth/login" title="Login") Login

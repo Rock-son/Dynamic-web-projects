@@ -1,0 +1,15 @@
+extends includes/head.pug
+
+block content
+    include includes/navbar.pug
+    section.context
+        h1.context__header Create a new Poll
+        form.context__form(action="/voting-app/createPoll" method="post" id="poll_form")
+            h3.context__form__header
+            input(type="hidden" name="createdBy" value=user)
+            input.context__form__input(type="text" name="poll_title")
+            br
+            textarea.context__form__input(name="options" form="poll_form" placeholder="split options with new line")
+            br
+            input.context__form__submit(type="submit" value="Submit")
+        
