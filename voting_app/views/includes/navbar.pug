@@ -1,0 +1,19 @@
+section.header
+    nav.header__nav
+        div.header__nav__left
+            a.header__nav__left__items(href="/")
+                i(class="fa fa-home" title="Home")
+            if auth == true
+                a.header__nav__left__items.polls(href="/voting-app/createPoll") Create Poll
+            a.header__nav__left__items.polls(href="/voting-app/allPolls") My Polls
+        div.header__nav__right
+            if auth == false
+                a.header__nav__right__items(href="/auth-facebook")
+                    i(class="fa fa-facebook-square " title="Login with Facebook" aria-hidden="true")
+                a.header__nav__right__items(href="/auth-github")
+                    i(class="fa fa-github-square" title="Login with GitHub" aria-hidden="true")
+                a.header__nav__right__items(href="/auth-google")
+                    i(class="fa fa-google-plus-square " title="Login with Google" aria-hidden="true") 
+            else 
+                a.header__nav__right__items.authBtn(href="/auth/logout") Logout
+                span.header__nav__right__items.authBtn--no-link Welcome, #{user}

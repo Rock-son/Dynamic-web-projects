@@ -438,7 +438,8 @@ body {
       .header__nav__left__items {
         font-size: 2rem;
         color: #999;
-        text-decoration: none; }
+        text-decoration: none;
+        margin-right: 25%; }
         .header__nav__left__items .fa-home {
           color: #000;
           text-shadow: 0px 0px 1px #fff, 0px 0px 2px #bbb;
@@ -451,6 +452,7 @@ body {
         .header__nav__left__items.polls {
           display: inline-table;
           vertical-align: bottom;
+          font-variant: small-caps;
           margin-left: 5%;
           font-size: 1rem;
           color: #999;
