@@ -1,11 +1,14 @@
 section.header
     nav.header__nav
         div.header__nav__left
+            if action != null
+                a.header__nav__left__items(href="/")
+                    i(class="fa fa-home" title="Home")
         div.header__nav__right
             if auth == false
                 if action == null
                     a.header__nav__right__items.authBtn(href="/auth/login") Login                        
-                    a.header__nav__right__items.authBtn(href="/auth/register") Register
+                    a.header__nav__right__items.authBtn(href="/auth/register") Sign up
                 a.header__nav__right__items(href="/auth-facebook")
                     i(class="fa fa-facebook-square " title="Login with Facebook" aria-hidden="true")
                 a.header__nav__right__items(href="/auth-github")
