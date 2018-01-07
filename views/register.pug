@@ -1,6 +1,7 @@
-extends header    
+extends includes/head.pug
     
 block content
+    include includes/navbar.pug
     section.context
         div.form__container
             if action == "/auth/register"
@@ -11,7 +12,7 @@ block content
                 h5.form__container__subtitle Please fill in the Login Data
             hr.form__container__line
             form.form(method='POST' action=action)
-                input.form__control(type='text' placeholder='Username' name='username')
+                input.form__control(type='text' placeholder='Username' name='username' autofocus)
                 input.form__control(type='password' placeholder='Password' name='password')
                 if action == "/auth/register"
                     input.form__control(type='password' placeholder='Confirm Password' name='confirmPassword')
