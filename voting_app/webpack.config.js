@@ -2,11 +2,11 @@ const path = require("path");
 
 module.exports = {
     entry: {
-        main: path.resolve(__dirname, "./public/assets/scripts/main_voting.js")
+        createPoll: path.resolve(__dirname, "./public/assets/scripts/createPoll.js")
     },
     output: {
         path: path.resolve(__dirname, "./public/dist"),
-        filename: "[name].js"
+        filename: "[name]_[chunkhash].js"
     },
     module: {
         rules: [
