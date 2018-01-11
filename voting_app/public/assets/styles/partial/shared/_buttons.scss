@@ -1,0 +1,59 @@
+.btn {
+    display: inline-block;
+    border-radius: 5px;
+    font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+    border: 1px solid rgb(16, 119, 26);
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+        background-color: rgb(24, 134, 35);
+        border: 1px solid rgb(39, 151, 50);
+        outline-width: 0;        
+        transition: all .2s ease-in-out;
+    }
+    &:active {
+        text-decoration: none;
+        background-color: rgb(39, 151, 50);
+        border: 1px solid rgb(39, 151, 50);
+        background-image: none;
+        outline-width: 0; 
+    }
+}
+.btn--large {
+    font-size: 1rem;
+    line-height: 2rem;
+    padding: .1rem 1rem;
+    margin: .5rem 1rem 1rem auto;
+}
+.btn--medium {
+    font-size: .9em;
+    line-height: 1.2rem;
+    padding: .2rem .8rem;
+    margin: .5rem .8rem .8rem auto;
+}
+.btn--small {
+    font-size: .8em;
+    line-height: 1rem;
+    padding: .2rem .7rem;
+    margin: .5rem .8rem .8rem auto;
+}
+.btn--empty {
+    background-color: #fff;
+    color: #333;
+    &:hover {
+        color: #fff;
+    }
+    &:active {
+        color: #fff;
+    }
+}
+.btn--full {    
+    background-color: #279732;
+    color: #fff;
+    &:hover {
+        color: #fff;
+    }
+    &:active {
+        color: #fff;
+    }
+}
