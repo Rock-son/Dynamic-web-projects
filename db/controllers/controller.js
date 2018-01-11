@@ -6,9 +6,10 @@ const { PollSchema } = require("../models/poll"),
 
 exports.insertFormData = function(req, res, next) {   
     
-    const createdBy = mongoSanitize(req.body.createdBy || "").trim(),
-          options   = mongoSanitize(req.body.options   || "").split(/[\n\r]/);
-
+    const createdBy = mongoSanitize(req.body.createdBy || "").trim();
+          optsArr = Array.isArray(req.body.options) ? req.body.options : [req.body.options],
+          options = optsArr.map((item) => mongoSanitize(item));
+          
     // CHECK IF EMPTY
     if (createdBy == "") {
         return res.redirect('/auth/login');  
