@@ -1,30 +1,5 @@
-// Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/prepend()/prepend().md
-(function (arr) {
-    arr.forEach(function (item) {
-      if (item.hasOwnProperty('prepend')) {
-        return;
-      }
-      Object.defineProperty(item, 'prepend', {
-        configurable: true,
-        enumerable: true,
-        writable: true,
-        value: function prepend() {
-          var argArr = Array.prototype.slice.call(arguments),
-            docFrag = document.createDocumentFragment();
-          
-          argArr.forEach(function (argItem) {
-            var isNode = argItem instanceof Node;
-            docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
-          });
-          
-          this.insertBefore(docFrag, this.firstChild);
-        }
-      });
-    });
-  })([Element.prototype, Document.prototype, DocumentFragment.prototype]);
+"use strict"
 
-
-//MAIN
 document.addEventListener("DOMContentLoaded", main);
 
 
@@ -39,36 +14,56 @@ document.addEventListener("DOMContentLoaded", main);
   function addOption(e) {
 
     e.preventDefault();    
-    if (document.getElementById("new_form_option").value === "") {return};
+    if (document.getElementById("new_option").value === "") {return};
     
-    const parentNode = document.getElementById("new_form_option"),
+    const parentNode = document.getElementById("new_option"),
           wrapper = document.createElement("div"),
           input = document.createElement("input"),
           edit = document.createElement("div"),
-          close = document.createElement("div");
+          remove = document.createElement("div");
+
     // WRAPPER
     wrapper.className = "wrapper";
     // INPUT
     input.readOnly = true;
     input.name = "options";
-    input.value = document.getElementById("new_form_option").value;
+    input.value = document.getElementById("new_option").value;     
+    input.addEventListener("onblur", onFocusLost);
     // EDIT
     edit.className = "fa fa-pencil edit";
     edit.setAttribute("aria-hidden","true");
+    edit.addEventListener("click", editInput);
     // CLOSE
-    close.innerHTML = "X";
-    close.className = "close";
+    remove.innerHTML = "X";
+    remove.className = "close";
+    remove.addEventListener("click", removeWrapper);
+
 
     wrapper.appendChild(input);
+    wrapper.appendChild(remove);
     wrapper.appendChild(edit);
-    wrapper.appendChild(close);
-
 
     document.getElementById("context__options").appendChild(wrapper);
-    document.getElementById("new_form_option").value = "";
-    document.getElementById("new_form_option").focus();
+    document.getElementById("new_option").value = "";
+    document.getElementById("new_option").focus();
+  
+}
+
+
+
+  function editInput(e) {
+      e.target.parentNode.childNodes[0].readOnly = false;
+      e.target.parentNode.childNodes[0].focus();
   }
 
-  function editEvent() {
-    
+  function onFocusLost(e) {
+    console.log("focus!");
+      e.target.readOnly = true;
+  }
+
+  function removeWrapper(e) {
+      e.target.parentNode.childNodes[0].removeEventListener("onblur", onFocusLost);
+      e.target.parentNode.childNodes[2].removeEventListener("click", editInput);
+      e.target.removeEventListener("click", removeWrapper);
+      e.target.parentNode.parentNode.removeChild(e.target.parentNode);
   }

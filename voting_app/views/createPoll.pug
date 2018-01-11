@@ -9,13 +9,13 @@ block content
                 h3.context__form__header
                 input(type="hidden" name="createdBy" value=user)
                 label(for="pollTitle") Poll Name
-                input(id="pollTitle" type="text" name="poll_title" placeholder="")
+                input.context__form__input(id="pollTitle" type="text" name="poll_title")
                 br
                 br
-                label(for="pollOptions") Poll Options
+                label(for="new_option") Poll Options
                 div.context__form__container(id="context__options")
-                input.context__form__options(name="option" value="" id="new_form_option")
-                button#options_button(class="btn btn--full" title="Register") add option
+                input.context__form__options(name="option" value="" id="new_option")
+                button.context__form__addBtn.btn.btn--small.btn--full(id="options_button" title="Register") Add
                 br
                 input.context__form__submit(type="submit" value="Submit")
     include includes/footer.pug    
