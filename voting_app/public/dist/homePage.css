@@ -448,10 +448,6 @@ body {
 
 .btn {
   display: inline-block;
-  font-size: 1rem;
-  line-height: 2rem;
-  padding: .1rem 1rem;
-  margin: .5rem 1rem 1rem auto;
   border-radius: 5px;
   font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
   border: 1px solid #10771a;
@@ -470,9 +466,23 @@ body {
     background-image: none;
     outline-width: 0; }
 
-.btn--full {
-  color: #fff;
-  background-color: #279732; }
+.btn--large {
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: .1rem 1rem;
+  margin: .5rem 1rem 1rem auto; }
+
+.btn--medium {
+  font-size: .9em;
+  line-height: 1.2rem;
+  padding: .2rem .8rem;
+  margin: .5rem .8rem .8rem auto; }
+
+.btn--small {
+  font-size: .8em;
+  line-height: 1rem;
+  padding: .2rem .7rem;
+  margin: .5rem .8rem .8rem auto; }
 
 .btn--empty {
   background-color: #fff;
@@ -480,6 +490,14 @@ body {
   .btn--empty:hover {
     color: #fff; }
   .btn--empty:active {
+    color: #fff; }
+
+.btn--full {
+  background-color: #279732;
+  color: #fff; }
+  .btn--full:hover {
+    color: #fff; }
+  .btn--full:active {
     color: #fff; }
 
 .header {
