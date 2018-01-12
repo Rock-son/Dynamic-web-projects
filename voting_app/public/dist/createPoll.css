@@ -645,7 +645,7 @@ body {
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
     font-size: 3rem;
-    color: #fff;
+    color: #00AFEB;
     letter-spacing: 0em;
     text-shadow: 0px 0px 2px black, 1px 1px 3px white; }
   .context__form {
@@ -654,11 +654,18 @@ body {
     text-align: left; }
     .context__form__fieldset {
       border-color: white;
-      background-color: rgba(255, 255, 255, 0.5); }
+      background-color: rgba(255, 255, 255, 0.7); }
       .context__form__fieldset label {
-        display: block; }
+        font-size: 1.25rem;
+        display: block;
+        color: #f7a604;
+        text-shadow: 0px 0px 1px black, 0px 0px 1px black; }
     .context__form__input {
-      border: 1px solid #ccc; }
+      padding: .5%;
+      border: 1px solid #ccc;
+      color: #444; }
+      .context__form__input:active {
+        border-color: #369ede; }
     .context__form__container {
       display: inner-block;
       width: 100%;
@@ -669,9 +676,11 @@ body {
         padding: 0 1%;
         margin: 1% 2% 1% 0;
         border: 1px solid #bbb;
-        background-color: #369ede;
+        background-color: #00afeb;
         border-radius: 5px;
-        color: #ddd; }
+        color: #ddd;
+        -webkit-transition: width .3s;
+        transition: width .3s; }
         .context__form__container .wrapper input, .context__form__container .wrapper div {
           display: inline-block;
           color: inherit;
@@ -686,21 +695,30 @@ body {
           float: right;
           cursor: pointer;
           margin-left: 4%; }
+          .context__form__container .wrapper div:after {
+            clear: both; }
         .context__form__container .wrapper div:hover {
           font-weight: 700;
           -webkit-transform: scale(1.1);
                   transform: scale(1.1); }
         .context__form__container .wrapper .close {
           font-weight: 700;
-          color: #a2000e; }
+          color: #e63943;
+          text-shadow: 0px 0px 1px white, 0px 0px 1px black; }
         .context__form__container .wrapper .edit {
-          color: #1f6105; }
+          color: #4dff9d; }
     .context__form__options {
       display: inline-block;
+      margin: 2% 2% 2% 0;
+      padding: .5%;
       border: 1px solid #ccc;
-      margin: 2% 2% 2% 0; }
-    .context__form__submit {
-      margin-top: 2%; }
+      color: #444; }
+    .context__form__alert {
+      display: block;
+      font-family: Colibri, Arial, sans-serif;
+      color: red; }
+      .context__form__alert.options {
+        margin-top: -.8rem; }
 
 @media (max-width: 1399px) {
   .context__card {

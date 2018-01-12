@@ -4,13 +4,21 @@
     text-align: left;
     &__fieldset {
         border-color: white;
-        background-color: rgba(255,255,255,.5);
+        background-color: rgba(255,255,255,.7);
         & label {
+            font-size: 1.25rem;
             display: block;
+            color: #f7a604;
+            text-shadow: 0px 0px 1px black, 0px 0px 1px black;
         }
     }
     &__input {
+        padding: .5%;
         border: 1px solid #ccc;
+        color: #444;
+        &:active {
+            border-color: #369ede;
+        }
     }
     &__container {
         display: inner-block;
@@ -22,9 +30,10 @@
             padding: 0 1%;
             margin: 1% 2% 1% 0;
             border: 1px solid #bbb;
-            background-color: #369ede;
+            background-color: #00afeb;
             border-radius: 5px;
-            color: #ddd;            
+            color: #ddd;
+            transition: width .3s;
             & input, div {      
                 display: inline-block;
                 color: inherit;
@@ -41,6 +50,9 @@
                 float: right;
                 cursor: pointer;
                 margin-left: 4%;
+                &:after {
+                    clear: both;
+                }
             }
             & div:hover {
                 font-weight: 700;
@@ -48,19 +60,27 @@
             }
             & .close {
                 font-weight: 700;
-                color: #a2000e;
+                color: #e63943;
+                text-shadow: 0px 0px 1px white, 0px 0px 1px black;
             }
             & .edit {
-                color: #1f6105;
+                color: #4dff9d;
             }
         }
     }
     &__options {
         display: inline-block;
-        border: 1px solid #ccc;
         margin: 2% 2% 2% 0;
+        padding: .5%;
+        border: 1px solid #ccc;
+        color: #444;
     }
-    &__submit {
-        margin-top: 2%;
+    &__alert {
+        display: block;
+        font-family: Colibri, Arial, sans-serif;
+        color: red;
+        &.options {
+            margin-top: -.8rem;
+        }
     }
 }
