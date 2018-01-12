@@ -5,16 +5,81 @@ document.addEventListener("DOMContentLoaded", main);
 
   function main() {
 
-    document.getElementById("options_button").addEventListener("click", addOption);
+    document.getElementById("options_btn").addEventListener("click", addOption);
+    document.getElementById("submit_btn").addEventListener("click", checkInputs);
 
-
-
+    document.getElementById("pollTitle").addEventListener("focus", deleteWarning);
+    document.getElementById("new_option").addEventListener("focus", deleteWarning);
   }
 
-  function addOption(e) {
+
+
+
+
+function deleteWarning(e) {
+
+  const parent = e.target.parentNode,
+        nextSibling = e.target.nextSibling;
+        
+  if (nextSibling.className === "context__form__alert title") {
+      parent.removeChild(e.target.nextSibling);
+  } else if (nextSibling.nextSibling.className === "context__form__alert options") {
+      parent.removeChild(e.target.nextSibling.nextSibling);
+  }
+}
+
+
+
+
+function checkInputs(e) {
+
+  e.preventDefault();
+  const parent = document.getElementById("fs"),
+        titleEL = document.getElementById("pollTitle"),
+        title = titleEL.value.trim(),        
+        button = document.getElementById("options_btn"),
+        options = document.getElementById("context__options"),
+        nrChildren = options.childNodes.length,
+        warning = document.createElement("div");
+        
+  warning.innerHTML = "Please input data!"
+
+  if (title != "" && nrChildren > 0 ) {
+      e.target.click();
+
+  } else if (title === "" && nrChildren === 0 ) {      
+      
+      if (document.getElementsByClassName("context__form__alert title")[0] == null) {
+          warning.className = "context__form__alert title";
+          parent.insertBefore(warning.cloneNode(true), titleEL.nextSibling);
+      }
+      if (document.getElementsByClassName("context__form__alert options")[0] == null) {
+          warning.className = "context__form__alert options";
+          parent.insertBefore(warning.cloneNode(true), button.nextSibling);
+      }
+
+  } else if (title === "" && nrChildren > 0 ) {
+      if (document.getElementsByClassName("context__form__alert title")[0] == null) {
+          warning.className = "context__form__alert title";
+          parent.insertBefore(warning.cloneNode(true), titleEL.nextSibling);
+      }
+
+  } else if (title !== "" && nrChildren === 0 ) {
+
+      if (!document.getElementsByClassName("context__form__alert options")[0] == null) {
+          warning.className = "context__form__alert options";
+          parent.insertBefore(warning.cloneNode(true), button.nextSibling);
+      }
+  }
+}
+
+
+
+
+function addOption(e) {
 
     e.preventDefault();    
-    if (document.getElementById("new_option").value === "") {return};
+    if (document.getElementById("new_option").value.trim() === "") {return};
     
     const parentNode = document.getElementById("new_option"),
           wrapper = document.createElement("div"),
@@ -22,20 +87,19 @@ document.addEventListener("DOMContentLoaded", main);
           edit = document.createElement("div"),
           remove = document.createElement("div");
 
-    // WRAPPER
+    // WRAPPER EL
     wrapper.className = "wrapper";
-    // INPUT
-    input.readOnly = true;
+    // INPUT EL
     input.name = "options";
-    input.value = document.getElementById("new_option").value;     
-    input.addEventListener("onblur", onFocusLost);
-    // EDIT
+    input.value = document.getElementById("new_option").value;   
+    input.addEventListener("focusout", onFocusLost);
+    // EDIT EL
     edit.className = "fa fa-pencil edit";
     edit.setAttribute("aria-hidden","true");
     edit.addEventListener("click", editInput);
-    // CLOSE
-    remove.innerHTML = "X";
-    remove.className = "close";
+    // REMOVE EL
+    remove.className = "fa fa-trash-o close";
+    remove.setAttribute("aria-hidden","true");
     remove.addEventListener("click", removeWrapper);
 
 
@@ -45,25 +109,36 @@ document.addEventListener("DOMContentLoaded", main);
 
     document.getElementById("context__options").appendChild(wrapper);
     document.getElementById("new_option").value = "";
-    document.getElementById("new_option").focus();
-  
+    document.getElementById("new_option").focus();  
 }
 
 
 
-  function editInput(e) {
-      e.target.parentNode.childNodes[0].readOnly = false;
-      e.target.parentNode.childNodes[0].focus();
-  }
+function editInput(e) {
+  e.target.parentNode.childNodes[0].readOnly = false;
+  e.target.parentNode.childNodes[0].focus();
+}
 
-  function onFocusLost(e) {
-    console.log("focus!");
-      e.target.readOnly = true;
-  }
 
-  function removeWrapper(e) {
-      e.target.parentNode.childNodes[0].removeEventListener("onblur", onFocusLost);
-      e.target.parentNode.childNodes[2].removeEventListener("click", editInput);
-      e.target.removeEventListener("click", removeWrapper);
-      e.target.parentNode.parentNode.removeChild(e.target.parentNode);
-  }
+
+function onFocusLost(e) {
+    e.target.readOnly = true;
+}
+
+
+
+function removeWrapper(e) {
+  
+    const parent = e.target.parentNode.parentNode,
+          wrapper = e.target.parentNode;
+
+    wrapper.childNodes[0].removeEventListener("focusout", onFocusLost);
+    wrapper.childNodes[2].removeEventListener("click", editInput);
+    e.target.removeEventListener("click", removeWrapper);
+
+    wrapper.style.width = "0px";
+    wrapper.removeChild(e.target.nextSibling);
+    wrapper.removeChild(e.target);
+
+    setTimeout(function(){ parent.removeChild(wrapper); }, 200);
+}
