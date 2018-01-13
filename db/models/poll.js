@@ -5,6 +5,7 @@ const mongoose = require("mongoose"),
 const pollSchema = new Schema({    
     
     createdBy:  { type: String, required: true },
+    title:      { type: String, required: true},
     options:    { type: [ [String, Number] ], required: true },
     usersVoted: { type: [String] },
     updatedUTC: { type: Date },
