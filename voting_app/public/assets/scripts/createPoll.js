@@ -1,4 +1,6 @@
 "use strict"
+const xssFilters = require("xss-filters");
+
 
 document.addEventListener("DOMContentLoaded", main);
 
@@ -38,14 +40,14 @@ function checkInputs(e) {
         titleEL = document.getElementById("pollTitle"),
         title = titleEL.value.trim(),        
         button = document.getElementById("options_btn"),
-        options = document.getElementById("context__options"),
+        options = document.getElementById("container__options"),
         nrChildren = options.childNodes.length,
         warning = document.createElement("div");
         
-  warning.innerHTML = "Please input data!"
+  warning.innerHTML = "Input data!"
 
   if (title != "" && nrChildren > 0 ) {
-      e.target.click();
+      parent.parentNode.submit();
 
   } else if (title === "" && nrChildren === 0 ) {      
       
@@ -65,7 +67,7 @@ function checkInputs(e) {
       }
 
   } else if (title !== "" && nrChildren === 0 ) {
-
+    alert("dela!");
       if (!document.getElementsByClassName("context__form__alert options")[0] == null) {
           warning.className = "context__form__alert options";
           parent.insertBefore(warning.cloneNode(true), button.nextSibling);
@@ -90,15 +92,16 @@ function addOption(e) {
     // WRAPPER EL
     wrapper.className = "wrapper";
     // INPUT EL
+    input.readOnly = true;
     input.name = "options";
-    input.value = document.getElementById("new_option").value;   
+    input.value = xssFilters.uriInHTMLData(document.getElementById("new_option").value);
     input.addEventListener("focusout", onFocusLost);
     // EDIT EL
     edit.className = "fa fa-pencil edit";
     edit.setAttribute("aria-hidden","true");
     edit.addEventListener("click", editInput);
     // REMOVE EL
-    remove.className = "fa fa-trash-o close";
+    remove.className = "fa fa-window-close close";
     remove.setAttribute("aria-hidden","true");
     remove.addEventListener("click", removeWrapper);
 
@@ -107,7 +110,7 @@ function addOption(e) {
     wrapper.appendChild(remove);
     wrapper.appendChild(edit);
 
-    document.getElementById("context__options").appendChild(wrapper);
+    document.getElementById("container__options").appendChild(wrapper);
     document.getElementById("new_option").value = "";
     document.getElementById("new_option").focus();  
 }
@@ -133,8 +136,8 @@ function removeWrapper(e) {
           wrapper = e.target.parentNode;
 
     wrapper.childNodes[0].removeEventListener("focusout", onFocusLost);
+    wrapper.childNodes[1].removeEventListener("click", removeWrapper);
     wrapper.childNodes[2].removeEventListener("click", editInput);
-    e.target.removeEventListener("click", removeWrapper);
 
     wrapper.style.width = "0px";
     wrapper.removeChild(e.target.nextSibling);

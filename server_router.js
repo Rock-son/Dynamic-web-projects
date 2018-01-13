@@ -7,13 +7,16 @@ module.exports = function(app) {
             passportService = require("./auth/services/passport"),
             passport = require("passport"),
             fs = require("fs"),
+            // SECURITY
+            csrf = require("csurf"),
+            csrfProtection = csrf({ cookie: true }),
             path = require("path"),
             homepageCSS = (function() {return "/dist/"+ (/(index[-\w]*\.css)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["index.js"] )[0] })(),
             mainJS = (function() {return "/dist/"+ (/(main[-\w]*\.js)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
             register_loginCSS = (function() {return "/dist/"+ (/(register[-\w]*\.css)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
             fontArr = require("./public/assets/fonts/fontAllow"),
             // SANITIZE USER INPUT
-            escapeHtml = require('escape-html'),
+            xssFilterJS = "./dist/xss-filters.min.js",
 
             ensureAuthenticated = passport.authenticate("jwt", { session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
             verifyLoginData = passport.authenticate("local", { session: false });  // login - input user & pass - for POST
@@ -22,13 +25,12 @@ module.exports = function(app) {
       /***************************************************** ROUTES ***************************************************************************/
 
       // HOME ROUTE
-      app.get ("/", function(req, res, next) {
-            
+      app.get ("/", function(req, res, next) {            
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                   
                   if (err) { return next(err) }
-                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "", mainJS: mainJS }); }
-                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: escapeHtml(user.username || user.displayName), mainJS: mainJS });
+                  if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "" }); }
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user.username || user.displayName) });
             })(req, res, next);
       });
 
@@ -36,28 +38,28 @@ module.exports = function(app) {
       // REGISTER PAGE
       app.route("/auth/register")
             // JWT STRATEGY
-            .get(function(req, res, next) {
+            .get(csrfProtection, function(req, res, next) {
                   passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                         if (err) { return next(err) }
-                        if (!user) {return res.render("register", {action: "/auth/register", reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: false}); }
+                        if (!user) {return res.render("register", {action: "/auth/register", csrfTkn: req.csrfToken(), reverseType: "/auth/login", footnote: "Have an account?", cssPath: register_loginCSS, auth: false}); }
                         return res.redirect("/");
                   })(req, res, next);
             })
             // LOCAL STRATEGY
-            .post(Authentication.register);
+            .post(csrfProtection, Authentication.register);
 
       // LOGIN PAGE
       app.route("/auth/login")
             // JWT STRATEGY
-            .get(function(req, res, next) {
+            .get(csrfProtection, function(req, res, next) {
                   passport.authenticate('jwt', {session: false}, function(err, user, info, status) {                  
                         if (err) { return next(err) }
-                        if (!user || user == null) {return res.render("register", {action: "/auth/login", reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
+                        if (!user || user == null) {return res.render("register", {action: "/auth/login", csrfTkn: req.csrfToken(), reverseType: "/auth/register", footnote: "Register?", cssPath: register_loginCSS, auth: false}); }
                         return res.redirect("/");
                   })(req, res, next);
             })
             // LOCAL STRATEGY
-            .post(verifyLoginData, Authentication.login);
+            .post(csrfProtection, verifyLoginData, Authentication.login);
 
 
       // LOGOUT

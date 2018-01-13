@@ -12,6 +12,7 @@ block content
                 h5.form__container__subtitle Please fill in the Login Data
             hr.form__container__line
             form.form(method='POST' action=action)
+                input(type="hidden" name="_csrf" value=csrfTkn)
                 input.form__control(type='text' placeholder='Username' name='username' autofocus)
                 input.form__control(type='password' placeholder='Password' name='password')
                 if action == "/auth/register"
