@@ -513,7 +513,7 @@ body {
     display: block;
     width: auto; }
     .header__nav__left {
-      width: 30%;
+      width: 60%;
       text-align: left;
       display: inline-block; }
       .header__nav__left__items {
@@ -546,7 +546,7 @@ body {
             background-color: rgba(5, 5, 5, 0.2); }
     .header__nav__right {
       display: inline-block;
-      width: 70%;
+      width: 40%;
       text-align: right; }
       .header__nav__right__items {
         margin-right: 1.3%;

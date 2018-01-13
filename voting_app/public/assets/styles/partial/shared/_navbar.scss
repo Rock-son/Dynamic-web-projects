@@ -3,7 +3,7 @@
     display: block;
     width: auto;
     &__left {
-        width: 30%;
+        width: 60%;
         text-align: left;
         display: inline-block;
         &__items {
@@ -40,7 +40,7 @@
     } 
     &__right {
         display: inline-block;
-        width: 70%;
+        width: 40%;
         text-align: right;
         &__items {
             margin-right: 1.3%;
