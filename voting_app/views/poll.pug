@@ -1,0 +1,23 @@
+extends includes/head.pug
+
+block content
+    include includes/navbar.pug
+    section.context
+        h1.context__header Create a new Poll
+        form.context__form(action="/voting-app/createPoll" method="post" id="poll_form")
+            fieldset#fs.context__form__fieldset
+                h3.context__form__header
+                input(type="hidden" name="createdBy" value=user)
+                label(for="pollTitle") Poll Name
+                input.context__form__input(id="pollTitle" type="text" name="poll_title" size="35")
+                br
+                br
+                label(for="new_option") Poll Options
+                input.context__form__options(name="option" value="" id="new_option" size="23")
+                button.context__form__addBtn.btn.btn--small.btn--full(id="options_btn" title="Register") Add Option
+                div.context__form__container(id="context__options")
+                br
+                input.context__form__submit.btn.btn--medium.btn--full(id="submit_btn" type="submit" value="Create New Poll")
+                
+    include includes/footer.pug    
+    script(type="text/javascript" src=js )
