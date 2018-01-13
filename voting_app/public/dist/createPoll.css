@@ -513,7 +513,7 @@ body {
     display: block;
     width: auto; }
     .header__nav__left {
-      width: 30%;
+      width: 60%;
       text-align: left;
       display: inline-block; }
       .header__nav__left__items {
@@ -546,7 +546,7 @@ body {
             background-color: rgba(5, 5, 5, 0.2); }
     .header__nav__right {
       display: inline-block;
-      width: 70%;
+      width: 40%;
       text-align: right; }
       .header__nav__right__items {
         margin-right: 1.3%;
@@ -663,9 +663,19 @@ body {
     .context__form__input {
       padding: .5%;
       border: 1px solid #ccc;
-      color: #444; }
+      color: #666;
+      line-height: .8rem;
+      font-weight: 700;
+      font-variant: small-caps; }
       .context__form__input:active {
         border-color: #369ede; }
+    .context__form__options {
+      font-variant: small-caps;
+      display: inline-block;
+      margin: 2% 2% 2% 0;
+      padding: .5%;
+      border: 1px solid #ccc;
+      color: #444; }
     .context__form__container {
       display: inner-block;
       width: 100%;
@@ -688,10 +698,14 @@ body {
           background-color: inherit;
           border: none; }
         .context__form__container .wrapper input {
+          font-variant: small-caps;
+          line-height: 1.5rem;
           width: 60%;
-          margin-right: 7%;
+          margin-right: 3%;
           text-shadow: 0px 0px 5px black, 0px 0px 1px black; }
         .context__form__container .wrapper div {
+          line-height: 1.5rem;
+          font-size: 1.1rem;
           float: right;
           cursor: pointer;
           margin-left: 4%; }
@@ -702,17 +716,11 @@ body {
           -webkit-transform: scale(1.1);
                   transform: scale(1.1); }
         .context__form__container .wrapper .close {
-          font-weight: 700;
-          color: #e63943;
-          text-shadow: 0px 0px 1px white, 0px 0px 1px black; }
+          font-weight: 100;
+          color: #a71119; }
         .context__form__container .wrapper .edit {
-          color: #4dff9d; }
-    .context__form__options {
-      display: inline-block;
-      margin: 2% 2% 2% 0;
-      padding: .5%;
-      border: 1px solid #ccc;
-      color: #444; }
+          color: #056f35;
+          text-shadow: 0px 0px 1px white; }
     .context__form__alert {
       display: block;
       font-family: Colibri, Arial, sans-serif;
