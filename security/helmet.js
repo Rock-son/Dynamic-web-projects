@@ -6,6 +6,7 @@ module.exports = function(app) {
 
     // SECURITY middleware (Helmet, Helmet-csp)
     app.use(helmet({dnsPrefetchControl: {allow: true}}));
+    app.use(helmet.hidePoweredBy());
     app.use(helmet_csp({
     directives: {
             defaultSrc: ["'self'", 'https://fcc-dynamic-webapps-roky.herokuapp.com'],
