@@ -8,6 +8,7 @@ block content
             fieldset#fs.context__form__fieldset
                 h3.context__form__header
                 input(type="hidden" name="createdBy" value=user)
+                input(type="hidden" name="_csrf" value=csrfTkn)
                 label(for="pollTitle") Poll Name
                 input.context__form__input(id="pollTitle" type="text" name="poll_title" size="35")
                 br
@@ -15,7 +16,7 @@ block content
                 label(for="new_option") Poll Options
                 input.context__form__options(name="option" value="" id="new_option" size="23")
                 button.context__form__addBtn.btn.btn--small.btn--full(id="options_btn" title="Register") Add Option
-                div.context__form__container(id="context__options")
+                div.context__form__container(id="container__options")
                 br
                 input.context__form__submit.btn.btn--medium.btn--full(id="submit_btn" type="submit" value="Create New Poll")
     include includes/footer.pug    
