@@ -16,7 +16,7 @@ module.exports = function(app) {
             register_loginCSS = (function() {return "/dist/"+ (/(register[-\w]*\.css)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
             fontArr = require("./public/assets/fonts/fontAllow"),
             // SANITIZE USER INPUT
-            xssFilterJS = "./dist/xss-filters.min.js",
+            xssFilters = require("xss-filters"),
 
             ensureAuthenticated = passport.authenticate("jwt", { session: false, failureRedirect: "/auth/login"}),     // jwt - one strategy
             verifyLoginData = passport.authenticate("local", { session: false });  // login - input user & pass - for POST

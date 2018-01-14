@@ -12,7 +12,8 @@ const passport = require("passport"),
       LocalStrategy = require("passport-local"),
       OAuth2Strategy = require("passport-oauth2"),
       // SANITIZATION
-      mongoSanitize = require("mongo-sanitize");
+      mongoSanitize = require("mongo-sanitize"),
+      xssFilters = require("xss-filters");
 
 
 
@@ -21,8 +22,8 @@ const localOptions = {usernameField: "username"};
 
 const localLogin = new LocalStrategy(localOptions, function(username, password, done) {
       // verify this email and password, call done w/ user if correct, else call done w/false
-      const userName = mongoSanitize(username),
-            pass = mongoSanitize(password);
+      const userName = xssFilters.inHTMLData(mongoSanitize(username)),
+            pass = xssFilters.inHTMLData(mongoSanitize(password));
       LocalUser.findOne({username: userName}, function(err, user) {
             if (err) { return done(err, false); }
 
