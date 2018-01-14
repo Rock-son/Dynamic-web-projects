@@ -4,7 +4,8 @@ const path = require("path"),
 
 module.exports = {
     entry: {
-        createPoll: path.resolve(__dirname, "./public/assets/scripts/createPoll.js")
+        createPoll: path.resolve(__dirname, "./public/assets/scripts/createPoll.js"),
+        poll: path.resolve(__dirname, "./public/assets/scripts/poll.js"),
     },
     output: {
         path: path.resolve(__dirname, "./public/dist"),
