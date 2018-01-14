@@ -17,7 +17,7 @@ var fs = require("fs"),
     mainJS = (function() {return "./dist/"+ (/(main_[-\w]*\.js)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["main.js"] )[0] })(),
     createPollJS = (function() {return "./dist/"+ (/(createPoll_[-\w]*\.min\.js)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["createPoll.js"] )[0] })(),
     pollJS = (function() {return "./dist/"+ (/(poll_[-\w]*\.min\.js)/.exec(fs.readdirSync(path.resolve(__dirname, "public/dist/")).join(",")) || ["poll.js"] )[0] })(),
-    xssFilterJS = "./dist/xss-filters.min.js",
+    xssFilters = require("xss-filters"),
     // PASSPORT
     passportService = require("../auth/services/passport"),
     passport = require("passport"),
@@ -53,27 +53,21 @@ var fs = require("fs"),
         .post(ensureAuthenticated, csrfProtection, db.insertFormData);
 
 
-    app.get("/poll:id", csrfProtection, function(req, res, next) {
-        // GET POLL DATA
-        console.log(req.params.id, xssFilterJS.uriComponentInHTMLData(req.params.id));
-        return res.send(req.params.id, xssFilterJS.uriComponentInHTMLData(req.params.id));
-        let id = null, 
-            data = null;
-        try {
-            id = xssFilters.uriInHTMLData(req.params.id) || null;
-            data = db.getPollData(id) || null;
-        } catch (error) {
-            next(error);
-        }
-
+    app.get("/poll", csrfProtection, function(req, res, next) {        
         passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
             if (err) { return next(err) }
-            if (!user) { return res.render("poll", { js: pollJS, data, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false }); }
-            return res.render("poll", { js: pollJS, data, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) });
+
+            if (!user) { 
+                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false };
+                db.managePollData(req, res, next, options);
+            } else {
+                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+                db.managePollData(req, res, next, options);
+            }    
         })(req, res, next);
     });
-
-
+    
+    app.get("/getPollData", db.getPollData);
 
     app.get("/myPolls", function(req, res, next) {
 
