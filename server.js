@@ -14,7 +14,6 @@ const express = require("express"),
       router = require("./server_router"),
       // SECURITY
       helmet = require("./security/helmet"),
-      hpp = require("hpp"),
       csrf = require("csurf"),
       cookieParser = require("cookie-parser"),
       cookieEncrypter = require("cookie-encrypter"),
@@ -37,7 +36,7 @@ const express = require("express"),
       app.use(bodyParser.json({type: "application/json"}));
       app.use(bodyParser.json({ type: ['json', 'application/csp-report'] }));
       app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-      app.use(hpp());
+
 
       //app.use(morgan({stream: accessLogStream}));
       app.set("views", path.join(__dirname, "views"));
