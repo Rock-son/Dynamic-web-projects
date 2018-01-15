@@ -94,7 +94,7 @@ function addOption(e) {
     // INPUT EL
     input.readOnly = true;
     input.name = "options";
-    input.value = xssFilters.uriInHTMLData(document.getElementById("new_option").value);
+    input.value = xssFilters.inHTMLData(document.getElementById("new_option").value);
     input.addEventListener("focusout", onFocusLost);
     // EDIT EL
     edit.className = "fa fa-pencil edit";
