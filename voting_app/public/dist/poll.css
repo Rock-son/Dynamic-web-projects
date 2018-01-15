@@ -713,14 +713,33 @@ body, html {
   user-select: none;
   /* Non-prefixed version, currently supported by Chrome and Opera */ }
 
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 0.85rem;
+  text-align: right;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome and Opera */ }
+
 #chart {
-  background-color: #F5F2EB;
+  background-color: #292222;
   border: 1px outset #CCC;
-  margin: 10% 2%; }
+  margin: 5% 2%; }
 
 .chart-title {
-  font-size: 2rem;
-  fill: #333;
+  font-size: 3rem;
+  font-variant: small-caps;
+  fill: #009a82;
   opacity: 0.6; }
 
 .display {
@@ -743,6 +762,10 @@ body, html {
 
 .axis .tick {
   fill: #333; }
+
+.x-axis-label, .y-axis-label {
+  fill: #999;
+  font-variant: small-caps; }
 
 .gridline path, .gridline line {
   fill: none;
