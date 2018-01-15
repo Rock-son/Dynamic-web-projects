@@ -34,5 +34,10 @@ gulp.task("votingCreatePollStyles", function() {
         .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
         .pipe(gulp.dest("./voting_app/public/dist"));
 });
-
-gulp.task("styles", ["homePageStyles", "registerPageStyles", "votingHomeStyles", "votingNewPollStyles"]);
+gulp.task("votingPollStyles", function() {    
+    return gulp.src(votingAppStylePath + "/poll/poll.scss")
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([autoprefixer ])) // order matters - FIFO (first in, first out)
+        .pipe(gulp.dest("./voting_app/public/dist"));
+});
+gulp.task("styles", ["homePageStyles", "registerPageStyles", "votingHomeStyles", "votingCreatePollStyles", "votingPollStyles"]);
