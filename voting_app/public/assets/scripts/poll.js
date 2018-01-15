@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", onContentLoaded);
 
 // container object's width and height
 
-	var w = +window.innerWidth / 1.33,
-		h = +window.innerHeight / 1.10,
+	var w = +window.innerWidth / 1.5,
+		h = +window.innerHeight / 1.5,
 		margin =  {
-        top: 40,
+        top: 100,
         bottom: 80,
         left: 80,
         right: 20
@@ -27,24 +27,26 @@ function onContentLoaded(response) {
   const poll = JSON.parse(document.getElementById("poll_data").value),
         data = poll.options,
         description = poll.title,
+        max = d3.max(data, entry => entry[1]),
     x =  d3.scaleOrdinal()
                   .domain(data.map(entry => entry[0]))
-                  .range(data.map((entry, index, arr) => index === 0 ? 0 : index * (width / arr.length))),
+                  .range(data.map((entry, index, arr) => index === 0 ? 0 : index * (width / (arr.length)))),
     y = d3.scaleLinear()
-                  .domain([0, d3.max(data, entry => entry[1])])
+                  .domain([0, max])
                   .range([height, 0]),
     yGridLines = d3.axisLeft()
                          .scale(y)
                          .tickSize(-width, 0, 0)
-                         .tickFormat(""),
+                         .tickFormat("")
+                         .ticks(max),
     linearColorScale = d3.scaleLinear()
-                                 .domain([0, data.length])
-                                 .range(["#572500", "#F68026"]),
+                          .domain([0, data.length])
+                          .range(["#572500", "#F68026"]),
     xAxis = d3.axisBottom()
              .scale(x),
     yAxis = d3.axisLeft()
-              .scale(y),
-
+              .scale(y)
+              .ticks(max),
     svg  = d3.select("body")
                .append("svg")
                   .attr("id", "chart")
@@ -60,25 +62,13 @@ function onContentLoaded(response) {
   
     chart.append('text')
                 .classed("chart-title", true)
-                .html("Gross Domestic Product, USA")
+                .html(description)
                 .attr("width", 200)
                 .attr("height", 200)
                 .attr("x", width/2)
-                .attr("y", 0)
+                .attr("y", -40)
                 .attr("transform", "translate(0,0)")
                 .style("text-anchor", "middle");
-    d3.select('body')
-          .append('div')  
-          .classed("codedBy", true)
-          .style("font-size", "0.5rem")
-          .style("margin", "auto")
-          .style("width", "100px");
-    d3.select(".codedBy")
-            .append("a")
-              .classed("svglink", true)
-              .html("Coded by Roky")
-              .attr("href", "https://codepen.io/Roky/full/YqGqWg")
-              .attr("target", "_blank");
   
   
     	plot.call(chart, {
@@ -109,10 +99,11 @@ function onContentLoaded(response) {
           .call(params.axis.x)
             .selectAll("text")
               .classed("x-axis-label", true)
-              .style("text-anchor", "middle")  //"end" and dx = -8 - with rotation
+              .style("text-anchor", "midlle")  //"end" and dx = -8 - with rotation
               .attr("dx", (width / params.data.length) / 2)
-              .attr("dy", 8)
-              .attr("transform", "translate(0,0)"); /* rotate(-45)*/
+              .attr("dy", 20)
+              .attr("transform", "translate(0,0)") /* rotate(-45)*/
+              .style("font-size", "1.5rem");
 			this.append("g")
           .classed("y axis", true)
           .attr("transform", "translate(0,0)")
@@ -121,42 +112,20 @@ function onContentLoaded(response) {
 			//draw axis anchors
 			this.select(".y.axis")
           .append("text")
-          .text("Gross Domestic Product, USA")
-          .attr("x", 0)
-          .attr("y", 15)
-          .attr("transform", "rotate(-90)")
+          .text("Votes")
+          .attr("x", -10)
+          .attr("y", -40)
           .attr("fill", "#333")
-          .style("text-anchor", "end");
-			this.select(".x.axis")
-          .append("text")
-            .text(params.description.slice(0, params.description.indexOf("http") - 4))          
-            .attr("dx", width/2)
-            .attr("dy", 50)
-            .style("fill", "steelblue")
-            .style("font-size", "0.8rem")
-            .style("text-anchor", "middle");            
-      this.select(".x.axis")
-          .append("a")
-            .classed("svglink", true)
-            .attr("xlink:href", params.description.slice(params.description.indexOf("http"), -1))
-            .attr("xlink:show", "new")
-          .append('text')
-            .text(params.description.slice(params.description.indexOf("http"), -1))
-            .attr("dx", width/2)
-            .attr("dy", 70)
-            .style("fill", "steelblue") 
-            .style("font-size", "0.8rem")
-            .style("text-anchor", "middle");
+          .style("text-anchor", "end")
+          .style("font-size", "1.5rem");
+			           
+
 	}
 
 	function plot(params) {
     
     var barWidth = Math.ceil(width / params.data.length);
-  // Object.assign({}, params, {xScale: {domain: [params.dates.minDate, params.dates.maxDate], range: [0, width]}, 
-  //                            yScale: {domain: [0, d3.max(params.data, entry => entry[1])]}, range: [0, height]
-  //                           });
-	//	params.xScale.domain([params.dates.minDate, params.dates.maxDate]).range([0, width]);
-	//	params.yScale.domain([0, d3.max(params.data, entry => entry[1])]);
+
 		//draw the axes
 		drawAxis.call(this, params);
 
