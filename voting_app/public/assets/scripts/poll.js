@@ -3,7 +3,7 @@
 const d3 = require("d3");
 
 
-document.addEventListener("DOMContentLoaded", main);
+document.addEventListener("DOMContentLoaded", onContentLoaded);
 
 
 // container object's width and height
@@ -22,40 +22,39 @@ document.addEventListener("DOMContentLoaded", main);
 
 
 // onload event listener callback function
-function onDataLoad(response) {
+function onContentLoaded(response) {
   
-	var data = response.data,
-      description = response.description,
-      minDate = new Date(data[0][0]),
-      maxDate = new Date(data.slice(-1)[0][0]),
-      x =  d3.scaleTime()
-                  .domain([minDate, maxDate])
-                  .range([0, width]),
-      y = d3.scaleLinear()
+  const poll = JSON.parse(document.getElementById("poll_data").value),
+        data = poll.options,
+        description = poll.title,
+    x =  d3.scaleOrdinal()
+                  .domain(data.map(entry => entry[0]))
+                  .range(data.map((entry, index, arr) => index === 0 ? 0 : index * (width / arr.length))),
+    y = d3.scaleLinear()
                   .domain([0, d3.max(data, entry => entry[1])])
                   .range([height, 0]),
-      yGridLines = d3.axisLeft()
+    yGridLines = d3.axisLeft()
                          .scale(y)
                          .tickSize(-width, 0, 0)
                          .tickFormat(""),
-      linearColorScale = d3.scaleLinear()
+    linearColorScale = d3.scaleLinear()
                                  .domain([0, data.length])
                                  .range(["#572500", "#F68026"]),
-      xAxis = d3.axisBottom()
-              .scale(x),
-      yAxis = d3.axisLeft()
+    xAxis = d3.axisBottom()
+             .scale(x),
+    yAxis = d3.axisLeft()
               .scale(y),
 
-      svg  = d3.select("#context")
+    svg  = d3.select("body")
                .append("svg")
                   .attr("id", "chart")
                   .attr("width", w)
                   .attr("height", h),
-      chart = svg.append("g")
+    chart = svg.append("g")
                  .classed("display", true)
                  .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
-  console.log(data);
-      tooltip = d3.select('body')
+  
+    tooltip = d3.select('body')
                   .append('div')
                   .classed("tooltip", true);
   
@@ -84,10 +83,6 @@ function onDataLoad(response) {
   
     	plot.call(chart, {
         description: description,
-        dates: {
-            minDate: minDate,
-            maxDate: maxDate
-        },
 				data: data,
 				axis: {
 						x: xAxis,
@@ -115,7 +110,7 @@ function onDataLoad(response) {
             .selectAll("text")
               .classed("x-axis-label", true)
               .style("text-anchor", "middle")  //"end" and dx = -8 - with rotation
-              .attr("dx", 0)
+              .attr("dx", (width / params.data.length) / 2)
               .attr("dy", 8)
               .attr("transform", "translate(0,0)"); /* rotate(-45)*/
 			this.append("g")
@@ -157,9 +152,9 @@ function onDataLoad(response) {
 	function plot(params) {
     
     var barWidth = Math.ceil(width / params.data.length);
-    Object.assign({}, params, {xScale: {domain: [params.dates.minDate, params.dates.maxDate], range: [0, width]}, 
-                               yScale: {domain: [0, d3.max(params.data, entry => entry[1])]}, range: [0, height]
-                              });
+  // Object.assign({}, params, {xScale: {domain: [params.dates.minDate, params.dates.maxDate], range: [0, width]}, 
+  //                            yScale: {domain: [0, d3.max(params.data, entry => entry[1])]}, range: [0, height]
+  //                           });
 	//	params.xScale.domain([params.dates.minDate, params.dates.maxDate]).range([0, width]);
 	//	params.yScale.domain([0, d3.max(params.data, entry => entry[1])]);
 		//draw the axes
@@ -182,7 +177,7 @@ function onDataLoad(response) {
 
 		//update()
 		this.selectAll(".bar")
-				.attr("x", (d, i) => params.xScale(new Date(d[0])))
+				.attr("x", (d, i) => params.xScale(d[0]))
         .attr("y", (d, i) => params.yScale(d[1]))
         .attr("width", (d, i) => barWidth)
         .attr("height", (d, i) => height - params.yScale(d[1]));
