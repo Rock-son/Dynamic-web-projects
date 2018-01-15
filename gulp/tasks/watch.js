@@ -17,7 +17,7 @@ gulp.task("watch", function() {
     watch(homeStylePath + "*.scss", () => gulp.start("homePageStyles"));
     watch(registerStylePath + "*.scss", () => gulp.start("registerPageStyles"));
     watch(homeOutputPath + "shared/*.scss", () => gulp.start([ "homePageStyles", "votingHomeStyles", "registerPageStyles"]));
-    watch(votingOutputPath + "**/*.scss", () => gulp.start([ "votingHomeStyles", "votingCreatePollStyles" ]));
+    watch(votingOutputPath + "**/*.scss", () => gulp.start([ "votingHomeStyles", "votingCreatePollStyles", "votingPollStyles" ]));
     watch(scriptsPath + "*.js", () => gulp.start("scripts"));
     watch(votingScriptsPath + "*.js", () => gulp.start("scriptsVoting"));
 });
