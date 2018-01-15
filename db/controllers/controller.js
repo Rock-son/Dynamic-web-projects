@@ -45,18 +45,10 @@ exports.managePollData = function(req, res, next, options) {
     PollSchema.findOne({url: id}, function(err, poll) {
         if (err) next(err);
         
-        options.data = poll;
+        if (!poll) {
+            return res.render({"error": "No poll with url: " + id + " found!"});
+        }
+        options.data =poll;
         return res.render("poll", options);
-    });
-}
-
-exports.getPollData = function(req, res, next) {
-
-    const id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.query.url));
-    
-    PollSchema.findOne({url: id}, function(err, poll) {
-        if (err) next(err);
-        
-        return res.set({"Content-Type": "application/json"}).send({"poll": poll});
     });
 }
