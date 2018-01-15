@@ -34,13 +34,14 @@ exports.insertFormData = function(req, res, next) {
     poll.save(function(err) {
         if (err) return next(err)
         
-        return res.status(302).set({"Location": "/poll?" + poll.url}).end();
+        return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
     });
 };
 
 exports.managePollData = function(req, res, next, options) {
     
-    const id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.query.url));
+    const url = Array.isArray(req.query.url) ? req.query.url.slice(-1)[0] : req.query.url,
+          id = xssFilters.uriComponentInHTMLData(mongoSanitize(url));
     
     PollSchema.findOne({url: id}, function(err, poll) {
         if (err) next(err);
