@@ -26,12 +26,13 @@ var fs = require("fs"),
 
     ensureAuthenticated = passport.authenticate('jwt', {session: false, failureRedirect: "/auth/login"});
     
+
     app.set("views", path.join(__dirname, "views"));
     app.set("view engine", "pug");
     app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+    // HOME ROUTE
     app.route("/") 
         .get(function(req, res, next) {
           passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
@@ -41,7 +42,7 @@ var fs = require("fs"),
         })(req, res, next);
     });
 
-
+    // CREATE POLL
     app.route("/createPoll")
         .get(csrfProtection, function(req, res, next) {
             passport.authenticate('jwt', {session: false, failureRedirect: "/auth/login"}, function(err, user, info, status) {
@@ -53,22 +54,22 @@ var fs = require("fs"),
         .post(ensureAuthenticated, csrfProtection, db.insertFormData);
 
 
+    // SHOW SPECIFIC POLL
     app.get("/poll", csrfProtection, function(req, res, next) {        
         passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
             if (err) { return next(err) }
 
             if (!user) { 
                 const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false };
-                db.managePollData(req, res, next, options);
-            } else {
-                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
-                db.managePollData(req, res, next, options);
-            }    
+                return db.managePollData(req, res, next, options);
+            } 
+            const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+            return db.managePollData(req, res, next, options);
+        
         })(req, res, next);
     });
-    
-    app.get("/getPollData", db.getPollData);
 
+    // SHOW ALL POLLS OF A LOGGED-ON USER
     app.get("/myPolls", function(req, res, next) {
 
     }); 
