@@ -3,5 +3,6 @@ extends includes/head.pug
 block content
     include includes/navbar.pug
     section#context
+        input#poll_data(type="hidden" name="data" value=data)
     include includes/footer.pug
     script(type="text/javascript" src=js )
