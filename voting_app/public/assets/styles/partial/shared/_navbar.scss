@@ -48,6 +48,9 @@
             color: #999; 
             text-decoration: none;
             transition: all .3s;
+            & a {
+                cursor: default;
+            }
             &.authBtn {
                 display: inline-table;
                 vertical-align: bottom;
@@ -117,10 +120,11 @@
                     text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff;
                 }
             }
-            & .fa-user-o {
+            & .fa-user {
                 color: #999;
                 line-height: 1rem;
                 &:hover {
+                    cursor: pointer;
                     text-decoration: none;
                     text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff;
                 }
