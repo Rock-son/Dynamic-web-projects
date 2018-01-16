@@ -4,62 +4,26 @@ block content
     include includes/navbar.pug
     include includes/headerText.pug
     section.context
-    section(class="context cards")
-        .context__card
-            .context__card__header 
-                p.context__card__header__title Best Day of the Week?
-                .context__card__header__left                
-                    ul.context__card__header__left__items                        
-                        each val in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                            a.btn.btn--empty.btn--large(href="#")=val
-                .context__card__header__right
-                    .context__card__header__right__label Votes:
-                    .context__card__header__right__votes 10                
-            .context__card__footer
-                hr.context__card__footer__line
-                .footer__foot This is a footer
-        br
-        .context__card
-            .context__card__header 
-                p.context__card__header__title Best Day of the Week?
-                .context__card__header__left                
-                    ul.context__card__header__left__items                        
-                        each val in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                            a.btn.btn--empty.btn--large(href="#")=val
-                .context__card__header__right
-                    .context__card__header__right__label Votes:
-                    .context__card__header__right__votes 10                
-            .context__card__footer
-                hr.context__card__footer__line
-                .footer__foot This is a footer
-        br
-        .context__card
-            .context__card__header 
-                p.context__card__header__title Best Day of the Week?
-                .context__card__header__left                
-                    ul.context__card__header__left__items                        
-                        each val in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                            a.btn.btn--empty.btn--large(href="#")=val
-                .context__card__header__right
-                    .context__card__header__right__label Votes:
-                    .context__card__header__right__votes 10                
-            .context__card__footer
-                hr.context__card__footer__line
-                .footer__foot This is a footer
-        br
-        .context__card
-            .context__card__header 
-                p.context__card__header__title Best Day of the Week?
-                .context__card__header__left                
-                    ul.context__card__header__left__items                        
-                        each val in ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                            a.btn.btn--empty.btn--large(href="#")=val
-                .context__card__header__right
-                    .context__card__header__right__label Votes:
-                    .context__card__header__right__votes 10                
-            .context__card__footer
-                hr.context__card__footer__line
-                .footer__foot This is a footer
+    section.context
+        each poll in polls
+            .context__card
+                .context__card__body
+                    a.context__card__body__title(href="./poll?url=" + poll.url)=poll.title
+                    .context__card__body__container
+                        .context__card__body__container__left                
+                            ul.items                        
+                                each val in poll.options
+                                    a.btn.btn--empty.btn--large(href="#")=val[0]
+                        .context__card__body__container__middle
+                            a.btn.btn--medium.btn--full.hidden(href="./poll?url=" + poll.url) Submit vote
+                        .context__card__body__container__right
+                            .label Votes:
+                            .votes=poll.usersVoted.length              
+                .context__card__footer
+                    hr.context__card__footer__line
+                    .footer__foot This is a footer
+            br
     section.context
     section.context
     include includes/footer.pug
+
