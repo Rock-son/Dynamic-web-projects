@@ -55,23 +55,25 @@ var fs = require("fs"),
                 return res.render("createPoll", { js: createPollJS, cssPath: createPollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) });
             })(req, res, next);
         })
-        .post(ensureAuthenticated, csrfProtection, db.insertFormData);
+        .post(ensureAuthenticated, csrfProtection, db.insertPollData);
 
 
     // SHOW SPECIFIC POLL
-    app.get("/poll", csrfProtection, function(req, res, next) {        
-        passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
-            if (err) { return next(err) }
+    app.route("/poll")
+        .get(csrfProtection, function(req, res, next) {
+            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+                if (err) { return next(err) }
 
-            if (!user) { 
-                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false };
+                if (!user) { 
+                    const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false };
+                    return db.managePollData(req, res, next, options);
+                } 
+                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
                 return db.managePollData(req, res, next, options);
-            } 
-            const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
-            return db.managePollData(req, res, next, options);
-        
-        })(req, res, next);
-    });
+            
+            })(req, res, next);
+        })
+        .post(csrfProtection, db.updatePollOPtions);
 
     // SHOW ALL POLLS OF A LOGGED-ON USER
     app.get("/myPolls", csrfProtection, function(req, res, next) {
