@@ -53,3 +53,16 @@ exports.managePollData = function(req, res, next, options) {
         return res.render("poll", options);
     });
 }
+
+exports.showPolls = function(req, res, next, options) {
+
+    PollSchema.find(options.fetch, function(err, polls) {
+        if (err) next(err);
+        
+        if (!polls.length) {
+            return res.render({"error": "No polls found!"});
+        }
+        options.polls =polls;
+        return res.render("homePage", options);
+    });
+}
