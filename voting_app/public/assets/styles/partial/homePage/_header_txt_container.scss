@@ -15,17 +15,34 @@
     &__title {
         clear: both;
         position: relative;
-        display: block;
+        display: inline-block;
         margin: .5% auto;
         line-height: 2rem;
+        color:#fff;
         opacity: .8;
+        text-decoration: none;
         text-shadow: 1px 1px 2px black, -1px -1px 2px black, 0px 0px 3px green;
+        &:visited {
+            color:#fff;
+        }
+        &:hover {
+            color:#fff;
+            text-decoration: underline;
+        }
     }
     &__subtitle {
         position: relative;
         font-size: 1.8rem;
         color: rgb(55, 143, 113);
         text-shadow: 0px 0px 1px #333;
+        & a {
+            text-decoration: none;
+            color: inherit;
+            &:hover{
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
     }
     &__stub {
         position: relative;
