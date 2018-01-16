@@ -453,6 +453,7 @@ body {
   border: 1px solid #10771a;
   text-decoration: none; }
   .btn:hover {
+    cursor: pointer;
     text-decoration: none;
     background-color: #188623;
     border: 1px solid #279732;
@@ -466,6 +467,9 @@ body {
     background-image: none;
     outline-width: 0; }
 
+.btn.hidden {
+  display: none; }
+
 .btn--large {
   font-size: 1rem;
   line-height: 2rem;
@@ -473,13 +477,13 @@ body {
   margin: .5rem 1rem 1rem auto; }
 
 .btn--medium {
-  font-size: .9em;
+  font-size: .9rem;
   line-height: 1.2rem;
   padding: .2rem .8rem;
   margin: .5rem .8rem .8rem auto; }
 
 .btn--small {
-  font-size: .8em;
+  font-size: .8rem;
   line-height: 1rem;
   padding: .2rem .7rem;
   margin: .5rem .8rem .8rem auto; }
@@ -612,6 +616,14 @@ body {
           .header__nav__right__items .fa-google-plus-square:hover {
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
+        .header__nav__right__items .fa-user-o {
+          color: #999;
+          line-height: 1rem; }
+          .header__nav__right__items .fa-user-o:hover {
+            text-decoration: none;
+            text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
+        .header__nav__right__items span {
+          margin-left: 1%; }
     .header__nav__line {
       opacity: .5;
       display: block;
@@ -701,52 +713,65 @@ body {
 
 .context__card {
   position: relative;
-  top: -60vh;
   display: block;
   margin: 0 auto;
-  width: 80%;
   background-color: #fff;
   border-radius: 10px;
-  z-index: 0; }
-  .context__card__header {
+  z-index: 0;
+  top: -60vh;
+  width: 100%; }
+  .context__card__body {
     display: inline-block;
     font-size: 2rem;
     color: #000;
     text-align: left;
-    padding: 0 0 1% 0; }
-    .context__card__header__title {
+    padding: 0 0 1% 0;
+    width: 100%; }
+    .context__card__body__title {
+      display: block;
       background-color: #26c978;
       padding-left: 5%;
       margin: 0 0 2% 0;
       color: #fff;
-      border-radius: 10px 10px 0 0; }
-    .context__card__header__left {
+      border-radius: 10px 10px 0 0;
+      text-decoration: none;
+      -webkit-transition: color .2s ease-in-out;
+      transition: color .2s ease-in-out; }
+      .context__card__body__title:visited {
+        color: #fff; }
+      .context__card__body__title:hover {
+        color: #17f7ff; }
+    .context__card__body__container {
       display: inline-block;
-      width: 80%;
-      font-size: 1rem;
-      padding-left: 5%; }
-      .context__card__header__left__items {
+      width: 100%; }
+      .context__card__body__container__left {
         display: inline-block;
-        padding-left: 0; }
-    .context__card__header__right {
-      display: inline-block;
-      -webkit-box-align: start;
-          -ms-flex-align: start;
-              align-items: flex-start;
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-              flex-direction: column;
-      -webkit-box-pack: center;
-          -ms-flex-pack: center;
-              justify-content: center;
-      width: 20%;
-      font-size: 1rem; }
-      .context__card__header__right__label {
-        display: block; }
-      .context__card__header__right__votes {
-        display: block;
-        font-size: 5rem; }
+        width: 70%;
+        font-size: 1rem;
+        padding-left: 5%;
+        vertical-align: top; }
+        .context__card__body__container__left .items {
+          display: inline-block;
+          padding-left: 0; }
+      .context__card__body__container__middle {
+        display: inline-block;
+        width: 10%;
+        vertical-align: top; }
+        .context__card__body__container__middle .btn {
+          margin: 50% 0 2% 0;
+          -webkit-transform: translateY(-50%);
+                  transform: translateY(-50%); }
+      .context__card__body__container__right {
+        display: inline-block;
+        width: 20%;
+        font-size: 1rem;
+        text-align: center;
+        vertical-align: top; }
+        .context__card__body__container__right .label {
+          display: block; }
+        .context__card__body__container__right .votes {
+          display: block;
+          font-size: 5rem; }
   .context__card__footer {
     background-color: #b4b1d1;
     border-radius: 0 0 10px 10px; }
@@ -754,14 +779,20 @@ body {
       color: #f6b7b7;
       margin: 0; }
 
-@media (max-width: 1399px) {
+@media (min-width: 500px) {
   .context__card {
-    width: 60%; } }
+    top: -60vh;
+    width: 100%; } }
+
+@media (min-width: 660px) {
+  .context__card {
+    top: -70vh;
+    width: 80%; } }
 
 @media (min-width: 1400px) {
   .context__card {
     top: -70vh;
-    width: 40%; } }
+    width: 60%; } }
 
 @-webkit-keyframes moveInRight {
   0% {

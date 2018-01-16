@@ -453,6 +453,7 @@ body {
   border: 1px solid #10771a;
   text-decoration: none; }
   .btn:hover {
+    cursor: pointer;
     text-decoration: none;
     background-color: #188623;
     border: 1px solid #279732;
@@ -466,6 +467,9 @@ body {
     background-image: none;
     outline-width: 0; }
 
+.btn.hidden {
+  display: none; }
+
 .btn--large {
   font-size: 1rem;
   line-height: 2rem;
@@ -473,13 +477,13 @@ body {
   margin: .5rem 1rem 1rem auto; }
 
 .btn--medium {
-  font-size: .9em;
+  font-size: .9rem;
   line-height: 1.2rem;
   padding: .2rem .8rem;
   margin: .5rem .8rem .8rem auto; }
 
 .btn--small {
-  font-size: .8em;
+  font-size: .8rem;
   line-height: 1rem;
   padding: .2rem .7rem;
   margin: .5rem .8rem .8rem auto; }
@@ -612,6 +616,14 @@ body {
           .header__nav__right__items .fa-google-plus-square:hover {
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
+        .header__nav__right__items .fa-user-o {
+          color: #999;
+          line-height: 1rem; }
+          .header__nav__right__items .fa-user-o:hover {
+            text-decoration: none;
+            text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
+        .header__nav__right__items span {
+          margin-left: 1%; }
     .header__nav__line {
       opacity: .5;
       display: block;
@@ -649,7 +661,7 @@ body {
     letter-spacing: 0em;
     text-shadow: 0px 0px 2px black, 1px 1px 3px white; }
 
-@media (max-width: 1399px) {
+@media (min-width: 660px) {
   .context__card {
     width: 60%; } }
 
