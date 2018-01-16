@@ -9,12 +9,12 @@ block content
                 h3.context__form__header
                 input(type="hidden" name="createdBy" value=user)
                 input(type="hidden" name="_csrf" value=csrfTkn)
-                label(for="pollTitle") Poll Name
+                label(for="pollTitle" maxlength="100") Poll Name
                 input.context__form__input(id="pollTitle" type="text" name="poll_title" size="35")
                 br
                 br
                 label(for="new_option") Poll Options
-                input.context__form__options(name="option" value="" id="new_option" size="23")
+                input.context__form__options(name="option" value="" id="new_option" size="23" maxlength="50")
                 button.context__form__addBtn.btn.btn--small.btn--full(id="options_btn" title="Register") Add Option
                 div.context__form__container(id="container__options")
                 br
