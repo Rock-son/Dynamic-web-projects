@@ -62,12 +62,20 @@
                 &__left {
                     display: inline-block;
                     width: 70%;
-                    font-size: 1rem;
+                    font-size: 1.2rem;
                     padding-left: 5%;                    
                     vertical-align: top;
                     & .items {
                         display: inline-block;
                         padding-left: 0;
+                        & .btn {
+                            font-size: 1.2rem;
+                            font-variant: all-petite-caps;
+                            color: #000;
+                            &:hover {
+                                color: #fff;
+                            }
+                        }
                     }
                 }
                 &__middle {
@@ -113,7 +121,7 @@
 @include atMedium{
     .context__card {
         top:-70vh;
-        width: 80%;
+        width: 70%;
     }
 }
 
