@@ -4,9 +4,6 @@
 #secrets
 config.js
 
-#scss helper files
-*.scss
-
 # Logs
 logs
 *.log
