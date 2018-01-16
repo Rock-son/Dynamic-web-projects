@@ -45,7 +45,7 @@ function checkInputs(e) {
         warning = document.createElement("div");
         
   warning.innerHTML = "Input data!"
-
+  
   if (title != "" && nrChildren > 0 ) {
       parent.parentNode.submit();
 
@@ -66,9 +66,9 @@ function checkInputs(e) {
           parent.insertBefore(warning.cloneNode(true), titleEL.nextSibling);
       }
 
-  } else if (title !== "" && nrChildren === 0 ) {
-    alert("dela!");
-      if (!document.getElementsByClassName("context__form__alert options")[0] == null) {
+  } else if (title !== "" && nrChildren === 0) {
+      
+      if (document.getElementsByClassName("context__form__alert options")[0] == null) {
           warning.className = "context__form__alert options";
           parent.insertBefore(warning.cloneNode(true), button.nextSibling);
       }
@@ -93,6 +93,7 @@ function addOption(e) {
     wrapper.className = "wrapper";
     // INPUT EL
     input.readOnly = true;
+    input.maxLength = 50;
     input.name = "options";
     input.value = xssFilters.inHTMLData(document.getElementById("new_option").value);
     input.addEventListener("focusout", onFocusLost);
