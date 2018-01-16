@@ -37,8 +37,12 @@ var fs = require("fs"),
         .get(function(req, res, next) {
           passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                 if (err) { return next(err) }
-                if (!user) { return res.render("homePage", { cssPath: homeCSS, auth: false, user: "" }); }
-                return res.render("homePage", { cssPath: homeCSS, auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) });
+                if (!user) { 
+                    const options = { fetch: {}, cssPath: homeCSS, auth: false, user: "" };
+                    return db.showPolls(req, res, next, options);
+                }
+                const options = { fetch: {}, cssPath: homeCSS, auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+                return db.showPolls(req, res, next, options);
         })(req, res, next);
     });
 
@@ -70,8 +74,16 @@ var fs = require("fs"),
     });
 
     // SHOW ALL POLLS OF A LOGGED-ON USER
-    app.get("/myPolls", function(req, res, next) {
+    app.get("/myPolls", csrfProtection, function(req, res, next) {
+        passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+            if (err) { return next(err) }
 
+            if (!user) { return res.redirect("/auth/login"); }
+            
+            const options = { fetch: { createdBy: user.username || user.displayName }, cssPath: homeCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+            return db.showPolls(req, res, next, options);
+        
+        })(req, res, next);
     }); 
 
 module.exports = app;
