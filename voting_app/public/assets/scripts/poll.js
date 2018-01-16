@@ -51,7 +51,7 @@ function onContentLoaded(response) {
                   .ticks(max)
                   .tickPadding(10)
                   .tickSize(-width, 10, -10),
-        svg  = d3.select("body")
+        svg  = d3.select("#graph")
                    .append("svg")
                       .attr("id", "chart")
                       .attr("width", w)
