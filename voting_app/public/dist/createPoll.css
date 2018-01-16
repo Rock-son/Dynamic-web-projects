@@ -559,6 +559,8 @@ body {
         text-decoration: none;
         -webkit-transition: all .3s;
         transition: all .3s; }
+        .header__nav__right__items a {
+          cursor: default; }
         .header__nav__right__items.authBtn {
           display: inline-table;
           vertical-align: bottom;
@@ -616,10 +618,11 @@ body {
           .header__nav__right__items .fa-google-plus-square:hover {
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
-        .header__nav__right__items .fa-user-o {
+        .header__nav__right__items .fa-user {
           color: #999;
           line-height: 1rem; }
-          .header__nav__right__items .fa-user-o:hover {
+          .header__nav__right__items .fa-user:hover {
+            cursor: pointer;
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
         .header__nav__right__items span {
