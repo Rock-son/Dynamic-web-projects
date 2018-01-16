@@ -1,0 +1,80 @@
+@import "./_normalize.scss";
+
+::after, ::before, * { 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* roboto-condensed-regular - latin */
+$path: "/public/assets";
+@font-face {
+    font-family: 'Roboto Condensed';
+    font-style: normal;
+    font-weight: 300;
+    src: url('#{$path}/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Roboto Condensed'), local('RobotoCondensed-Regular'),
+         url('#{$path}/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/RobotoCondensed/roboto-condensed-v16-latin-regular.svg#RobotoCondensed') format('svg'); /* Legacy iOS */
+  }
+/* advent-pro-regular - latin */
+@font-face {
+    font-family: 'Advent Pro';
+    font-style: normal;
+    font-weight: 300;
+    src: url('#{$path}/fonts/AdventPro/advent-pro-v7-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Advent Pro Regular'), local('AdventPro-Regular'),
+         url('#{$path}/fonts/AdventPro/advent-pro-v7-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/AdventPro/advent-pro-v7-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/AdventPro/advent-pro-v7-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/AdventPro/advent-pro-v7-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/AdventPro/advent-pro-v7-latin-regular.svg#AdventPro') format('svg'); /* Legacy iOS */
+  }
+  
+/* abeezee-regular - latin */
+@font-face {
+    font-family: 'ABeeZee';
+    font-style: normal;
+    font-weight: 300;
+    src: url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('ABeeZee Regular'), local('ABeeZee-Regular'),
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/Abeezee/abeezee-v11-latin-regular.svg#ABeeZee') format('svg'); /* Legacy iOS */
+  }
+  
+/* vollkorn-sc-regular - latin */
+@font-face {
+    font-family: 'Vollkorn SC';
+    font-style: normal;
+    font-weight: 300;
+    src: url('#{$path}/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Vollkorn SC Regular'), local('VollkornSC-Regular'),
+         url('#{$path}/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$path}/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$path}/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('#{$path}/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('#{$path}/fonts/VollkornSC/vollkorn-sc-v1-latin-regular.svg#VollkornSC') format('svg'); /* Legacy iOS */
+  }
+
+body {
+    height: 100vh;
+    width: 100vw;
+    min-width: 530px;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1rem;
+    color:#666b70;
+    overflow-y: hidden;
+}
+
+@import "../mixins/mixin.scss";
+@import "../../images/chart.scss";
+@import "../shared/_buttons.scss";
+@import "./_header.scss";
+@import "./_body.scss";
+@import "./_footer.scss";
