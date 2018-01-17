@@ -4,96 +4,42 @@
     width: 100vw;
     font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
     font-size: 1rem;
-    background: #333 url($votingAppUrl) no-repeat center center;
     background-size: cover;
+    background-color: #292222;
     z-index: -1;
     &__left {
         display: inline-table;
         width: 30%;
         vertical-align: top;
         margin-top: 4%;
+        @import "./body_form.scss";
     }
     &__right {
         display: inline-table;
         width: 70%;
         vertical-align: top;
         margin-top: 4%;
+        @import "./body_chart.scss";
     }    
 }
 
 
-
-
-
-#chart{
-	background-color: #292222;
-	border: 1px outset #CCC;
-  
+@include atSmall {
+  .context__card {
+      top: -60vh;
+      width: 100%;
+  }
 }
-.chart-title {
-  font-size: 3rem;
-  font-variant: small-caps;
-  fill: #009a82;
-  opacity: 0.6;
-}
-.display {  
-  fill: steelblue;
-}
-.bar {
-  stroke: #888;
-  stroke-width: 1;
-	shape-rendering: crispEdges;
-}
-.bar-label {
-	fill: white;
-	text-anchor: middle;
-	font-weight: 700;
-}
-.axis path, .axis line {
-	fill: none;
-	stroke: #333;
-	shape-rendering: crispEdges;
-}
-.axis .tick {
-  fill: #333;
-}
-.x-axis-label, .y-axis-label {
-  fill: #999;
-  font-variant: small-caps;
-}
-.gridline path, .gridline line {
-	fill: none;
-	stroke: #ccc;
-	shape-rendering: crispEdges;
-}
-.svglink {
-  text-decoration: none;
-}
-.svglink:hover {
-  text-decoration: underline;
-}
-.tooltip {  
-  position: absolute;
-  padding: 5px 10px;
-  opacity: 0;
-  text-align: left;
-  border-radius: 5px;
-  background-color: lightblue;
-  -webkit-box-shadow: 1px 1px 5px #333;
-  -moz-box-shadow: 1px 1px 5px #333;
-  box-shadow: 1px 1px 5px #333;  
-	pointer-events: none;
-}
-
 @include atMedium{
-    .context__card {
-        width: 60%;
-    }
+  .context__card {
+      top:-70vh;
+      width: 70%;
+  }
 }
 
 @include atLarge{
-    .context__card {
-        top: -70vh;
-        width: 40%;
-    }
+  .context__card {
+      top: -75vh;
+      width: 60%;
+  }
 }
