@@ -32,6 +32,8 @@ var fs = require("fs"),
     app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+    
     // HOME ROUTE
     app.route("/") 
         .get(function(req, res, next) {
@@ -46,6 +48,9 @@ var fs = require("fs"),
         })(req, res, next);
     });
 
+
+
+
     // CREATE POLL
     app.route("/createPoll")
         .get(csrfProtection, function(req, res, next) {
@@ -56,6 +61,8 @@ var fs = require("fs"),
             })(req, res, next);
         })
         .post(ensureAuthenticated, csrfProtection, db.insertPollData);
+
+
 
 
     // SHOW SPECIFIC POLL
@@ -74,6 +81,8 @@ var fs = require("fs"),
             })(req, res, next);
         })
         .post(csrfProtection, db.updatePollOPtions);
+
+
 
     // SHOW ALL POLLS OF A LOGGED-ON USER
     app.get("/myPolls", csrfProtection, function(req, res, next) {
