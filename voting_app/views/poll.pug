@@ -7,14 +7,16 @@ block content
         .container__left
             form.form(action="/voting-app/createPoll" method="post" id="poll_form")
                 fieldset#fs.form__fieldset
-                    h3.form__header Vote Options
                     input(type="hidden" name="_csrf" value=csrfTkn)
                     each poll in data.options
                         .form__options=poll[0]
-                    input.form__submit.btn.btn--large.btn--full(id="submit_btn1" type="submit" value="Add Option")
-                    input.form__submit.btn.btn--large.btn--full(id="submit_btn2" type="submit" value="Delete Poll")
+                    input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
+                    input.form__btn.btn.btn--large.btn--full(id="delete" type="button" value="Delete Poll")
+                    input.form__submit(id="submit" type="submit" value="Submit Vote")
+            #controls
         .container__right
             #graph
         input#poll_data(type="hidden" name="data" value=data)
     include includes/footer.pug
+    script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js")
     script(type="text/javascript" src=js )
