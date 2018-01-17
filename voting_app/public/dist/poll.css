@@ -794,7 +794,7 @@ body {
   height: 3vh;
   margin: 0 auto;
   font-size: .8rem;
-  color: #ccc;
+  color: #333;
   text-align: center;
   margin: 0 auto;
   background-color: transparent; }
@@ -822,3 +822,6 @@ body {
       .footer__codedby__link:active {
         text-decoration: underline;
         color: inherit; }
+
+.footer {
+  color: #ccc; }

@@ -769,7 +769,7 @@ body {
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-    color: 333;
+    color: inherit;
     text-align: center;
     margin: 0 auto;
     font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
@@ -778,13 +778,13 @@ body {
       color: red; }
     .footer__codedby__link {
       text-decoration: none;
-      color: #333;
+      color: inherit;
       background-color: transparent; }
       .footer__codedby__link:hover {
         text-decoration: underline; }
       .footer__codedby__link:visited {
         text-decoration: underline;
-        color: #333; }
+        color: inherit; }
       .footer__codedby__link:active {
         text-decoration: underline;
-        color: #333; }
+        color: inherit; }

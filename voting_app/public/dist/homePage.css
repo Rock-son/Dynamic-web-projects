@@ -800,6 +800,22 @@ body {
     .context__card__footer__line {
       color: #f6b7b7;
       margin: 0; }
+    .context__card__footer__context {
+      font-family: Colibri, Arial, sans-serif;
+      font-size: .8rem;
+      font-variant: inherit;
+      color: #555;
+      text-align: left;
+      padding-left: 5%; }
+      .context__card__footer__context span {
+        font-size: 1rem;
+        color: #03A6E6;
+        font-family: "Vollkorn SC", Colibri, Arial, sans-serif; }
+      .context__card__footer__context span.small {
+        color: #555;
+        font-family: Colibri, Arial, sans-serif;
+        font-variant: normal;
+        font-size: .8rem; }
 
 @media (min-width: 500px) {
   .context__card {
@@ -901,7 +917,7 @@ body {
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-    color: 333;
+    color: inherit;
     text-align: center;
     margin: 0 auto;
     font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
@@ -910,16 +926,16 @@ body {
       color: red; }
     .footer__codedby__link {
       text-decoration: none;
-      color: #333;
+      color: inherit;
       background-color: transparent; }
       .footer__codedby__link:hover {
         text-decoration: underline; }
       .footer__codedby__link:visited {
         text-decoration: underline;
-        color: #333; }
+        color: inherit; }
       .footer__codedby__link:active {
         text-decoration: underline;
-        color: #333; }
+        color: inherit; }
 
 @media (max-width: 1605px) {
   .body {
