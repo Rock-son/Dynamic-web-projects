@@ -6,7 +6,7 @@
     height: 3vh;
     margin: 0 auto;
     font-size: .8rem;
-    color: #333;
+    color: #ccc;
     text-align: center;
     margin: 0 auto;
     background-color: transparent;
@@ -14,7 +14,7 @@
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        color: 333;
+        color: inherit;
         text-align: center;
         margin: 0 auto;
         font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
@@ -24,18 +24,18 @@
         }
         &__link {
             text-decoration: none;
-            color: #333;
+            color: inherit;
             background-color: transparent;
             &:hover {                
                 text-decoration: underline;
             }
             &:visited {                
                 text-decoration: underline;
-                color: #333;
+                color: inherit;
             }
             &:active {                
                 text-decoration: underline;
-                color: #333;
+                color: inherit;
             }
         }
     }
