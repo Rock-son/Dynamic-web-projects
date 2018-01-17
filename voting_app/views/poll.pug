@@ -6,19 +6,13 @@ block content
     section.container
         .container__left
             form.form(action="/voting-app/createPoll" method="post" id="poll_form")
-                fieldset#fs
-                    h3.form__header
+                fieldset#fs.form__fieldset
+                    h3.form__header Vote Options
                     input(type="hidden" name="_csrf" value=csrfTkn)
-                    label(for="pollTitle" maxlength="100") Poll Name
-                    input.form__input(id="pollTitle" type="text" name="poll_title" size="35")
-                    br
-                    br
-                    label(for="new_option") Poll Options
-                    input.form__options(name="option" value="" id="new_option" size="23" maxlength="50")
-                    button.form__addBtn.btn.btn--small.btn--full(id="options_btn" title="Register") Add Option
-                    div.form__container(id="container__options")
-                    br
-                    input.form__submit.btn.btn--medium.btn--full(id="submit_btn" type="submit" value="Create New Poll")
+                    each poll in data.options
+                        .form__options=poll[0]
+                    input.form__submit.btn.btn--large.btn--full(id="submit_btn1" type="submit" value="Add Option")
+                    input.form__submit.btn.btn--large.btn--full(id="submit_btn2" type="submit" value="Delete Poll")
         .container__right
             #graph
         input#poll_data(type="hidden" name="data" value=data)
