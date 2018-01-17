@@ -1,6 +1,8 @@
 "use strict"
-
-require("dotenv").config();
+console.log(process.env.HEROKU_RUN);
+if (process.env.HEROKU_RUN == null) {
+      require("dotenv").config();
+}
 
 const express = require("express"),
       http = require("http"),
