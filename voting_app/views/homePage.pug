@@ -21,7 +21,7 @@ block content
                             .votes=poll.usersVoted.length              
                 .context__card__footer
                     hr.context__card__footer__line
-                    .footer__foot Created by: #[span=poll.createdBy]
+                    .context__card__footer__context created on: &nbsp #[span=poll.createdUTC.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'}) ] #[span.small &nbsp #{"["} by ] #[span=poll.createdBy] #[span.small #{"]"}]
             br
     section.context
     section.context
