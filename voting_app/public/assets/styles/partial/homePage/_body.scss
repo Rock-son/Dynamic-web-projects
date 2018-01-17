@@ -110,6 +110,25 @@
                 color: #f6b7b7;
                 margin: 0;
             }
+            &__context {                
+                font-family: Colibri, Arial, sans-serif;
+                font-size: .8rem;
+                font-variant: inherit;
+                color: #555;                
+                text-align: left;
+                padding-left: 5%;
+                & span {
+                    font-size: 1rem;
+                    color: #03A6E6;
+                    font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+                }
+                & span.small {
+                    color: #555;
+                    font-family: Colibri, Arial, sans-serif;
+                    font-variant: normal;
+                    font-size: .8rem;
+                }
+            }
         }
     }
 @include atSmall {
