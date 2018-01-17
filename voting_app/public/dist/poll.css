@@ -656,12 +656,12 @@ body {
     vertical-align: top;
     margin-top: 4%; }
     .container__left .form {
-      margin: 25% auto;
+      margin: auto;
       text-align: left;
       width: 80%; }
       .container__left .form__fieldset {
         border-color: white;
-        background-color: rgba(255, 255, 255, 0.7); }
+        background-color: rgba(255, 255, 255, 0.1); }
         .container__left .form__fieldset label {
           font-size: 1.25rem;
           display: block;
@@ -678,6 +678,7 @@ body {
         padding: 4% 3%;
         color: #ccc;
         text-align: center;
+        letter-spacing: 1px;
         background-color: #0f3e3e;
         -webkit-transition: -webkit-transform .2s;
         transition: -webkit-transform .2s;
@@ -686,39 +687,55 @@ body {
         .container__left .form__options:hover {
           -webkit-transform: scale(1.02);
                   transform: scale(1.02); }
-      .container__left .form__submit {
+      .container__left .form__btn {
         display: inline-block; }
-        .container__left .form__submit#submit_btn1 {
-          float: left;
+        .container__left .form__btn#add {
           width: 49%;
           margin: 10% 0 0 0; }
-        .container__left .form__submit#submit_btn2 {
+        .container__left .form__btn#delete {
           float: right;
           width: 49%;
           margin: 10% 0 0 0;
           background-color: red;
           border: 1px solid orangered; }
-          .container__left .form__submit#submit_btn2:hover {
+          .container__left .form__btn#delete:hover {
             background-color: #d10404; }
-          .container__left .form__submit#submit_btn2:after {
+          .container__left .form__btn#delete:after {
             clear: both; }
+      .container__left .form__submit {
+        display: block;
+        width: 100%;
+        padding: 3%;
+        margin-top: 2%;
+        font-weight: 700;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        color: aliceblue;
+        background-color: #0094da; }
   .container__right {
     display: inline-table;
     width: 70%;
     vertical-align: top;
     margin-top: 4%; }
+    .container__right #graph {
+      opacity: .95; }
     .container__right #chart {
-      background-color: #292222;
-      border: 1px outset #CCC; }
+      background-color: #ced3d6;
+      background-color: rgba(206, 211, 214, 0.2);
+      border: 1px outset #CCC;
+      height: 88vh; }
+    .container__right #controls {
+      margin-top: -3%; }
     .container__right .chart-title {
       font-size: 3rem;
       font-variant: small-caps;
-      fill: #009a82;
-      opacity: 0.6; }
+      fill: #0f3e3e;
+      opacity: 1; }
     .container__right .display {
-      fill: steelblue; }
+      fill: steelblue;
+      fill-opacity: 1; }
     .container__right .bar {
-      stroke: #888;
+      stroke: #9eaeea;
       stroke-width: 1;
       shape-rendering: crispEdges; }
     .container__right .bar-label {
@@ -732,7 +749,8 @@ body {
     .container__right .axis .tick {
       fill: #333; }
     .container__right .x-axis-label, .container__right .y-axis-label {
-      fill: #999;
+      fill: #0f3e3e;
+      font-weight: 700;
       font-variant: small-caps; }
     .container__right .gridline path, .container__right .gridline line {
       fill: none;
@@ -776,7 +794,7 @@ body {
   height: 3vh;
   margin: 0 auto;
   font-size: .8rem;
-  color: #333;
+  color: #ccc;
   text-align: center;
   margin: 0 auto;
   background-color: transparent; }
@@ -785,7 +803,7 @@ body {
     top: 50%;
     -webkit-transform: translateY(-50%);
             transform: translateY(-50%);
-    color: 333;
+    color: inherit;
     text-align: center;
     margin: 0 auto;
     font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
@@ -794,13 +812,13 @@ body {
       color: red; }
     .footer__codedby__link {
       text-decoration: none;
-      color: #333;
+      color: inherit;
       background-color: transparent; }
       .footer__codedby__link:hover {
         text-decoration: underline; }
       .footer__codedby__link:visited {
         text-decoration: underline;
-        color: #333; }
+        color: inherit; }
       .footer__codedby__link:active {
         text-decoration: underline;
-        color: #333; }
+        color: inherit; }
