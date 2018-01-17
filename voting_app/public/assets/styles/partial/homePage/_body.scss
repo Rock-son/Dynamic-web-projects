@@ -151,6 +151,13 @@
     }
 }
 
+@include atXLarge{
+    .context__card {
+        top: -75vh;
+        width: 50%;
+    }
+}
+
 @keyframes moveInRight {
 
     0%  { right:-70vw }
