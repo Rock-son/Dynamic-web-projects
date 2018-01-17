@@ -1,0 +1,69 @@
+
+#graph {
+  opacity: .95;
+}
+#chart{
+	background-color: rgb(206, 211, 214);
+	background-color: rgba(206, 211, 214, .2);
+	border: 1px outset #CCC;
+  height: 88vh;
+}
+#controls {
+  margin-top: -3%;
+}
+.chart-title {
+  font-size: 3rem;
+  font-variant: small-caps;
+  fill: #0f3e3e;
+  opacity: 1;
+}
+.display {  
+  fill: steelblue;
+  fill-opacity: 1;
+}
+.bar {
+  stroke: #9eaeea;
+  stroke-width: 1;
+	shape-rendering: crispEdges;
+}
+.bar-label {
+	fill: white;
+	text-anchor: middle;
+	font-weight: 700;
+}
+.axis path, .axis line {
+	fill: none;
+	stroke: #333;
+	shape-rendering: crispEdges;
+}
+.axis .tick {
+  fill: #333;
+}
+.x-axis-label, .y-axis-label {
+  fill: #0f3e3e;
+  font-weight: 700;
+  font-variant: small-caps;
+}
+.gridline path, .gridline line {
+	fill: none;
+	stroke: #ccc;
+	shape-rendering: crispEdges;
+}
+.svglink {
+  text-decoration: none;
+}
+.svglink:hover {
+  text-decoration: underline;
+}
+.tooltip {  
+  position: absolute;
+  padding: 5px 10px;
+  opacity: 0;
+  text-align: left;
+  border-radius: 5px;
+  background-color: lightblue;
+  -webkit-box-shadow: 1px 1px 5px #333;
+  -moz-box-shadow: 1px 1px 5px #333;
+  box-shadow: 1px 1px 5px #333;  
+	pointer-events: none;
+}

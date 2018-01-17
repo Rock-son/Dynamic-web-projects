@@ -3,7 +3,7 @@
     height: 100vh;
     width: 100vw;
     font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
-    font-size: 1rem;
+    font-size: 1rem;   
     background-size: cover;
     background-color: #292222;
     z-index: -1;
@@ -12,14 +12,14 @@
         width: 30%;
         vertical-align: top;
         margin-top: 4%;
-        @import "./body_form.scss";
+        @import "./__body_form.scss";
     }
     &__right {
         display: inline-table;
         width: 70%;
         vertical-align: top;
         margin-top: 4%;
-        @import "./body_chart.scss";
+        @import "./__body_chart.scss";
     }    
 }
 
