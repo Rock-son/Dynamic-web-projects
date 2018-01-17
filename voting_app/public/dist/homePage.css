@@ -832,6 +832,11 @@ body {
     top: -75vh;
     width: 60%; } }
 
+@media (min-width: 1700px) {
+  .context__card {
+    top: -75vh;
+    width: 50%; } }
+
 @-webkit-keyframes moveInRight {
   0% {
     right: -70vw; }

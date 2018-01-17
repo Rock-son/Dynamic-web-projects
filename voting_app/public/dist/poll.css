@@ -658,7 +658,9 @@ body {
     .container__left .form {
       margin: auto;
       text-align: left;
-      width: 80%; }
+      width: 80%;
+      -webkit-box-shadow: 0px 0px 15px black, 0px 5px 20px black;
+              box-shadow: 0px 0px 15px black, 0px 5px 20px black; }
       .container__left .form__fieldset {
         border-color: white;
         background-color: rgba(255, 255, 255, 0.1); }
@@ -683,12 +685,18 @@ body {
         -webkit-transition: -webkit-transform .2s;
         transition: -webkit-transform .2s;
         transition: transform .2s;
-        transition: transform .2s, -webkit-transform .2s; }
+        transition: transform .2s, -webkit-transform .2s;
+        border-radius: 5px;
+        text-shadow: 0px 0px 2px black, 1px 1px 2px black; }
         .container__left .form__options:hover {
           -webkit-transform: scale(1.02);
-                  transform: scale(1.02); }
+                  transform: scale(1.02);
+          background-color: #f7b551;
+          color: #333;
+          font-weight: 700; }
       .container__left .form__btn {
-        display: inline-block; }
+        display: inline-block;
+        text-shadow: 0px 0px 2px black, 1px 1px 2px black; }
         .container__left .form__btn#add {
           width: 49%;
           margin: 10% 0 0 0; }
@@ -711,7 +719,8 @@ body {
         letter-spacing: 1px;
         border-radius: 5px;
         color: aliceblue;
-        background-color: #0094da; }
+        background-color: #0094da;
+        text-shadow: 0px 0px 2px black, 1px 1px 2px black; }
   .container__right {
     display: inline-table;
     width: 70%;
@@ -723,13 +732,15 @@ body {
       background-color: #ced3d6;
       background-color: rgba(206, 211, 214, 0.2);
       border: 1px outset #CCC;
-      height: 88vh; }
+      height: 88vh;
+      -webkit-box-shadow: 0px 0px 15px black, 0px 5px 20px black;
+              box-shadow: 0px 0px 15px black, 0px 5px 20px black; }
     .container__right #controls {
       margin-top: -3%; }
     .container__right .chart-title {
       font-size: 3rem;
       font-variant: small-caps;
-      fill: #0f3e3e;
+      fill: aliceblue;
       opacity: 1; }
     .container__right .display {
       fill: steelblue;
@@ -739,9 +750,11 @@ body {
       stroke-width: 1;
       shape-rendering: crispEdges; }
     .container__right .bar-label {
+      font-size: 2rem;
       fill: white;
       text-anchor: middle;
-      font-weight: 700; }
+      font-weight: 700;
+      text-shadow: 0px 0px 2px black, 1px 1px 2px black; }
     .container__right .axis path, .container__right .axis line {
       fill: none;
       stroke: #333;
@@ -749,9 +762,17 @@ body {
     .container__right .axis .tick {
       fill: #333; }
     .container__right .x-axis-label, .container__right .y-axis-label {
-      fill: #0f3e3e;
+      fill: aliceblue;
       font-weight: 700;
-      font-variant: small-caps; }
+      font-variant: small-caps;
+      font-size: 1.2rem;
+      text-shadow: 0px 0px 2px black, 1px 1px 2px black; }
+    .container__right .y-axis-anchor {
+      fill: aliceblue;
+      font-weight: 700;
+      font-variant: small-caps;
+      font-size: 2rem;
+      text-shadow: 0px 0px 2px black, 1px 1px 2px black; }
     .container__right .gridline path, .container__right .gridline line {
       fill: none;
       stroke: #ccc;
