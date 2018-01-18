@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", onContentLoaded);
 
 
 // container object's width and height
-
-	var w = +window.innerWidth / 1.5,
+  const winSize = +window.innerWidth
+	var w = +window.innerWidth > 1500 ? +window.innerWidth / 1.5 : +window.innerWidth,
 		h = +window.innerHeight / 1.2,
 		margin =  {
         top: 100,

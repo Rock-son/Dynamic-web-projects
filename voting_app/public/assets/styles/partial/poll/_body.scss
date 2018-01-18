@@ -5,41 +5,47 @@
     font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
     font-size: 1rem;   
     background-size: cover;
-    background-color: #292222;
+    background-color: #fdfdfd;
     z-index: -1;
     &__left {
-        display: inline-table;
-        width: 30%;
-        vertical-align: top;
-        margin-top: 4%;
+        display: block;
+        width: 95%;
+        margin: 20% auto;
         @import "./__body_form.scss";
     }
     &__right {
         display: inline-table;
-        width: 70%;
+        width: 99%;
         vertical-align: top;
-        margin-top: 4%;
+        margin-top: 5%;
         @import "./__body_chart.scss";
     }    
 }
 
-
-@include atSmall {
-  .context__card {
-      top: -60vh;
-      width: 100%;
-  }
-}
 @include atMedium{
-  .context__card {
-      top:-70vh;
-      width: 70%;
+  .container__left {
+      width: 80%;
+      margin: 10% auto;
   }
 }
 
 @include atLarge{
-  .context__card {
-      top: -75vh;
-      width: 60%;
-  }
+    .container__left {
+        width: 60%;
+        margin: 10% auto;
+    }
+}
+
+@include atXLarge{
+    .container__left {
+        display: inline-table;
+        vertical-align: top;
+        width: 30%;
+        margin: 3% auto;
+    }
+    .container__right {
+        width: 70%;
+        margin: 3% auto;
+        
+    }
 }

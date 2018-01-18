@@ -7,17 +7,65 @@
 	background-color: rgba(206, 211, 214, .2);
 	border: 1px outset #CCC;
   height: 88vh;
+  width: 98%;
+  margin-left: 2%; 
   box-shadow: 0px 0px 15px black, 0px 5px 20px black;
 }
+@include atXLarge {
+  #chart {
+      width: 95%;
+      margin: auto;
+      
+  }
+}
 #controls {
-  margin-top: -3%;
+  margin-top: -8%;
+  margin-left: 4%;
+  & button {
+    padding: 6px;
+    background-color: #4ec3fb;
+    color: #eee;
+    border-radius: 5px;
+    text-shadow: 0px 0px 2px black, 1px 1px 2px black;
+    transition: background-color .2s;
+    &:hover {
+      cursor: pointer;
+      background-color: #239cd4;
+    }
+  }
+}
+@include atSmall {
+  #controls {
+    margin-top: -10%;
+    margin-left: 4%;
+  }
+}
+@include atMedium{
+  #controls {
+    margin-top: -5%;
+    margin-left: 3%;
+  }
+}
+@include atLarge{
+  #controls {
+    margin-top: -4%;
+    margin-left: 3%;
+  }
+}
+@include atXLarge{
+  #controls {
+    margin-top: -4%;
+    margin-left: 1%;
+  }
 }
 .chart-title {
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-variant: small-caps;
-  fill: aliceblue;
+  fill: #0094da;
   opacity: 1;
-}
+  text-shadow: 0px 0px 1px black, 0px 0px 1px black;
+}// font-size
+
 .display {  
   fill: steelblue;
   fill-opacity: 1;
@@ -32,7 +80,7 @@
 	fill: white;
 	text-anchor: middle;
   font-weight: 700;
-  text-shadow: 0px 0px 2px black, 1px 1px 2px black;
+  text-shadow: 0px 0px 1px black, 1px 1px 1px black;
 }
 .axis path, .axis line {
 	fill: none;
@@ -43,18 +91,18 @@
   fill: #333;
 }
 .x-axis-label, .y-axis-label {
-  fill: aliceblue;
+  fill: #0094da;
   font-weight: 700;
   font-variant: small-caps;
   font-size: 1.2rem;
-  text-shadow: 0px 0px 2px black, 1px 1px 2px black;
+  text-shadow: 0px 0px 1px black, 0px 0px 1px black;
 }
 .y-axis-anchor {
-  fill: aliceblue;
+  fill: 0094da;
   font-weight: 700;
   font-variant: small-caps;
   font-size: 2rem;
-  text-shadow: 0px 0px 2px black, 1px 1px 2px black;
+  text-shadow: 0px 0px 1px black, 0px 0px 1px black;
 }
 .gridline path, .gridline line {
 	fill: none;

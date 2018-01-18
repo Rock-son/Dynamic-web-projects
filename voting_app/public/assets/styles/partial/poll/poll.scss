@@ -1,4 +1,5 @@
 @import "./_normalize.scss";
+@import "../mixins/mixin.scss";
 
 ::after, ::before, * { 
     -webkit-box-sizing: border-box;
@@ -63,22 +64,23 @@ $path: "/public/assets";
   }
 
 body {
-    height: 100vh;
+    height: 99vh;
     width: 100vw;
     min-width: 530px;
     -webkit-font-smoothing: antialiased;
     font-size: 1rem;
     color:#666b70;
-    overflow-y: hidden;
 }
 
-@import "../mixins/mixin.scss";
+@include atXLarge {
+    body {
+        overflow: hidden;
+    }
+}
+
+
 @import "../../images/chart.scss";
 @import "../shared/_buttons.scss";
 @import "./_header.scss";
 @import "./_body.scss";
 @import "../shared/_footer.scss";
-
-.footer {
-    color: #ccc;
-}
