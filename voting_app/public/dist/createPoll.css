@@ -747,7 +747,7 @@ body {
   .context__card {
     width: 60%; } }
 
-@media (min-width: 1400px) {
+@media (min-width: 1000px) {
   .context__card {
     top: -70vh;
     width: 40%; } }

@@ -827,12 +827,12 @@ body {
     top: -70vh;
     width: 70%; } }
 
-@media (min-width: 1400px) {
+@media (min-width: 1000px) {
   .context__card {
     top: -75vh;
     width: 60%; } }
 
-@media (min-width: 1700px) {
+@media (min-width: 1500px) {
   .context__card {
     top: -75vh;
     width: 50%; } }
