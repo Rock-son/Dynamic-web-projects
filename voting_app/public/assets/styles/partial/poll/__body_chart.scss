@@ -26,7 +26,7 @@
     background-color: #4ec3fb;
     color: #eee;
     border-radius: 5px;
-    text-shadow: 0px 0px 2px black, 1px 1px 2px black;
+    text-shadow: 0px 0px 1px black, 0px 0px 1px black;
     transition: background-color .2s;
     &:hover {
       cursor: pointer;
@@ -59,13 +59,18 @@
   }
 }
 .chart-title {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-variant: small-caps;
   fill: #0094da;
   opacity: 1;
   text-shadow: 0px 0px 1px black, 0px 0px 1px black;
-}// font-size
+}
 
+@include atXSmall{
+  .chart-title {
+      font-size: 1.6rem;
+  }
+}
 .display {  
   fill: steelblue;
   fill-opacity: 1;
@@ -94,7 +99,8 @@
   fill: #0094da;
   font-weight: 700;
   font-variant: small-caps;
-  font-size: 1.2rem;
+  font-size: 1.2rem;  
+  letter-spacing: 1px;
   text-shadow: 0px 0px 1px black, 0px 0px 1px black;
 }
 .y-axis-anchor {
