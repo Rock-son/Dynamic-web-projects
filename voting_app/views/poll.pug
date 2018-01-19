@@ -5,15 +5,14 @@ block content
 
     section.container
         .container__left
-            form.form(action="/voting-app/createPoll" method="post" id="poll_form")
+            form.form(action="/voting-app/poll" method="post" id="poll_form")
                 fieldset#fs.form__fieldset
                     input(type="hidden" name="_csrf" value=csrfTkn)
-                    each poll in data.options
-                        .form__options=poll[0]
+                    each poll, index in data.options
+                        .form__options(id=index)=poll[0]
                     input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
                     input.form__btn.btn.btn--large.btn--full(id="delete" type="button" value="Delete Poll")
                     input.form__submit(id="submit" type="submit" value="Submit Vote")
-            #controls
         .container__right
             #graph
         input#poll_data(type="hidden" name="data" value=data)
