@@ -1,6 +1,6 @@
 const { PollSchema } = require("../models/poll"),
         mongoSanitize = require("mongo-sanitize"),
-        createHash = require("./_createHash"),
+        createHash = require("./modules/_createHash"),
         xssFilters = require("xss-filters"),
         // PASSPORT
         passport = require("passport");
@@ -40,7 +40,7 @@ exports.insertPollData = function(req, res, next) {
 // FOR VOTING SITE
 exports.updatePollOptions = function(req, res, next) {
     
-    return res.status( 422 ).send( { error: "Sent form must include at least one voting option and title!" } );
+    return res.status( 422 ).send( { error: "Sent data: " + req.body.voted } );
     const title = xssFilters.inHTMLData(mongoSanitize( req.body.poll_title || "" ).trim()),
           optsArr = Array.isArray( req.body.options ) ? req.body.options : [req.body.options],          
           options = optsArr.map( ( item ) => xssFilters.inHTMLData(mongoSanitize( item )) );
