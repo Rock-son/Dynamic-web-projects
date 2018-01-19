@@ -3,10 +3,11 @@ import { basename } from "path";
 module.exports = function(e) {
     // ELEMENT IDs
     const CANCEL_BTN = "cancel_option",
-          SELECTED_OPTION = "new_option",
+          NEW_OPTION = "new_option",
           ADD_BTN = "add",
           DELETE = "delete",
           SUBMIT = "submit",
+          SUBMIT_DATA = "voted_option",
           FIELDSET = "fs",
           WARNING = "warning",
           FORM_OPTIONS = "form__options";
@@ -33,7 +34,7 @@ module.exports = function(e) {
                 case CANCEL_BTN:
                     cancelNewOption(e);
                     break;
-                case SELECTED_OPTION:
+                case NEW_OPTION:
                     closeWarning(e);
                 case SUBMIT:
                     submitForm(e);
@@ -42,7 +43,7 @@ module.exports = function(e) {
                     showWrapper(fieldset);
                     break;
                 case DELETE:
-                    fieldset.lastChild.click();
+                    deletePoll(fieldset);
                     break;
                 default:
                     break;
@@ -62,7 +63,7 @@ module.exports = function(e) {
     function addNewOption(fieldset) {
 
         // LEAVE NEW OPT INPUT (if open)
-        if (document.getElementById(SELECTED_OPTION)) {
+        if (document.getElementById(NEW_OPTION)) {
             return;
         }
         // CLOSE DELETE INPUT (if open)
@@ -81,7 +82,7 @@ module.exports = function(e) {
 
         input.className = "form__wrapper__options";
         input.maxLength = 25;
-        input.setAttribute("id", SELECTED_OPTION);
+        input.setAttribute("id", NEW_OPTION);
         input.name = "newOption";
 
         cancelBtn.className = "form__wrapper__cancel btn btn--medium btn--full";
@@ -123,7 +124,7 @@ module.exports = function(e) {
 
     function selectOption(e) {
 
-        const voted_el = document.getElementById("voted_option"),
+        const voted_el = document.getElementById(SUBMIT_DATA),
               target_data = JSON.parse(document.getElementById("poll_data").value);
 
         closeWarning(e);
@@ -133,7 +134,7 @@ module.exports = function(e) {
 
         // WHEN SELECTING - deselect each item and close new option if exists
         const list = document.getElementsByClassName("form__options"),
-              newOption = document.getElementById(SELECTED_OPTION),
+              newOption = document.getElementById(NEW_OPTION),
               deleteOption = document.getElementById(DELETE),
               len = list.length;
         for (let i = 0; i < len; i++) { list.item(i).className = FORM_OPTIONS; }
@@ -146,7 +147,7 @@ module.exports = function(e) {
     function closeWarning(e) {
 
         let fieldset = document.getElementById("fs");
-
+        
         if (document.getElementById("warning") != null) {
             fieldset.removeChild(fieldset.lastChild.previousSibling); 
         }
@@ -158,19 +159,19 @@ module.exports = function(e) {
 
         let doc = null;
         // IF NEW INPUT EXISTS AND (IS NOT ZERO): SET VAL ELSE ERROR
-        if ((doc = document.getElementById(SELECTED_OPTION)) != null) {
+        if ((doc = document.getElementById(NEW_OPTION)) != null) {
             if (doc.value !== "") {
-                document.getElementById("voted_option").value = doc.value;
-            } else {
+                document.getElementById(SUBMIT_DATA).value = doc.value;
+            } else if (doc.value === "" && e.target.id !== "new_option") {
                 e.preventDefault();
-                showError(EMPTY_NEW_OPTION);
+                e.target.previousSibling.id === "warning" ? void 0 : showError(EMPTY_NEW_OPTION);
             }
-        // ELSE CHECK ACTIVE VALUE OR EXISTANCE OF DELETE BTN
-        } else if (!document.querySelector(".form__options.selected") && !document.getElementById("delete")) {
+        // ELSE CHECK ACTIVE VALUE OR EXISTANCE OF DELETE COMMAND
+        } else if (!document.querySelector(".form__options.selected") && document.getElementById(SUBMIT_DATA).value !== "delete") {
                 e.preventDefault();
-                showError(NO_VALUE);
+                e.target.previousSibling.id === "warning" ? void 0 : showError(NO_VALUE);
         }
-
+        console.log(document.getElementById(SUBMIT_DATA).value);
                 function showError(type) {
 
                     const fieldset = document.getElementById("fs"),
@@ -197,7 +198,7 @@ module.exports = function(e) {
     function showWrapper(fieldset) {
 
         // CLOSE NEW INPUT (if open)
-        if (document.getElementById(SELECTED_OPTION)) {
+        if (document.getElementById(NEW_OPTION)) {
             document.getElementById(CANCEL_BTN).click();
             return;
         }
@@ -208,7 +209,6 @@ module.exports = function(e) {
         if (document.querySelector(".form__options.selected")) {
             document.querySelector(".form__options.selected").className = "form__options";
         } 
-
 
         const input = document.createElement("input"),
               cancelBtn = document.createElement("div"),
@@ -228,5 +228,12 @@ module.exports = function(e) {
         wrapper.className = "form__wrapper";
 
         fieldset.insertBefore(wrapper, fieldset.lastChild);
+    }
+
+    function deletePoll(fieldset) {
+
+        // FOR SUBMITING PURPOSES (when none selected and delete buttons opened)
+        document.getElementById(SUBMIT_DATA).value = "delete";        
+        fieldset.lastChild.click();
     }
 }

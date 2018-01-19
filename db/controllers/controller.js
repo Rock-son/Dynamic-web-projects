@@ -40,7 +40,7 @@ exports.insertPollData = function(req, res, next) {
 // FOR VOTING SITE
 exports.updatePollOptions = function(req, res, next) {
     
-    return res.status( 422 ).send( { error: "Sent data: " + req.body.voted } );
+    return res.status( 422 ).send( { voted: req.body.voted, delete: req.body.delete_poll} );
     const title = xssFilters.inHTMLData(mongoSanitize( req.body.poll_title || "" ).trim()),
           optsArr = Array.isArray( req.body.options ) ? req.body.options : [req.body.options],          
           options = optsArr.map( ( item ) => xssFilters.inHTMLData(mongoSanitize( item )) );
