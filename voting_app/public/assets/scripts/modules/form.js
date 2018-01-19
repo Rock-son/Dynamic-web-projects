@@ -32,8 +32,8 @@ module.exports = function(e) {
             switch (e.target.id) {
                 case ADD_OPTION:
                     addNewOption(fieldset, addBtn);
-                break;
-            case CANCEL_OPTION:
+                    break;
+                case CANCEL_OPTION:
                     cancelNewOption(e);
                     break;
                 case SELECTED_OPTION:
@@ -49,11 +49,11 @@ module.exports = function(e) {
             switch (e.target.className) {
                 case FORM_OPTIONS:
                     selectOption(e);
-                break;
-            default:
-                break;
-        }
-    }
+                    break;            
+                default:
+                    break;
+            }
+        }        
     }
 
     function addNewOption(fieldset, addBtn) {
@@ -63,7 +63,7 @@ module.exports = function(e) {
             document.querySelector(".form__options.selected").className = "form__options";
         } 
 
-        
+
         const input = document.createElement("input"),
               cancelBtn = document.createElement("div"),
               wrapper = document.createElement("div");
@@ -127,19 +127,60 @@ module.exports = function(e) {
         e.target.className = e.target.className + " selected";        
     }
 
-        
-        if (window.event) event = window.event;
-        
-        const fieldset = event.target.parentNode.parentNode,
-              wrapper = event.target.parentNode;
+    function closeWarning(e) {
 
-        wrapper.style.width = "0px";
-        event.target.style.width = "0px";
-        event.target.style.color = "#fff";
-        event.target.style.textShadow = "none";
+        let fieldset = document.getElementById("fs");
 
-        setTimeout(function(){ wrapper.removeChild(wrapper.lastChild); }, 50);
-        setTimeout(function(){ fieldset.removeChild(fieldset.lastChild.previousSibling); }, 300);
+        if (document.getElementById("warning") != null) {
+            fieldset.removeChild(fieldset.lastChild.previousSibling); 
+        }
+    }
+
+    function submit(e) {
+
+        const EMPTY_NEW_OPTION = "empty", NO_VALUE = "no_value";
+
+        let doc = null;
+        // IF NEW INPUT EXISTS AND (IS NOT ZERO): SET VAL ELSE ERROR
+        if ((doc = document.getElementById(SELECTED_OPTION)) != null) {
+            if (doc.value !== "") {
+                document.getElementById("voted_option").value = doc.value;
+            } else {
+                e.preventDefault();
+                showError(EMPTY_NEW_OPTION);
+            }
+        // ELSE CHECK ACTIVE VALUE
+        } else {
+            if (document.querySelector(".form__options.selected") == null) {
+                e.preventDefault();
+                showError(NO_VALUE);
+            }
+        }
+
+
+
+        function showError(type) {
+
+            const fieldset = document.getElementById("fs"),
+                  error = document.createElement("div");
+
+            error.setAttribute("id", "warning");
+            error.style.color = "red";
+            switch (type) {
+                case EMPTY_NEW_OPTION:
+                    error.innerHTML = "Input new option or close the input field!";
+                    break;
+                case NO_VALUE:
+                    error.innerHTML = "Please select or add one option!";
+                    break;
+                default:
+                    error.innerHTML = "Unexpected error. Try reloading the page.";
+                    break;
+            }            
+
+            fieldset.insertBefore(error, fieldset.lastChild);
+        }
+
     }
 }
 
