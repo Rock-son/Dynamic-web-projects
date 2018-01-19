@@ -101,15 +101,15 @@ exports.showMyPolls = function(req, res, next, options) {
 }
 
 function hideID(json) {
-    
+        
     if (Array.isArray(json)) {
 
         json.forEach((poll,index) => {
-            delete poll._id;
-            return json;
+            delete poll._doc._id;
+            return poll._doc;
         });
     } else {
-        delete json._id;
-        return json;
+        delete json._doc._id;
+        return json._doc;
     }
 }
