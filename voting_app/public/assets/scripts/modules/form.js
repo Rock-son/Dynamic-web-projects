@@ -106,6 +106,27 @@ module.exports = function(e) {
         }, 500);
     }
 
+    function selectOption(e) {
+
+        const voted_el = document.getElementById("voted_option"),
+              target_data = JSON.parse(document.getElementById("poll_data").value);
+
+        closeWarning(e);
+
+        // PUT VALUE IN INPUT - which will be posted
+        voted_el.value = target_data.options[e.target.id][0];
+
+        // WHEN SELECTING - deselect each item and close new option if exists
+        const list = document.getElementsByClassName("form__options"),
+              newOption = document.getElementById(SELECTED_OPTION) || null,
+              len = list.length;
+        for (let i = 0; i < len; i++) { list.item(i).className = FORM_OPTIONS; }
+        if (newOption != null) {document.getElementById("cancel_option").click();}
+
+        // ADD "SELECTED" CLASS TO "MESSENGER" DIV
+        e.target.className = e.target.className + " selected";        
+    }
+
         
         if (window.event) event = window.event;
         
