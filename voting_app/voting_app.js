@@ -80,7 +80,7 @@ var fs = require("fs"),
             
             })(req, res, next);
         })
-        .post(csrfProtection, db.updatePollOPtions);
+        .post(csrfProtection, db.updatePollOptions);
 
 
 
@@ -92,7 +92,7 @@ var fs = require("fs"),
             if (!user) { return res.redirect("/auth/login"); }
             
             const options = { fetch: { createdBy: user.username || user.displayName }, cssPath: homeCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
-            return db.showPolls(req, res, next, options);
+            return db.showMyPolls(req, res, next, options);
         
         })(req, res, next);
     }); 

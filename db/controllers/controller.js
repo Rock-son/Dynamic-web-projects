@@ -6,7 +6,7 @@ const { PollSchema } = require("../models/poll"),
         passport = require("passport");
 
 
-
+// CREATE NEW POLL
 exports.insertPollData = function(req, res, next) {
     
     const createdBy = xssFilters.inHTMLData(mongoSanitize( req.body.createdBy || "" ).trim()),
@@ -37,11 +37,11 @@ exports.insertPollData = function(req, res, next) {
         return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
     });
 };
-
-exports.updatePollOPtions = function(req, res, next) {
+// FOR VOTING SITE
+exports.updatePollOptions = function(req, res, next) {
     
-    const createdBy = xssFilters.inHTMLData(mongoSanitize( req.body.createdBy || "" ).trim()),
-          title = xssFilters.inHTMLData(mongoSanitize( req.body.poll_title || "" ).trim()),
+    return res.status( 422 ).send( { error: "Sent form must include at least one voting option and title!" } );
+    const title = xssFilters.inHTMLData(mongoSanitize( req.body.poll_title || "" ).trim()),
           optsArr = Array.isArray( req.body.options ) ? req.body.options : [req.body.options],          
           options = optsArr.map( ( item ) => xssFilters.inHTMLData(mongoSanitize( item )) );
           
@@ -69,7 +69,7 @@ exports.updatePollOPtions = function(req, res, next) {
     });
 };
 
-
+// RETURN DATA FOR SPECIFIC POLL (/poll?url=j73jhn3s...)
 exports.managePollData = function(req, res, next, options) {
     
     const url = Array.isArray(req.query.url) ? req.query.url.slice(-1)[0] : req.query.url,
@@ -86,7 +86,8 @@ exports.managePollData = function(req, res, next, options) {
     });
 }
 
-exports.showPolls = function(req, res, next, options) {
+// SHOWING A USER HIS POLLS
+exports.showMyPolls = function(req, res, next, options) {
 
     PollSchema.find(options.fetch, function(err, polls) {
         if (err) next(err);
