@@ -8,6 +8,7 @@ block content
             form.form(action="/voting-app/poll" method="post" id="poll_form")
                 fieldset#fs.form__fieldset
                     input(type="hidden" name="_csrf" value=csrfTkn)
+                    input(type="hidden" name="voted" id="voted_option" value="")
                     each poll, index in data.options
                         .form__options(id=index)=poll[0]
                     input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
@@ -15,7 +16,7 @@ block content
                     input.form__submit(id="submit" type="submit" value="Submit Vote")
         .container__right
             #graph
-        input#poll_data(type="hidden" name="data" value=data)
+        input(id="poll_data" type="hidden" value=data)
     include includes/footer.pug
     script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js")
     script(type="text/javascript" src=js )
