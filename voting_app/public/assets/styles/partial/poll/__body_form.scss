@@ -13,6 +13,11 @@
             text-shadow: 0px 0px 1px black, 0px 0px 1px black;
         }
     }
+    @include atXSmall {
+        & {
+            width: 99%;
+        }
+    }
     &__header {
         text-align: center;
         font-size: 1.2rem;
@@ -30,7 +35,7 @@
         border-radius: 5px;
         text-shadow: 0px 0px 1px black, 0px 0px 1px black;
         transition: all .2s;
-        border: 1px solid #333;
+        border: 1px solid #c3c3c3;
         &:hover {
             transform: scale(1.02);
             font-weight: 700;
@@ -42,12 +47,12 @@
         display: inline-block;
         text-shadow: 0px 0px 1px black, 0px 0px 1px black;
         transition: all .2s;
+        margin: 10% 0 1% 0;
+        width: 49%;
         &#add {
             color: #039e08;
             background-color: #d2d1d1;
-            border: 1px solid #039e08;
-            width: 49%;
-            margin: 10% 0 0 0;
+            border: 1px solid #9bc79c;
             &:hover {
                 color: #fff;
                 background-color: #039e08;
@@ -56,10 +61,8 @@
         &#delete {
             color: red;
             float: right;
-            width: 49%;
-            margin: 10% 0 0 0;
             background-color: #d2d1d1;
-            border: 1px solid red;
+            border: 1px solid #caaeae;
             &:hover {
                 color: #fff;
                 background-color: red;
@@ -69,17 +72,47 @@
             }
         }
     }
+    &__wrapper {
+        display: inline-table;
+        width: 100%;
+        transition: all .5s;
+        &__options {
+            margin: 1% 2% 1% 0;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            line-height: 1.7rem;
+            width: 75%;
+            padding:  .5% 1%;
+            color: #a9a9a9;
+            letter-spacing: .5px;
+            background-color: #f3f3f3;
+            text-shadow: 0px 0px 1px black, 0px 0px 1px black;
+            transition: width .3s;
+        }
+        &__cancel {
+            background-color: #e66920;
+            color: #a9a9a9;
+            padding: 2% 4%;        
+            margin: 1% 0;
+            float: right;
+            text-shadow: 0px 0px 1px black, 0px 0px 1px black;
+            transition: width .3s;
+            &:after {
+                clear: both;
+            }
+        }
+    }
     &__submit {
         display: block;
         width: 100%;
         padding: 3%;
-        margin-top: 2%;
+        margin-top: 1%;
         font-weight: 700;
         letter-spacing: 1px;
         border-radius: 5px;
         color: #0094da;
         background-color: #d2d1d1;
-        border: 1px solid #0094da;    
+        border: 1px solid #a9c1cc;    
         text-shadow: 0px 0px 1px black, 0px 0px 1px black;
         transition: all .2s;
         &:hover {
