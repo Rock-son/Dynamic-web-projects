@@ -724,22 +724,25 @@ body {
           .container__left .form__btn#add:hover {
             color: #fff;
             background-color: #039e08; }
-        .container__left .form__btn#delete {
+        .container__left .form__btn#delete_btn {
           color: red;
           float: right;
           background-color: #d2d1d1;
           border: 1px solid #caaeae; }
-          .container__left .form__btn#delete:hover {
+          .container__left .form__btn#delete_btn:hover {
             color: #fff;
             background-color: red; }
-          .container__left .form__btn#delete:after {
+          .container__left .form__btn#delete_btn:after {
             clear: both; }
       .container__left .form__wrapper {
         display: inline-table;
         width: 100%;
         -webkit-transition: all .5s ease-in-out;
-        transition: all .5s ease-in-out; }
+        transition: all .5s ease-in-out;
+        -ms-flex-line-pack: center;
+            align-content: center; }
         .container__left .form__wrapper__options {
+          display: inline-block;
           margin: 1% 2% 1% 0;
           border-radius: 5px;
           font-size: 1.2rem;
@@ -752,15 +755,44 @@ body {
           text-shadow: 0px 0px 1px black, 0px 0px 1px black;
           -webkit-transition: width .3s;
           transition: width .3s; }
+        .container__left .form__wrapper__delete {
+          color: #ffffff;
+          padding: 2% 4%;
+          margin: 2% 0;
+          width: 49%;
+          float: left;
+          font-weight: 700;
+          text-align: center;
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black;
+          -webkit-transition: background-color .3s;
+          transition: background-color .3s; }
+        .container__left .form__wrapper__cancel-delete {
+          background-color: #f13536;
+          color: #ffffff;
+          padding: 2% 4%;
+          margin: 2% 0;
+          float: right;
+          width: 49%;
+          font-weight: 700;
+          text-align: center;
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black;
+          -webkit-transition: background-color .3s;
+          transition: background-color .3s; }
+          .container__left .form__wrapper__cancel-delete:hover {
+            background-color: #f72509; }
         .container__left .form__wrapper__cancel {
-          background-color: #e66920;
-          color: #a9a9a9;
+          background-color: #f13536;
+          color: #ffffff;
           padding: 2% 4%;
           margin: 1% 0;
           float: right;
+          font-weight: 700;
+          text-align: center;
           text-shadow: 0px 0px 1px black, 0px 0px 1px black;
-          -webkit-transition: width .3s;
-          transition: width .3s; }
+          -webkit-transition: background-color .3s;
+          transition: background-color .3s; }
+          .container__left .form__wrapper__cancel:hover {
+            background-color: #f72509; }
           .container__left .form__wrapper__cancel:after {
             clear: both; }
       .container__left .form__submit {
