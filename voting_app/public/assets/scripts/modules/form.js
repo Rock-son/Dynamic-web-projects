@@ -1,47 +1,68 @@
 import { basename } from "path";
 
-module.exports = function(event) {
-    // ids
+module.exports = function(e) {
+    // ELEMENT IDs
     const CANCEL_OPTION = "cancel_option",
-          NEW_OPTION = "new_option",
-          ADD = "add",
+          SELECTED_OPTION = "new_option",
+          ADD_OPTION = "add",
           DELETE = "delete",
           SUBMIT = "submit",
-          FIELDSET = "fs";
+          FIELDSET = "fs",
+          WARNING = "warning",
+          FORM_OPTIONS = "form__options";
 
     document.getElementById("poll_form").addEventListener("click", activateOptions);
 
 
 
 
-    function activateOptions(event) {
+    function activateOptions(e) {
 
         // MSIE hack
-        if (window.event) event = window.event;
+        if (window.event) e = window.event;
 
-        const addBtn = document.getElementById(ADD),
+        const addBtn = document.getElementById(ADD_OPTION),
               deleteBtn = document.getElementById(DELETE),
               submitBtn = document.getElementById(SUBMIT),
-              fieldset = document.getElementById(FIELDSET);
+              fieldset = document.getElementById(FIELDSET),
+              id = parseInt(e.target.id != null ? e.target.id : 0),
+              idIsNaN = !(id === id); // isNaN is the only thing in JS that is not equal to itself!
         
-        if (event.target.id == null) return;
-        if (event.target.className == null) return;
-
-        switch (event.target.id) {
-            case ADD:
-                addOption(fieldset, addBtn, submitBtn);
+        if ( e.target.id != null && idIsNaN ) {
+            switch (e.target.id) {
+                case ADD_OPTION:
+                    addNewOption(fieldset, addBtn);
                 break;
             case CANCEL_OPTION:
-                cancelNewOption(event);
+                    cancelNewOption(e);
+                    break;
+                case SELECTED_OPTION:
+                    closeWarning(e);
+                case SUBMIT:
+                    submit(e);
+                    break;
+                default:
+                    break;
+            }
+        }
+        if ( e.target.className != null && !idIsNaN ) {
+            switch (e.target.className) {
+                case FORM_OPTIONS:
+                    selectOption(e);
                 break;
             default:
                 break;
         }
     }
+    }
 
-    function addOption(fieldset, addBtn, submitBtn) {
+    function addNewOption(fieldset, addBtn) {
 
-        if (document.getElementById(NEW_OPTION)) return;
+        if (document.getElementById(SELECTED_OPTION)) return;
+        if (document.querySelector(".form__options.selected")) {
+            document.querySelector(".form__options.selected").className = "form__options";
+        } 
+
         
         const input = document.createElement("input"),
               cancelBtn = document.createElement("div"),
@@ -49,8 +70,7 @@ module.exports = function(event) {
 
         input.className = "form__wrapper__options";
         input.maxLength = 25;
-        input.setAttribute("name", "voted_option");
-        input.setAttribute("id", NEW_OPTION);
+        input.setAttribute("id", SELECTED_OPTION);
         input.name = "newOption";
 
         cancelBtn.className = "form__wrapper__cancel btn btn--medium btn--full";
@@ -62,6 +82,7 @@ module.exports = function(event) {
         wrapper.className = "form__wrapper";
 
         fieldset.insertBefore(wrapper, fieldset.lastChild);
+        fieldset.lastChild.value = "Submit Vote with My Option";
         input.focus();
     }
 
