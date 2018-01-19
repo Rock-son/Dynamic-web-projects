@@ -81,7 +81,7 @@ exports.managePollData = function(req, res, next, options) {
         if (!poll) {
             return res.render({"error": "No poll with url: " + id + " found!"});
         }
-        options.data =poll;
+        options.data =hideID(poll);
         return res.render("poll", options);
     });
 }
@@ -95,7 +95,21 @@ exports.showMyPolls = function(req, res, next, options) {
         if (!polls.length) {
             return res.render({"error": "No polls found!"});
         }
-        options.polls =polls;
+        options.polls =hideID(polls);
         return res.render("homePage", options);
     });
+}
+
+function hideID(json) {
+    
+    if (Array.isArray(json)) {
+
+        json.forEach((poll,index) => {
+            delete poll._id;
+            return json;
+        });
+    } else {
+        delete json._id;
+        return json;
+    }
 }
