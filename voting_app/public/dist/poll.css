@@ -704,6 +704,12 @@ body {
           font-weight: 700;
           color: #fff;
           background-color: #039e08; }
+        .container__left .form__options.selected {
+          -webkit-transform: scale(1.02);
+                  transform: scale(1.02);
+          font-weight: 700;
+          color: #fff;
+          background-color: #039e08; }
       .container__left .form__btn {
         display: inline-block;
         text-shadow: 0px 0px 1px black, 0px 0px 1px black;
@@ -731,8 +737,8 @@ body {
       .container__left .form__wrapper {
         display: inline-table;
         width: 100%;
-        -webkit-transition: all .5s;
-        transition: all .5s; }
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out; }
         .container__left .form__wrapper__options {
           margin: 1% 2% 1% 0;
           border-radius: 5px;
