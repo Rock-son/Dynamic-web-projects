@@ -86,7 +86,26 @@ module.exports = function(e) {
         input.focus();
     }
 
-    function cancelNewOption(event) {
+    function cancelNewOption(e) {
+                
+        const fieldset = e.target.parentNode.parentNode,
+              wrapper = e.target.parentNode;
+
+        if ( document.getElementById("warning") != null ) {
+              fieldset.removeChild(fieldset.lastChild.previousSibling); 
+        }
+        wrapper.style.width = "0px";
+        e.target.style.width = "0px";
+        e.target.style.color = "#fff";
+        e.target.style.textShadow = "none";
+
+        setTimeout(function() { wrapper.removeChild(wrapper.lastChild); }, 50);
+        setTimeout(function() { 
+            fieldset.removeChild(fieldset.lastChild.previousSibling); 
+            fieldset.lastChild.value = "Submit Vote";
+        }, 500);
+    }
+
         
         if (window.event) event = window.event;
         
