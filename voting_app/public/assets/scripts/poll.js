@@ -1,9 +1,12 @@
 'use strict'
 
 //const d3 = require("d3");
-const drawPlot = require("./modules/drawPlot");
+const drawPlot = require("./modules/drawPlot"),
+      formEventListeners = require("./modules/form.js");
 
 document.addEventListener("DOMContentLoaded", onContentLoaded);
+document.addEventListener("DOMContentLoaded", formEventListeners);
+
 
 
 // container object's width and height
@@ -22,7 +25,7 @@ document.addEventListener("DOMContentLoaded", onContentLoaded);
 
 
 // onload event listener callback function
-function onContentLoaded(response) {
+function onContentLoaded() {
   
   const poll = JSON.parse(document.getElementById("poll_data").value),
         data = poll.options.map((item, index) => { return {key: item[0], value: item[1]} }),
