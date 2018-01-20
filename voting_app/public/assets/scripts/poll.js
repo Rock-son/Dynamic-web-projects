@@ -114,6 +114,7 @@ function onContentLoaded() {
     
     self.attr("state", state);
     self.html(txt);
+    
     drawPlot.call(chart, {
                   data: sortedData,
                   x,

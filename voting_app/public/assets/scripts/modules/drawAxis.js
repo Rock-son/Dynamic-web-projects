@@ -18,6 +18,8 @@ module.exports = function drawAxis(params) {
             .style("text-anchor", "end")
             .attr("dx", -8)
             .attr("dy", 8)
+            .style("fill", function(d, i) {
+              return params.ordinalColorScale(i)})
             .attr("transform", "translate(0,0) rotate(-60)");
       this.append("g")
         .classed("y axis", true)
@@ -47,6 +49,8 @@ module.exports = function drawAxis(params) {
           .call(params.axis.x);
       this.selectAll(".x-axis-label")
           .style("text-anchor", "end")
+          .style("fill", function(d, i) {
+            return params.ordinalColorScale(i)})
           .attr("transform", "translate(0,0) rotate(-60)");
       this.selectAll("g.y.axis")
           .transition()
