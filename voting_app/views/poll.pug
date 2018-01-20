@@ -13,7 +13,8 @@ block content
                     each poll, index in data.options
                         .form__options(id=index)=poll[0]
                     input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
-                    input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Delete Poll")
+                    if data.createdBy == user
+                        input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Delete Poll")
                     input.form__submit(id="submit" type="submit" value="Submit Vote")
         .container__right
             #graph
