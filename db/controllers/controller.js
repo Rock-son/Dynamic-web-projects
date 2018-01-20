@@ -1,5 +1,3 @@
-import { basename } from "path";
-
 const { PollSchema } = require("../models/poll"),
         mongoSanitize = require("mongo-sanitize"),
         createHash = require("./modules/_createHash"),
@@ -46,56 +44,51 @@ exports.insertPollData = function(req, res, next) {
 // FOR VOTING SITE
 exports.updatePollOptions = function(req, res, next) {
 
-    const voted_option = xssFilters.inHTMLData(mongoSanitize( req.body.voted || "" ).trim()),
-          shouldPollBeDeleted = xssFilters.inHTMLData(mongoSanitize( req.body.delete_poll || !!0 )),          
-          id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.body.poll)),
-          username = req.user.username;
+    let voted_index = xssFilters.inHTMLData(mongoSanitize( req.body.voted || "" ).trim()),
+        shouldPollBeDeleted = !!xssFilters.inHTMLData(mongoSanitize(req.body.delete_poll || "")),
+        username = req.user.username,
+        id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.body.poll));
 
-    // DELETE POLL IF OPTED
-    if (shouldPollBeDeleted) {
-
-        PollSchema.findById({_id: id}, function(err, poll) {
-            if (err) next(err);
-
+    // TESTING FOR HTTP PARAMS POLLUTION
+    voted_index = Array.isArray(voted_index) ? voted_index.slice(-1)[0] : voted_index;
+    id = Array.isArray(id) ? id.slice(-1)[0] : id;
+    
+    PollSchema.findById({_id: id}, function(err, poll) {
+        if (err) next(err);
+        
+        if (shouldPollBeDeleted) {
+            // DELETE POLL ONLY IF OWNER
             if ( username === poll.createdBy ) {
                 PollSchema.remove({_id: id}, function(err) {
-                    if (err) next(err);                    
+                    if (err) next(err);
                     return res.status(302).set( { "Location": "./myPolls" } ).end();
                 });
             } else {
                 return res.status( 422 ).send( { error: "You are not the owner of the poll and can therefore not delete it!" } );
             }
-        });
-    }
-
-
-    // CHECK FOR ARRAYS, WHERE THERE SHOULD BE NONE!
-    voted_option = Array.isArray(voted_option) ? voted_option.slice(-1)[0] : voted_option;
-    id = Array.isArray(id) ? id.slice(-1)[0] : id;
-    
-    // CHECK IF EMPTY
-    if (createdBy == "") {
-        return res.redirect('/auth/login');  
-    } else if ( options.length === 0 || title === "" ) {
-        return res.status( 422 ).send( { error: "Sent form must include at least one voting option and title!" } );
-    }
-
-    const data = Date.now().toString() + Math.random().toString(),
-          opts = options.filter((item) => item !== "").map( (item) => [item, 0]),
-          url  = createHash("md5", data),
-          poll = new PollSchema({
-                    createdBy,
-                    title,
-                    options: opts, 
-                    url 
-                });
+        // UPDATE IN CASE USER HASN'T VOTED - VOTE +1
+        } else {
+            if ( poll.options[voted_index]) {
+                ++poll.options[voted_index][1];
+                poll.usersVoted.push(req.user.username || req.connection.remoteAddress);
                 
-    poll.save(function(err) {
-        if (err) return next(err)
-        
-        return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
+                PollSchema.update({_id: id}, poll, function(err) {
+                    if (err) return next(err)
+                    return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
+                });
+            } else {
+                return res.status( 422 ).send( { error: "Option you voted for does not exist!" } );
+            }
+        }    
     });
 }
+    /*TODO form.js
+                let txt;
+                if (confirm("Are You sure!?")) {
+                    txt = "You pressed OK!";
+                } else {
+                    txt = "You pressed Cancel!";
+                }*/
 
 // RETURN DATA FOR SPECIFIC POLL (/poll?url=j73jhn3s...)
 exports.showPollData = function(req, res, next, options) {
