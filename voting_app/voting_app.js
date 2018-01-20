@@ -41,10 +41,10 @@ var fs = require("fs"),
                 if (err) { return next(err) }
                 if (!user) { 
                     const options = { fetch: {}, cssPath: homeCSS, auth: false, user: "" };
-                    return db.showPolls(req, res, next, options);
+                    return db.showMyPolls(req, res, next, options);
                 }
                 const options = { fetch: {}, cssPath: homeCSS, auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
-                return db.showPolls(req, res, next, options);
+                return db.showMyPolls(req, res, next, options);
         })(req, res, next);
     });
 
@@ -71,16 +71,16 @@ var fs = require("fs"),
             passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                 if (err) { return next(err) }
 
-                if (!user) { 
+                if (!user) {
                     const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false };
-                    return db.managePollData(req, res, next, options);
+                    return db.showPollData(req, res, next, options);
                 } 
                 const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
-                return db.managePollData(req, res, next, options);
+                return db.showPollData(req, res, next, options);
             
             })(req, res, next);
         })
-        .post(csrfProtection, db.updatePollOptions);
+        .post(csrfProtection, ensureAuthenticated, db.updatePollOptions);
 
 
 
