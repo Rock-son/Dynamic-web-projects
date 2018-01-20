@@ -9,6 +9,7 @@ block content
                 fieldset#fs.form__fieldset
                     input(type="hidden" name="_csrf" value=csrfTkn)
                     input(type="hidden" name="voted" id="voted_option" value="null")
+                    input(type="hidden" name="poll" value=data.id)
                     each poll, index in data.options
                         .form__options(id=index)=poll[0]
                     input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
