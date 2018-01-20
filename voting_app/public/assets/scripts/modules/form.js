@@ -130,13 +130,14 @@ module.exports = function(e) {
         closeWarning(e);
 
         // PUT VALUE IN INPUT - which will be posted
-        voted_el.value = target_data.options[e.target.id][0];
+        voted_el.value = e.target.id;
 
         // WHEN SELECTING - deselect each item and close new option if exists
         const list = document.getElementsByClassName("form__options"),
               newOption = document.getElementById(NEW_OPTION),
               deleteOption = document.getElementById(DELETE),
               len = list.length;
+
         for (let i = 0; i < len; i++) { list.item(i).className = FORM_OPTIONS; }
         if (newOption || deleteOption) {document.getElementById(CANCEL_BTN).click();}
 
