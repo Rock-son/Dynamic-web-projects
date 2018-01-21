@@ -35,31 +35,32 @@
       background-color: #226c90;
     }
   }
-}
-@include atSmall {
-  #controls {
-    margin-top: -10%;
-    margin-left: 4%;
+  @include atSmall {
+    & {
+      margin-top: -10%;
+      margin-left: 4%;
+    }
+  }
+  @include atMedium{
+    & {
+      margin-top: -10%;
+      margin-left: 3%;
+    }
+  }
+  @include atLarge{
+    & {
+      margin-top: -6%;
+      margin-left: 3%;
+    }
+  }
+  @include atXLarge{
+    & {
+      margin-top: -4%;
+      margin-left: 1%;
+    }
   }
 }
-@include atMedium{
-  #controls {
-    margin-top: -5%;
-    margin-left: 3%;
-  }
-}
-@include atLarge{
-  #controls {
-    margin-top: -4%;
-    margin-left: 3%;
-  }
-}
-@include atXLarge{
-  #controls {
-    margin-top: -4%;
-    margin-left: 1%;
-  }
-}
+
 .chart-title {
   font-size: 2.5rem;
   font-variant: small-caps;

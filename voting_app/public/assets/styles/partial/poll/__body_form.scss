@@ -92,7 +92,7 @@
             border-radius: 5px;
             font-size: 1.2rem;
             line-height: 1.7rem;
-            width: 75%;
+            width: 70%;
             padding:  .5% 1%;
             color: #a9a9a9;
             letter-spacing: .5px;
@@ -141,6 +141,24 @@
             }
             &:after {
                 clear: both;
+            }
+        }
+        @include atMedium {
+            &__cancel {
+                float: left;
+            }            
+        }
+        @include atLarge {
+            &__cancel {
+                float: right;
+            }
+            &__options {
+                width: 65%;
+            }
+        }
+        @include atXLarge {
+            &__options {
+                width: 75%;
             }
         }
     }
