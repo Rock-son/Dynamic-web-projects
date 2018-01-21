@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", main);
 
   function main() {
 
+    document.getElementById("pollTitle").focus();
     document.getElementById("options_btn").addEventListener("click", addOption);
     document.getElementById("submit_btn").addEventListener("click", checkInputs);
 
@@ -75,12 +76,9 @@ function checkInputs(e) {
   }
 }
 
-
-
-
 function addOption(e) {
 
-    e.preventDefault();    
+    e.preventDefault();
     if (document.getElementById("new_option").value.trim() === "") {return};
     
     const parentNode = document.getElementById("new_option"),
@@ -116,20 +114,14 @@ function addOption(e) {
     document.getElementById("new_option").focus();  
 }
 
-
-
 function editInput(e) {
   e.target.parentNode.childNodes[0].readOnly = false;
   e.target.parentNode.childNodes[0].focus();
 }
 
-
-
 function onFocusLost(e) {
     e.target.readOnly = true;
 }
-
-
 
 function removeWrapper(e) {
   
