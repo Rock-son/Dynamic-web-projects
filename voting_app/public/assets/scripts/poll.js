@@ -73,7 +73,7 @@ function onContentLoaded() {
             .classed("display", true)
             .attr("transform", "translate(" + margin.left + ", " + margin.top + ")"),
 
-      controls = d3.select("#graph")
+      controls = d3.select(".container__right")
                   .append("div")
                   .attr("id", "controls"),
 
