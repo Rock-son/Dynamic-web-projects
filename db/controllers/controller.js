@@ -133,9 +133,12 @@ exports.showPollData = function(req, res, next, options) {
         if (!poll) {
             return res.send({"error": "No poll with url: " + id + " found!"});
         }
-        options.data = poll;        
+        options.data = poll;
+        options.encodedUrl = xssFilters.uriInDoubleQuotedAttr(req.protocol + "://" + req.get("host") + req.originalUrl);
+        options.title =xssFilters.uriInDoubleQuotedAttr(poll.title + " | fcc-voting");
         url_error != null ? (options.url_error = url_error) : null;
         chosenOption != null ? (options.chosen = chosenOption) : null;
+
         return res.render("poll", options);
     });
 }
