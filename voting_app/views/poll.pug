@@ -11,10 +11,13 @@ block content
                     input(type="hidden" name="poll" value=data.id)
                     .form__container
                         each poll, index in data.options
-                            .form__container__options(id=index)=poll[0]
-                    input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
+                            if poll[0] == chosen
+                                .form__container__options.selected(id=index)=poll[0]
+                            else
+                                .form__container__options(id=index)=poll[0]
+                    input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add")
                     if data.createdBy == user
-                        input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Delete Poll")
+                        input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Delete")
                     input.form__submit(id="submit" type="submit" value="Submit Vote")
         .container__right
             #graph
