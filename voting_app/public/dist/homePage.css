@@ -751,12 +751,14 @@ body {
       color: #fff;
       border-radius: 10px 10px 0 0;
       text-decoration: none;
+      -webkit-text-decoration: 0ox 0px 1px black, 0px 0px 1px black;
+              text-decoration: 0ox 0px 1px black, 0px 0px 1px black;
       -webkit-transition: color .2s ease-in-out;
       transition: color .2s ease-in-out; }
       .context__card__body__title:visited {
         color: #fff; }
       .context__card__body__title:hover {
-        color: #17f7ff; }
+        text-decoration: underline; }
     .context__card__body__container {
       display: inline-block;
       width: 100%; }
@@ -809,7 +811,7 @@ body {
       padding-left: 5%; }
       .context__card__footer__context span {
         font-size: 1rem;
-        color: #03A6E6;
+        color: #fff;
         font-family: "Vollkorn SC", Colibri, Arial, sans-serif; }
       .context__card__footer__context span.small {
         color: #555;

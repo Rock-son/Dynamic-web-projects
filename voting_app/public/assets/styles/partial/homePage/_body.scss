@@ -48,12 +48,13 @@
                 color: #fff;
                 border-radius: 10px 10px 0 0;
                 text-decoration: none;
+                text-decoration: 0ox 0px 1px black, 0px 0px 1px black;
                 transition: color .2s ease-in-out;
                 &:visited {
                     color: #fff;
                 }
                 &:hover {
-                    color: #17f7ff;
+                    text-decoration: underline;
                 }
             }
             &__container {
@@ -119,7 +120,7 @@
                 padding-left: 5%;
                 & span {
                     font-size: 1rem;
-                    color: #03A6E6;
+                    color: #fff;
                     font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
                 }
                 & span.small {
