@@ -1,5 +1,5 @@
 "use strict"
-console.log(process.env.HEROKU_RUN);
+
 if (process.env.HEROKU_RUN == null) {
       require("dotenv").config();
 }
