@@ -1,3 +1,4 @@
+
 const { PollSchema } = require("../models/poll"),
         mongoSanitize = require("mongo-sanitize"),
         createHash = require("./modules/_createHash"),
@@ -12,27 +13,26 @@ exports.insertPollData = function(req, res, next) {
 
     let createdBy = xssFilters.inHTMLData(mongoSanitize( req.body.createdBy || "" ).trim()),
           title = xssFilters.inHTMLData(mongoSanitize( req.body.poll_title || "" ).trim()),
-          optsArr = Array.isArray( req.body.options ) ? req.body.options : [req.body.options],          
-          options = optsArr.map( ( item ) => xssFilters.inHTMLData(mongoSanitize( item )) );
+          optsArr = Array.isArray( req.body.options ) ? req.body.options : [req.body.options], // check for HTTP POLLUTION
+          options = optsArr.map(item => xssFilters.inHTMLData(mongoSanitize(item))).filter(val => val !== "").map(item => [item, 0]); // check & return items and votes (0) in array
 
     // CHECK FOR ARRAYS, WHERE THERE SHOULD BE NONE!
     createdBy = Array.isArray(createdBy) ? createdBy.slice(-1)[0] : createdBy;
     title = Array.isArray(title) ? title.slice(-1)[0] : title;
 
     // CHECK IF EMPTY
-    if (createdBy == "") {
+    if (!createdBy) {
         return res.redirect('/auth/login');  
-    } else if ( options.length === 0 || title === "" ) {
+    } else if ( !options.length || !title ) {
         return res.status( 422 ).send( { error: "Sent form must include at least one voting option and title!" } );
     }
 
     const data = Date.now().toString() + Math.random().toString(),
-          opts = options.filter((item) => item !== "").map( (item) => [item, 0]),
           url  = createHash("md5", data),
           poll = new PollSchema({
                     createdBy,
                     title,
-                    options: opts, 
+                    options, 
                     url 
                 });
                 
@@ -42,51 +42,69 @@ exports.insertPollData = function(req, res, next) {
         return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
     });
 };
+
+
+
 // FOR VOTING SITE
 exports.updatePollOptions = function(req, res, next) {
 
-    let voted_index = xssFilters.inHTMLData(mongoSanitize( req.body.voted || "" ).trim()),
+    let voted_index = parseInt(xssFilters.inHTMLData(mongoSanitize( req.body.voted || 0 ).trim())),
         shouldPollBeDeleted = !!xssFilters.inHTMLData(mongoSanitize(req.body.delete_poll || "")),
-
-        username = req.user.username,
+        newOption = xssFilters.inHTMLData(mongoSanitize( req.body.newOption || "" ).trim()),
+        username = req.user.username || req.user.displayName || null,
         id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.body.poll));
 
     // TESTING FOR HTTP PARAMS POLLUTION
     voted_index = Array.isArray(voted_index) ? voted_index.slice(-1)[0] : voted_index;
+    newOption = Array.isArray(newOption) ? newOption.slice(-1)[0] : newOption;
     id = Array.isArray(id) ? id.slice(-1)[0] : id;
     
-    // RETURN POLL DATA: delete, update or reject vote
+    // DELETE, REJECT, UPDATE
     PollSchema.findById({_id: id}, function(err, poll) {
         if (err) next(err);
-        
+
+
+    // DELETE
         if (shouldPollBeDeleted) {
-            // ARCHIVE (only owner) TODO!!!!
             if ( username === poll.createdBy ) {
                 PollSchema.remove({_id: id}, function(err) {
                     if (err) next(err);
                     return res.status(302).set( { "Location": "./myPolls" } ).end();
                 });
             } else {
-                return res.status( 422 ).send( { error: "You are not the owner of the poll and can therefore not delete it!" } );
+                return res.status(302).set({"Location": "./poll?url=" + poll.url + "&err=" + xssFilters.uriComponentInDoubleQuotedAttr("You are not the owner of the poll!")}).end();
             }
         } else {
-            // UPDATE VOTE (anyone)
-            if ( poll.options[voted_index]) {
-                // IF USER ALREADY VOTED - TODO: reload with warning
-                if (poll.usersVoted.map(item => item[0]).indexOf(req.user.username || "") > -1 || poll.usersVoted.map(item => item[1]).indexOf(getClientIp(req)) > -1 ) {
-                    return res.status( 422 ).send( { error: "You have already voted!" } );
+            
+    // REJECT if too many OPTIONS
+            if (poll.options.length >= 20 && newOption) {return res.status(302).set({"Location": "./poll?url=" + poll.url + "&err=" + xssFilters.uriComponentInDoubleQuotedAttr("The poll has exceeded max options (20) - no new options allowed!")}).end();}
+            
+
+    // UPDATE VOTE (anyone)
+            if ( poll.options[voted_index] ) {
+                
+                if (searchArrayOfArrays(poll.usersVoted, 0, username) || searchArrayOfArrays(poll.options, 1, getClientIp(req)) ) {
+                    return res.status(302).set({"Location": "./poll?url=" + poll.url + "&err=" + xssFilters.uriComponentInDoubleQuotedAttr("You have already voted!")}).end();
                 }
                 ++poll.options[voted_index][1];
-                poll.usersVoted.push([req.user.username || 0, getClientIp(req)]);
+                poll.usersVoted.push([username, getClientIp(req)]);
                 
                 PollSchema.update({_id: id}, poll, function(err) {
                     if (err) return next(err)
                     return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
                 });
-            } else {                
-                // UPDATE - AND VOTE WITH NEW OPTION
-                poll.options.push([voted_index, 1]);
-                poll.usersVoted.push([req.user.username || 0, getClientIp(req)]);
+            } else if (newOption){
+
+
+                
+    // UPDATE NEW OPTION (CHECK EXISTENCE)
+                if (searchArrayOfArrays(poll.options, 0, newOption)) {
+                    const index = poll.options.map(item => item[0]).indexOf(newOption);
+                    return res.status(302).set({"Location": "./poll?url=" + poll.url + "&err=" + xssFilters.uriComponentInDoubleQuotedAttr("Option already existed, no change was made!")}).end();
+                } else {
+                    poll.options.unshift([newOption, 0]);
+                }
+                
                 PollSchema.update({_id: id}, poll, function(err) {
                     if (err) return next(err)
                     return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
@@ -124,34 +142,6 @@ exports.showPollData = function(req, res, next, options) {
     });
 }
 
-// SHOWING A USER HIS POLLS
-exports.showMyPolls = function(req, res, next, options) {
-
-    PollSchema.find(options.fetch, function(err, polls) {
-        if (err) next(err);
-        
-        if (!polls.length) {
-            return res.render({"error": "No polls found!"});
-        }
-        options.polls =polls;
-        return res.render("homePage", options);
-    });
-}
-
-function hideID(json) {
-        
-    if (Array.isArray(json)) {
-        let result = [];
-        json.forEach((poll,index) => {
-            delete poll._doc._id;
-            result.push(poll._doc);
-        });
-        return result;
-    } else {
-        delete json._doc._id;
-        return json._doc;
-    }
-}
 
 
 
