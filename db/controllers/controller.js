@@ -142,3 +142,49 @@ function hideID(json) {
         return json._doc;
     }
 }
+
+
+
+// SHOWING A USER HIS POLLS
+exports.showMyPolls = function(req, res, next, options) {
+
+    PollSchema.find(options.fetch, function(err, polls) {
+        if (err) next(err);
+        
+        if (!polls.length) {
+            return res.render("homePage", options);
+        }
+        options.polls =polls;
+        return res.render("homePage", options);
+    });
+}
+
+function hideID(json) {
+        
+    if (Array.isArray(json)) {
+        let result = [];
+        json.forEach((poll,index) => {
+            delete poll._doc._id;
+            result.push(poll._doc);
+        });
+        return result;
+    } else {
+        delete json._doc._id;
+        return json._doc;
+    }
+}
+
+/**
+ * 
+ * @param {[[any, any]]} arr - array of arrays [ [String, Number] ]
+ * @param {Number} index - index of String value
+ * @param {String} searchStr - String to search
+ */
+function searchArrayOfArrays(arr, index, searchStr) {
+    
+    if (!arr || !searchStr) {
+        return false;
+    }
+
+    return !!arr.filter(val => val[index] === searchStr).length;
+}
