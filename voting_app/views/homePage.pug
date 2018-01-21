@@ -13,9 +13,8 @@ block content
                         .context__card__body__container__left                
                             ul.items                        
                                 each val in poll.options
-                                    a.btn.btn--empty.btn--large(href="#")=val[0]
+                                    a.btn.btn--empty.btn--large(href="./poll?url=" + poll.url + "&chosen=" + val[0])=val[0]
                         .context__card__body__container__middle
-                            a.btn.btn--medium.btn--full.hidden(href="./poll?url=" + poll.url) Submit vote
                         .context__card__body__container__right
                             .label Votes:
                             .votes=poll.usersVoted.length              
