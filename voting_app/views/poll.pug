@@ -2,7 +2,6 @@ extends includes/head.pug
 
 block content
     include includes/navbar.pug
-
     section.container
         .container__left
             form.form(action="/voting-app/poll" method="post" id="poll_form")
@@ -10,15 +9,18 @@ block content
                     input(type="hidden" name="_csrf" value=csrfTkn)
                     input(type="hidden" name="voted" id="voted_option" value="null")
                     input(type="hidden" name="poll" value=data.id)
-                    each poll, index in data.options
-                        .form__options(id=index)=poll[0]
+                    .form__container
+                        each poll, index in data.options
+                            .form__container__options(id=index)=poll[0]
                     input.form__btn.btn.btn--large.btn--full(id="add" type="button" value="Add Option")
                     if data.createdBy == user
-                        input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Archive Poll")
+                        input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Delete Poll")
                     input.form__submit(id="submit" type="submit" value="Submit Vote")
         .container__right
             #graph
         input(id="poll_data" type="hidden" value=data)
+        if url_error != null
+            #error=url_error
     include includes/footer.pug
     script(type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js")
     script(type="text/javascript" src=js )
