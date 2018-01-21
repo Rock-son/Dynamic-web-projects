@@ -24,7 +24,7 @@ module.exports = function(e) {
 
         const fieldset = document.getElementById(FIELDSET),
               id = parseInt(e.target.id != null ? e.target.id : 0),
-              idIsNaN = !(id === id); // isNaN is the only thing in JS that is not equal to itself!
+              idIsNaN = isNaN(id); // isNaN is the only thing in JS that is not equal to itself!
         
         if ( e.target.id != null && idIsNaN ) {
             switch (e.target.id) {
@@ -94,7 +94,6 @@ module.exports = function(e) {
         wrapper.className = "form__wrapper";
 
         fieldset.insertBefore(wrapper, fieldset.lastChild);
-        fieldset.lastChild.value = "Submit Vote with My Option";
         input.focus();
     }
 
@@ -158,10 +157,10 @@ module.exports = function(e) {
         const EMPTY_NEW_OPTION = "empty", NO_VALUE = "no_value";
 
         let doc = null;
-        // IF NEW INPUT EXISTS AND (IS NOT ZERO): SET VAL ELSE ERROR
+        // IF NEW INPUT EXISTS: set val else error
         if ((doc = document.getElementById(NEW_OPTION)) != null) {
             if (doc.value !== "") {
-                document.getElementById(SUBMIT_DATA).value = doc.value;
+                document.getElementById(SUBMIT_DATA).value = 100;
             } else if (doc.value === "" && e.target.id !== "new_option") {
                 e.preventDefault();
                 document.getElementsByClassName("warning").length > 0 ? void 0 : showError(EMPTY_NEW_OPTION);
