@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", formEventListeners);
       },
       width = w - margin.left - margin.right,
       height = h - margin.top - margin.bottom;
-console.log(w, h);
 
 
 // onload event listener callback function
