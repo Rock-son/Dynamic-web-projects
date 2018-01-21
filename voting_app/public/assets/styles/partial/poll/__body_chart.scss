@@ -1,4 +1,22 @@
 
+.twitter {
+  position: absolute;
+  z-index: 10;
+  color: #fff;
+  background-color: #1da1f2;
+  font-size: 1rem;
+  margin-top: .1rem;
+  margin-left: .8rem;
+  padding: 5px 20px;
+  border-radius: 5px;
+  &__font {
+    font-size: 1rem;
+    padding-bottom: .3rem;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
 #graph {
   opacity: .95;
   width: 98%;
@@ -21,10 +39,13 @@
   }
 }
 #controls {
-  margin-top: -8%;
-  margin-left: 4%;
+  position: absolute;
+  z-index: 20;
+  margin-top: -40px;
+  margin-left: 10px;
   & button {
-    padding: 6px;
+    font-size: 1rem;
+    padding: .3rem 1rem;
     background-color: #0094da;
     color: #eee;
     border-radius: 5px;
@@ -35,28 +56,16 @@
       background-color: #226c90;
     }
   }
-  @include atSmall {
-    & {
-      margin-top: -10%;
-      margin-left: 4%;
-    }
-  }
   @include atMedium{
     & {
-      margin-top: -10%;
-      margin-left: 3%;
-    }
-  }
-  @include atLarge{
-    & {
-      margin-top: -6%;
-      margin-left: 3%;
+      margin-top: -40px;
+      margin-left: 20px;
     }
   }
   @include atXLarge{
     & {
-      margin-top: -4%;
-      margin-left: 1%;
+      margin-top: -40px;
+      margin-left: 10px;
     }
   }
 }

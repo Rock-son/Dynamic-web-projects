@@ -857,6 +857,21 @@ body {
     vertical-align: top;
     margin: 5% auto 0 auto;
     padding-bottom: 2rem; }
+    .container__right .twitter {
+      position: absolute;
+      z-index: 10;
+      color: #fff;
+      background-color: #1da1f2;
+      font-size: 1rem;
+      margin-top: .1rem;
+      margin-left: .8rem;
+      padding: 5px 20px;
+      border-radius: 5px; }
+      .container__right .twitter__font {
+        font-size: 1rem;
+        padding-bottom: .3rem; }
+      .container__right .twitter:hover {
+        cursor: pointer; }
     .container__right #graph {
       opacity: .95;
       width: 98%; }
@@ -875,10 +890,13 @@ body {
       .container__right #graph {
         width: 100%; } }
     .container__right #controls {
-      margin-top: -8%;
-      margin-left: 4%; }
+      position: absolute;
+      z-index: 20;
+      margin-top: -40px;
+      margin-left: 10px; }
       .container__right #controls button {
-        padding: 6px;
+        font-size: 1rem;
+        padding: .3rem 1rem;
         background-color: #0094da;
         color: #eee;
         border-radius: 5px;
@@ -888,22 +906,14 @@ body {
         .container__right #controls button:hover {
           cursor: pointer;
           background-color: #226c90; }
-      @media (min-width: 500px) {
-        .container__right #controls {
-          margin-top: -10%;
-          margin-left: 4%; } }
       @media (min-width: 660px) {
         .container__right #controls {
-          margin-top: -10%;
-          margin-left: 3%; } }
-      @media (min-width: 1000px) {
-        .container__right #controls {
-          margin-top: -6%;
-          margin-left: 3%; } }
+          margin-top: -40px;
+          margin-left: 20px; } }
       @media (min-width: 1500px) {
         .container__right #controls {
-          margin-top: -4%;
-          margin-left: 1%; } }
+          margin-top: -40px;
+          margin-left: 10px; } }
     .container__right .chart-title {
       font-size: 2.5rem;
       font-variant: small-caps;
