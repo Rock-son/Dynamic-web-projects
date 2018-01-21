@@ -102,8 +102,7 @@ module.exports = function(e) {
                 
         const fieldset = e.target.parentNode.parentNode,
               wrapper = e.target.parentNode;
-
-        if ( document.getElementById("warning") != null ) {
+        if ( document.getElementsByClassName("warning").length > 0 ) {
               fieldset.removeChild(fieldset.lastChild.previousSibling); 
         }
         wrapper.style.width = "0px";
@@ -149,7 +148,7 @@ module.exports = function(e) {
 
         let fieldset = document.getElementById("fs");
         
-        if (document.getElementById("warning") != null) {
+        if (document.getElementsByClassName("warning").length > 0) {
             fieldset.removeChild(fieldset.lastChild.previousSibling); 
         }
     }
@@ -165,20 +164,19 @@ module.exports = function(e) {
                 document.getElementById(SUBMIT_DATA).value = doc.value;
             } else if (doc.value === "" && e.target.id !== "new_option") {
                 e.preventDefault();
-                e.target.previousSibling.id === "warning" ? void 0 : showError(EMPTY_NEW_OPTION);
+                document.getElementsByClassName("warning").length > 0 ? void 0 : showError(EMPTY_NEW_OPTION);
             }
         // ELSE CHECK ACTIVE VALUE OR EXISTANCE OF DELETE COMMAND
         } else if (!document.querySelector(".form__options.selected") && document.getElementById(SUBMIT_DATA).value !== "delete") {
                 e.preventDefault();
-                e.target.previousSibling.id === "warning" ? void 0 : showError(NO_VALUE);
+                document.getElementsByClassName("warning").length > 0 ? void 0 : showError(NO_VALUE);
         }
-        console.log(document.getElementById(SUBMIT_DATA).value);
                 function showError(type) {
 
                     const fieldset = document.getElementById("fs"),
                             error = document.createElement("div");
 
-                    error.setAttribute("id", "warning");
+                    error.className = "warning";
                     error.style.color = "red";
                     switch (type) {
                         case EMPTY_NEW_OPTION:
@@ -216,7 +214,7 @@ module.exports = function(e) {
               wrapper = document.createElement("div");
 
         input.className = "form__wrapper__delete btn btn--medium btn--full";
-        input.value = "Go ahead!"
+        input.value = "Archive!"
         input.name = "delete_poll"
         input.setAttribute("id", DELETE);
 
