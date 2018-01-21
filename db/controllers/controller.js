@@ -2,6 +2,7 @@ const { PollSchema } = require("../models/poll"),
         mongoSanitize = require("mongo-sanitize"),
         createHash = require("./modules/_createHash"),
         xssFilters = require("xss-filters"),
+        getClientIp = require("./modules/getIp"),
         // PASSPORT
         passport = require("passport");
 
@@ -66,29 +67,25 @@ exports.updatePollOptions = function(req, res, next) {
             } else {
                 return res.status( 422 ).send( { error: "You are not the owner of the poll and can therefore not delete it!" } );
             }
-        // UPDATE IN CASE USER HASN'T VOTED - VOTE +1
+        // IN CASE USER HASN'T VOTED - VOTE +1
         } else {
             if ( poll.options[voted_index]) {
-                ++poll.options[voted_index][1];
-                poll.usersVoted.push(req.user.username || req.connection.remoteAddress);
+
+                poll.options[voted_index][1] += 1;
+                poll.usersVoted.push([req.user.username || "", getClientIp(req)]);
                 
                 PollSchema.update({_id: id}, poll, function(err) {
                     if (err) return next(err)
                     return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
                 });
             } else {
+                // TODO: add new option
                 return res.status( 422 ).send( { error: "Option you voted for does not exist!" } );
             }
         }    
     });
 }
-    /*TODO form.js
-                let txt;
-                if (confirm("Are You sure!?")) {
-                    txt = "You pressed OK!";
-                } else {
-                    txt = "You pressed Cancel!";
-                }*/
+
 
 // RETURN DATA FOR SPECIFIC POLL (/poll?url=j73jhn3s...)
 exports.showPollData = function(req, res, next, options) {
