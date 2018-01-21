@@ -10,7 +10,7 @@ module.exports = function(e) {
           SUBMIT_DATA = "voted_option",
           FIELDSET = "fs",
           WARNING = "warning",
-          FORM_OPTIONS = "form__options";
+          FORM_OPTIONS = "form__container__options";
 
     document.getElementById("poll_form").addEventListener("click", activateOptions);
 
@@ -71,8 +71,8 @@ module.exports = function(e) {
             document.getElementById(CANCEL_BTN).click();
             return;
         }
-        if (document.querySelector(".form__options.selected")) {
-            document.querySelector(".form__options.selected").className = "form__options";
+        if (document.querySelector(".form__container__options.selected")) {
+            document.querySelector(".form__container__options.selected").className = "form__container__options";
         } 
         closeWarning(e);
 
@@ -132,7 +132,7 @@ module.exports = function(e) {
         voted_el.value = e.target.id;
 
         // WHEN SELECTING - deselect each item and close new option if exists
-        const list = document.getElementsByClassName("form__options"),
+        const list = document.getElementsByClassName("form__container__options"),
               newOption = document.getElementById(NEW_OPTION),
               deleteOption = document.getElementById(DELETE),
               len = list.length;
@@ -167,7 +167,7 @@ module.exports = function(e) {
                 document.getElementsByClassName("warning").length > 0 ? void 0 : showError(EMPTY_NEW_OPTION);
             }
         // ELSE CHECK ACTIVE VALUE OR EXISTANCE OF DELETE COMMAND
-        } else if (!document.querySelector(".form__options.selected") && document.getElementById(SUBMIT_DATA).value !== "delete") {
+        } else if (!document.querySelector(".form__container__options.selected") && document.getElementById(SUBMIT_DATA).value !== "delete") {
                 e.preventDefault();
                 document.getElementsByClassName("warning").length > 0 ? void 0 : showError(NO_VALUE);
         }
@@ -205,8 +205,8 @@ module.exports = function(e) {
         if (document.getElementById(DELETE)) return;
 
         // DESELECT ANY SELECTED OPTIONS
-        if (document.querySelector(".form__options.selected")) {
-            document.querySelector(".form__options.selected").className = "form__options";
+        if (document.querySelector(".form__container__options.selected")) {
+            document.querySelector(".form__container__options.selected").className = "form__container__options";
         } 
 
         const input = document.createElement("input"),
@@ -214,7 +214,7 @@ module.exports = function(e) {
               wrapper = document.createElement("div");
 
         input.className = "form__wrapper__delete btn btn--medium btn--full";
-        input.value = "Archive!"
+        input.value = "Delete"
         input.name = "delete_poll"
         input.setAttribute("id", DELETE);
 
