@@ -24,19 +24,12 @@
 
 @include atMedium{
   .container__left {
-      width: 80%;
+      width: 60%;
       margin: 10% auto;
   }
 }
 
 @include atLarge{
-    .container__left {
-        width: 60%;
-        margin: 10% auto;
-    }
-}
-
-@include atXLarge{
     .container__left {
         display: inline-table;
         vertical-align: top;
@@ -45,7 +38,6 @@
     }
     .container__right {
         width: 70%;
-        margin: 3% auto;
-        
+        margin: 3% auto;        
     }
 }
