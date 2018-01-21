@@ -97,19 +97,29 @@ exports.updatePollOptions = function(req, res, next) {
 }
 
 
+
+
+
 // RETURN DATA FOR SPECIFIC POLL (/poll?url=j73jhn3s...)
 exports.showPollData = function(req, res, next, options) {
     
     const url = Array.isArray(req.query.url) ? req.query.url.slice(-1)[0] : req.query.url,
+          check_err = xssFilters.inHTMLData(req.query.err || ""),
+          check_chosen = xssFilters.inHTMLData(req.query.chosen || ""),
+          url_error = check_err ? (Array.isArray(req.query.err || "") ? xssFilters.inHTMLData(req.query.err.slice(-1)[0]) : xssFilters.inHTMLData(req.query.err || "")) : null,
+          chosenOption = check_chosen ? (Array.isArray(req.query.chosen || "") ? xssFilters.inHTMLData(req.query.chosen.slice(-1)[0]) : xssFilters.inHTMLData(req.query.chosen || "")) : null,
           id = xssFilters.uriComponentInHTMLData(mongoSanitize(url));
     
     PollSchema.findOne({url: id}, function(err, poll) {
         if (err) next(err);
         
         if (!poll) {
-            return res.render({"error": "No poll with url: " + id + " found!"});
+            return res.send({"error": "No poll with url: " + id + " found!"});
         }
-        options.data =poll;
+        options.data = poll;        
+        url_error != null ? (options.url_error = url_error) : null;
+        chosenOption != null ? (options.chosen = chosenOption) : null;
+        console.log(chosenOption);
         return res.render("poll", options);
     });
 }
