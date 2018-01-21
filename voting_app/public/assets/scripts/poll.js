@@ -11,16 +11,15 @@ document.addEventListener("DOMContentLoaded", formEventListeners);
 
 // container object's width and height
   const winSize = +window.innerWidth
-	var w = +window.innerWidth > 999 ? +window.innerWidth * .7 : +window.innerWidth,
-      h = +window.innerHeight / 1.2,
-      margin =  {
-          top: 100,
-          bottom: 120,
-          left: +window.innerWidth < 999 ? 40 : 80,
-          right: 20
-      },
-      width = w - margin.left - margin.right,
-      height = h - margin.top - margin.bottom;
+	var w = +window.innerWidth > 660 ? +window.innerWidth * .7 : +window.innerWidth,
+          h = +window.innerHeight / 1.2,
+          margin = { top: 100,
+                     bottom: 120,
+                     left: +window.innerWidth < 999 ? 40 : 80,
+                     right: 20
+          },
+          width = w - margin.left - margin.right,
+          height = h - margin.top - margin.bottom;
 
 
 // onload event listener callback function
