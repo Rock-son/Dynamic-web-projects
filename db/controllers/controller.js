@@ -10,7 +10,7 @@ const { PollSchema } = require("../models/poll"),
 // CREATE NEW POLL
 exports.insertPollData = function(req, res, next) {
 
-    const createdBy = xssFilters.inHTMLData(mongoSanitize( req.body.createdBy || "" ).trim()),
+    let createdBy = xssFilters.inHTMLData(mongoSanitize( req.body.createdBy || "" ).trim()),
           title = xssFilters.inHTMLData(mongoSanitize( req.body.poll_title || "" ).trim()),
           optsArr = Array.isArray( req.body.options ) ? req.body.options : [req.body.options],          
           options = optsArr.map( ( item ) => xssFilters.inHTMLData(mongoSanitize( item )) );
@@ -47,6 +47,7 @@ exports.updatePollOptions = function(req, res, next) {
 
     let voted_index = xssFilters.inHTMLData(mongoSanitize( req.body.voted || "" ).trim()),
         shouldPollBeDeleted = !!xssFilters.inHTMLData(mongoSanitize(req.body.delete_poll || "")),
+
         username = req.user.username,
         id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.body.poll));
 
@@ -54,11 +55,12 @@ exports.updatePollOptions = function(req, res, next) {
     voted_index = Array.isArray(voted_index) ? voted_index.slice(-1)[0] : voted_index;
     id = Array.isArray(id) ? id.slice(-1)[0] : id;
     
+    // RETURN POLL DATA: delete, update or reject vote
     PollSchema.findById({_id: id}, function(err, poll) {
         if (err) next(err);
         
         if (shouldPollBeDeleted) {
-            // DELETE POLL ONLY IF OWNER
+            // ARCHIVE (only owner) TODO!!!!
             if ( username === poll.createdBy ) {
                 PollSchema.remove({_id: id}, function(err) {
                     if (err) next(err);
@@ -67,20 +69,28 @@ exports.updatePollOptions = function(req, res, next) {
             } else {
                 return res.status( 422 ).send( { error: "You are not the owner of the poll and can therefore not delete it!" } );
             }
-        // IN CASE USER HASN'T VOTED - VOTE +1
         } else {
+            // UPDATE VOTE (anyone)
             if ( poll.options[voted_index]) {
-
-                poll.options[voted_index][1] += 1;
-                poll.usersVoted.push([req.user.username || "", getClientIp(req)]);
+                // IF USER ALREADY VOTED - TODO: reload with warning
+                if (poll.usersVoted.map(item => item[0]).indexOf(req.user.username || "") > -1 || poll.usersVoted.map(item => item[1]).indexOf(getClientIp(req)) > -1 ) {
+                    return res.status( 422 ).send( { error: "You have already voted!" } );
+                }
+                ++poll.options[voted_index][1];
+                poll.usersVoted.push([req.user.username || 0, getClientIp(req)]);
                 
                 PollSchema.update({_id: id}, poll, function(err) {
                     if (err) return next(err)
                     return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
                 });
-            } else {
-                // TODO: add new option
-                return res.status( 422 ).send( { error: "Option you voted for does not exist!" } );
+            } else {                
+                // UPDATE - AND VOTE WITH NEW OPTION
+                poll.options.push([voted_index, 1]);
+                poll.usersVoted.push([req.user.username || 0, getClientIp(req)]);
+                PollSchema.update({_id: id}, poll, function(err) {
+                    if (err) return next(err)
+                    return res.status(302).set({"Location": "./poll?url=" + poll.url}).end();
+                });
             }
         }    
     });
