@@ -1,7 +1,7 @@
 .context {
     height: 100vh;
     width: 100vw;
-    font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+    font-family: "Vollkorn SC", Arial, sans-serif;
     font-size: 1rem;
     text-align: center;
     background: #333 url($votingAppUrl) no-repeat center center fixed;
@@ -112,7 +112,7 @@
                 margin: 0;
             }
             &__context {                
-                font-family: Colibri, Arial, sans-serif;
+                font-family: Arial, sans-serif;
                 font-size: .8rem;
                 font-variant: inherit;
                 color: #555;                
@@ -121,11 +121,11 @@
                 & span {
                     font-size: 1rem;
                     color: #fff;
-                    font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+                    font-family: "Vollkorn SC", Arial, sans-serif;
                 }
                 & span.small {
                     color: #555;
-                    font-family: Colibri, Arial, sans-serif;
+                    font-family:  Arial, sans-serif;
                     font-variant: normal;
                     font-size: .8rem;
                 }
