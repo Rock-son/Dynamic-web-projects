@@ -1,10 +1,10 @@
 
 #graph {
   opacity: .95;
+  width: 98%;
 }
 #chart{
-	background-color: rgb(206, 211, 214);
-	background-color: rgba(206, 211, 214, .2);
+	background-color: #e8edf1;
 	border: 1px outset #CCC;
   height: 88vh;
   width: 98%;
@@ -13,9 +13,11 @@
 }
 @include atXLarge {
   #chart {
-      width: 95%;
-      margin: auto;
-      
+      width: 100%;
+      margin: auto;      
+  }
+  #graph {
+    width: 100%;    
   }
 }
 #controls {

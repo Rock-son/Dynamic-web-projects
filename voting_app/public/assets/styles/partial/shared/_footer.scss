@@ -1,14 +1,15 @@
 .footer {
     position: fixed;
+    z-index: 0;
     bottom: 0;
     right: 0;
     left: 0;
     height: 3vh;
+    width: 50%;
     margin: 0 auto;
     font-size: .8rem;
     color: #333;
     text-align: center;
-    margin: 0 auto;
     background-color: transparent;
     &__codedby {
         position: relative;
@@ -17,7 +18,7 @@
         color: inherit;
         text-align: center;
         margin: 0 auto;
-        font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+        font-family: "Roboto Condensed", Arial, sans-serif;
         background-color: transparent;
         .fa-heart-o {
             color: red;

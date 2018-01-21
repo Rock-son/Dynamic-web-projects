@@ -1,31 +1,66 @@
+
+#error {
+    position: absolute;
+    z-index: 10;
+    width: 70%;
+    font-size: 2em;
+    font-weight: 700;
+    padding: 1rem 0;
+    font-family: Roboto, Calibri, sans-serif, Arial;
+    background-color: red;
+    color: white;
+    text-align: center;
+    border-radius: 2em;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 1;
+    margin: 15% auto;
+    text-shadow: 1px 1px black, 1px 1px 3px black, 1px 1px 25px white;
+    transition: opacity .8s;
+}
+
 .container {
     display: inline-table;
     height: 100vh;
     width: 100vw;
-    font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+    font-family: "Vollkorn SC", Calibri, Arial, sans-serif;
     font-size: 1rem;   
     background-size: cover;
-    background-color: #fdfdfd;
-    z-index: -1;
+    background-color: #fff;
     &__left {
+        position: relative;
+        z-index: 1;
         display: block;
         width: 97%;
-        margin: 20% 0;
+        margin: 20% auto 0 auto;
         @import "./__body_form.scss";
     }
     &__right {
+        position: relative;
+        z-index: 1;
         display: inline-table;
         width: 99%;
         vertical-align: top;
-        margin-top: 5%;
+        margin: 5% auto 0 auto;
+        padding-bottom: 2rem;;
         @import "./__body_chart.scss";
     }    
 }
+@include atSmall {
+    #error {
+        margin: 10% auto;
+    }
+}
+
 
 @include atMedium{
   .container__left {
       width: 60%;
-      margin: 10% auto;
+      margin-top: 10%;
+  }
+  #error {
+    margin: 5% auto;
   }
 }
 
@@ -34,10 +69,26 @@
         display: inline-table;
         vertical-align: top;
         width: 29%;
-        margin: 3% auto;
+        margin-top: 6%;
     }
     .container__right {
         width: 70%;
-        margin: 3% auto;        
+        margin-top: 6%;        
+    }
+    #error {
+      margin-top: 6%;
+    }
+}
+
+@include atXLarge{
+    .container__left {
+        margin-top: 3%;
+    }
+    .container__right {
+        width: 70%;
+        margin-top: 3%;        
+    }
+    #error {
+      margin: 2% auto;
     }
 }

@@ -64,6 +64,8 @@ $path: "/public/assets";
   }
 
 body {
+    position: relative;
+    z-index: -1;
     height: 99vh;
     width: 100vw;
     min-width: 530px;
