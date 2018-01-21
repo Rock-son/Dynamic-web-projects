@@ -925,15 +925,10 @@ body {
 
 @media (min-width: 660px) {
   .container__left {
-    width: 80%;
-    margin: 10% auto; } }
-
-@media (min-width: 1000px) {
-  .container__left {
     width: 60%;
     margin: 10% auto; } }
 
-@media (min-width: 1500px) {
+@media (min-width: 1000px) {
   .container__left {
     display: inline-table;
     vertical-align: top;
