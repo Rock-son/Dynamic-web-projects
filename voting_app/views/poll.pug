@@ -20,6 +20,8 @@ block content
                         input.form__btn.btn.btn--large.btn--full(id="delete_btn" type="button" value="Delete")
                     input.form__submit(id="submit" type="submit" value="Submit Vote")
         .container__right
+            a.twitter(href="https://twitter.com/intent/tweet?url=" + encodedUrl + "&text=" + title + "&original_referer=" + encodedUrl )
+                i(class="fa fa-twitter fa-lg twitter__font" title="Twitter") &nbspShare on Twitter
             #graph
         input(id="poll_data" type="hidden" value=data)
         if url_error != null
