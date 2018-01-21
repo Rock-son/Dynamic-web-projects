@@ -45,7 +45,7 @@ module.exports = function drawPlot(params) {
         .attr("dx", 0)
         .attr("y", function(d,i) {return params.y(d.value)})
         .attr("dy", function(d,i) {return d.value < 1 ? -10 : 50})
-        .style("fill", function(d,i) {return d.value < 1 ? "red" : "white"})
+        .style("fill", function(d,i) {return d.value < 1 ? "rgba(255,255,255,0)" : "white"})
         .text(function(d, i) {
           return d.value
         });
