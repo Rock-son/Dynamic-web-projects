@@ -80,7 +80,18 @@ var fs = require("fs"),
             
             })(req, res, next);
         })
-        .post(ensureAuthenticated, csrfProtection, db.updatePollOptions);
+        .post(csrfProtection, function(req, res, next) {
+            passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
+                if (err) { return next(err) }
+
+                if (!user) {
+                    return db.updatePollOptions(req, res, next, null);
+                }
+
+                return db.updatePollOptions(req, res, next, user);
+
+            })(req, res, next);
+        });
 
 
 

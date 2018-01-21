@@ -46,12 +46,12 @@ exports.insertPollData = function(req, res, next) {
 
 
 // FOR VOTING SITE
-exports.updatePollOptions = function(req, res, next) {
+exports.updatePollOptions = function(req, res, next, user) {
 
     let voted_index = parseInt(xssFilters.inHTMLData(mongoSanitize( req.body.voted || 0 ).trim())),
         shouldPollBeDeleted = !!xssFilters.inHTMLData(mongoSanitize(req.body.delete_poll || "")),
         newOption = xssFilters.inHTMLData(mongoSanitize( req.body.newOption || "" ).trim()),
-        username = req.user.username || req.user.displayName || null,
+        username = req.user ? (xssFilters.inHTMLData(req.user.username) || xssFilters.inHTMLData(req.user.displayName)) : null,
         id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.body.poll));
 
     // TESTING FOR HTTP PARAMS POLLUTION
@@ -82,8 +82,7 @@ exports.updatePollOptions = function(req, res, next) {
 
     // UPDATE VOTE (anyone)
             if ( poll.options[voted_index] ) {
-                
-                if (searchArrayOfArrays(poll.usersVoted, 0, username) || searchArrayOfArrays(poll.options, 1, getClientIp(req)) ) {
+                if (searchArrayOfArrays(poll.usersVoted, 0, username) || searchArrayOfArrays(poll.usersVoted, 1, getClientIp(req)) ) {
                     return res.status(302).set({"Location": "./poll?url=" + poll.url + "&err=" + xssFilters.uriComponentInDoubleQuotedAttr("You have already voted!")}).end();
                 }
                 ++poll.options[voted_index][1];
@@ -137,7 +136,6 @@ exports.showPollData = function(req, res, next, options) {
         options.data = poll;        
         url_error != null ? (options.url_error = url_error) : null;
         chosenOption != null ? (options.chosen = chosenOption) : null;
-        console.log(chosenOption);
         return res.render("poll", options);
     });
 }
@@ -151,7 +149,7 @@ exports.showMyPolls = function(req, res, next, options) {
     PollSchema.find(options.fetch, function(err, polls) {
         if (err) next(err);
         
-        if (!polls.length) {
+        if (!polls) {
             return res.render("homePage", options);
         }
         options.polls =polls;
