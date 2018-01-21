@@ -62,7 +62,7 @@
                     width: 100%;
                 &__left {
                     display: inline-block;
-                    width: 70%;
+                    width: 79%;
                     font-size: 1.1rem;
                     padding-left: 5%;                    
                     vertical-align: top;
@@ -77,15 +77,6 @@
                                 color: #fff;
                             }
                         }
-                    }
-                }
-                &__middle {
-                    display: inline-block;
-                    width: 10%;                
-                    vertical-align: top;
-                    & .btn {
-                        margin: 50% 0 2% 0;
-                        transform: translateY(-50%);
                     }
                 }
                 &__right {

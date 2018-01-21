@@ -764,7 +764,7 @@ body {
       width: 100%; }
       .context__card__body__container__left {
         display: inline-block;
-        width: 70%;
+        width: 79%;
         font-size: 1.1rem;
         padding-left: 5%;
         vertical-align: top; }
@@ -777,14 +777,6 @@ body {
             color: #000; }
             .context__card__body__container__left .items .btn:hover {
               color: #fff; }
-      .context__card__body__container__middle {
-        display: inline-block;
-        width: 10%;
-        vertical-align: top; }
-        .context__card__body__container__middle .btn {
-          margin: 50% 0 2% 0;
-          -webkit-transform: translateY(-50%);
-                  transform: translateY(-50%); }
       .context__card__body__container__right {
         display: inline-block;
         width: 20%;
