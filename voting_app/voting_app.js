@@ -80,7 +80,7 @@ var fs = require("fs"),
             
             })(req, res, next);
         })
-        .post(csrfProtection, ensureAuthenticated, db.updatePollOptions);
+        .post(ensureAuthenticated, csrfProtection, db.updatePollOptions);
 
 
 
