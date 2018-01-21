@@ -438,6 +438,8 @@ template {
   /* Legacy iOS */ }
 
 body {
+  position: relative;
+  z-index: -1;
   height: 99vh;
   width: 100vw;
   min-width: 530px;
@@ -452,7 +454,7 @@ body {
 .btn {
   display: inline-block;
   border-radius: 5px;
-  font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+  font-family: "Roboto Condensed", Arial, sans-serif;
   border: 1px solid #10771a;
   text-decoration: none; }
   .btn:hover {
@@ -512,7 +514,7 @@ body {
   width: 100%;
   color: #fff;
   top: 0;
-  font-family: "Advent Pro", Colibri, Arial, sans-serif;
+  font-family: "Advent Pro", Arial, sans-serif;
   font-size: 2rem;
   background-color: #292222;
   z-index: 2; }
@@ -650,23 +652,46 @@ body {
   .header__nav__right {
     width: 40%; } }
 
+#error {
+  position: absolute;
+  z-index: 10;
+  width: 70%;
+  font-size: 2em;
+  font-weight: 700;
+  padding: 1rem 0;
+  font-family: Roboto, Calibri, sans-serif, Arial;
+  background-color: red;
+  color: white;
+  text-align: center;
+  border-radius: 2em;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+  margin: 15% auto;
+  text-shadow: 1px 1px black, 1px 1px 3px black, 1px 1px 25px white;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s; }
+
 .container {
   display: inline-table;
   height: 100vh;
   width: 100vw;
-  font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
+  font-family: "Vollkorn SC", Calibri, Arial, sans-serif;
   font-size: 1rem;
   background-size: cover;
-  background-color: #fdfdfd;
-  z-index: -1; }
+  background-color: #fff; }
   .container__left {
+    position: relative;
+    z-index: 1;
     display: block;
     width: 97%;
-    margin: 20% 0; }
+    margin: 20% auto 0 auto; }
     .container__left .form {
       margin: auto;
       text-align: left;
       width: 80%;
+      background-color: #fff;
       -webkit-box-shadow: 0px 0px 15px black, 0px 5px 20px black;
               box-shadow: 0px 0px 15px black, 0px 5px 20px black; }
       .container__left .form__fieldset {
@@ -683,33 +708,32 @@ body {
       .container__left .form__header {
         text-align: center;
         font-size: 1.2rem; }
-      .container__left .form__options {
-        cursor: pointer;
-        font-variant: small-caps;
-        display: block;
-        margin: 2% 0;
-        padding: 4% 3%;
-        color: #10b1cc;
-        text-align: center;
-        letter-spacing: 1.5px;
-        background-color: #dce6ea;
-        border-radius: 5px;
-        text-shadow: 0px 0px 1px black, 0px 0px 1px black;
-        -webkit-transition: all .2s;
-        transition: all .2s;
-        border: 1px solid #c3c3c3; }
-        .container__left .form__options:hover {
-          -webkit-transform: scale(1.02);
-                  transform: scale(1.02);
-          font-weight: 700;
-          color: #fff;
-          background-color: #039e08; }
-        .container__left .form__options.selected {
-          -webkit-transform: scale(1.02);
-                  transform: scale(1.02);
-          font-weight: 700;
-          color: #fff;
-          background-color: #039e08; }
+      .container__left .form__container {
+        max-height: 72vh;
+        overflow-x: auto; }
+        .container__left .form__container__options {
+          cursor: pointer;
+          font-variant: small-caps;
+          display: block;
+          margin: 2% 0;
+          padding: 4% 3%;
+          color: #10b1cc;
+          text-align: center;
+          letter-spacing: 1.5px;
+          background-color: #dce6ea;
+          border-radius: 5px;
+          text-shadow: 0px 0px 1px black, 0px 0px 1px black;
+          -webkit-transition: all .2s;
+          transition: all .2s;
+          border: 1px solid #c3c3c3; }
+          .container__left .form__container__options:hover {
+            font-weight: 700;
+            color: #fff;
+            background-color: #039e08; }
+          .container__left .form__container__options.selected {
+            font-weight: 700;
+            color: #fff;
+            background-color: #039e08; }
       .container__left .form__btn {
         display: inline-block;
         text-shadow: 0px 0px 1px black, 0px 0px 1px black;
@@ -814,15 +838,18 @@ body {
           color: #fff;
           background-color: #0094da; }
   .container__right {
+    position: relative;
+    z-index: 1;
     display: inline-table;
     width: 99%;
     vertical-align: top;
-    margin-top: 5%; }
+    margin: 5% auto 0 auto;
+    padding-bottom: 2rem; }
     .container__right #graph {
-      opacity: .95; }
+      opacity: .95;
+      width: 98%; }
     .container__right #chart {
-      background-color: #ced3d6;
-      background-color: rgba(206, 211, 214, 0.2);
+      background-color: #e8edf1;
       border: 1px outset #CCC;
       height: 88vh;
       width: 98%;
@@ -831,8 +858,10 @@ body {
               box-shadow: 0px 0px 15px black, 0px 5px 20px black; }
     @media (min-width: 1500px) {
       .container__right #chart {
-        width: 95%;
-        margin: auto; } }
+        width: 100%;
+        margin: auto; }
+      .container__right #graph {
+        width: 100%; } }
     .container__right #controls {
       margin-top: -8%;
       margin-left: 4%; }
@@ -923,32 +952,50 @@ body {
       box-shadow: 1px 1px 5px #333;
       pointer-events: none; }
 
+@media (min-width: 500px) {
+  #error {
+    margin: 10% auto; } }
+
 @media (min-width: 660px) {
   .container__left {
     width: 60%;
-    margin: 10% auto; } }
+    margin-top: 10%; }
+  #error {
+    margin: 5% auto; } }
 
 @media (min-width: 1000px) {
   .container__left {
     display: inline-table;
     vertical-align: top;
     width: 29%;
-    margin: 3% auto; }
+    margin-top: 6%; }
   .container__right {
     width: 70%;
-    margin: 3% auto; } }
+    margin-top: 6%; }
+  #error {
+    margin-top: 6%; } }
+
+@media (min-width: 1500px) {
+  .container__left {
+    margin-top: 3%; }
+  .container__right {
+    width: 70%;
+    margin-top: 3%; }
+  #error {
+    margin: 2% auto; } }
 
 .footer {
   position: fixed;
+  z-index: 0;
   bottom: 0;
   right: 0;
   left: 0;
   height: 3vh;
+  width: 50%;
   margin: 0 auto;
   font-size: .8rem;
   color: #333;
   text-align: center;
-  margin: 0 auto;
   background-color: transparent; }
   .footer__codedby {
     position: relative;
@@ -958,7 +1005,7 @@ body {
     color: inherit;
     text-align: center;
     margin: 0 auto;
-    font-family: "Roboto Condensed", Colibri, Arial, sans-serif;
+    font-family: "Roboto Condensed", Arial, sans-serif;
     background-color: transparent; }
     .footer__codedby .fa-heart-o {
       color: red; }
