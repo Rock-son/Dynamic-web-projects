@@ -7,7 +7,7 @@ const pollSchema = new Schema({
     createdBy:  { type: String, required: true },
     title:      { type: String, required: true},
     options:    { type: [ [String, Number] ], required: true },
-    usersVoted: { type: [String] },
+    usersVoted: { type: [[String, String]] },
     updatedUTC: { type: Date },
     createdUTC: { type: Date, default: Date.now },
     url:        { type: String }
