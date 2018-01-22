@@ -51,7 +51,6 @@ exports.updatePollOptions = function(req, res, next, user) {
     let voted_index = parseInt(xssFilters.inHTMLData(mongoSanitize( req.body.voted || 0 ).trim())),
         shouldPollBeDeleted = !!xssFilters.inHTMLData(mongoSanitize(req.body.delete_poll || "")),
         newOption = xssFilters.inHTMLData(mongoSanitize( req.body.newOption || "" ).trim()),
-        username = req.user ? (xssFilters.inHTMLData(req.user.username) || xssFilters.inHTMLData(req.user.displayName)) : null,
         id = xssFilters.uriComponentInHTMLData(mongoSanitize(req.body.poll));
 
     // TESTING FOR HTTP PARAMS POLLUTION
@@ -66,7 +65,7 @@ exports.updatePollOptions = function(req, res, next, user) {
 
     // DELETE
         if (shouldPollBeDeleted) {
-            if ( username === poll.createdBy ) {
+            if ( user === poll.createdBy ) {
                 PollSchema.remove({_id: id}, function(err) {
                     if (err) next(err);
                     return res.status(302).set( { "Location": "./myPolls" } ).end();
@@ -82,11 +81,11 @@ exports.updatePollOptions = function(req, res, next, user) {
 
     // UPDATE VOTE (anyone)
             if ( poll.options[voted_index] ) {
-                if (searchArrayOfArrays(poll.usersVoted, 0, username) || searchArrayOfArrays(poll.usersVoted, 1, getClientIp(req)) ) {
+                if (searchArrayOfArrays(poll.usersVoted, 0, user) || searchArrayOfArrays(poll.usersVoted, 1, getClientIp(req)) ) {
                     return res.status(302).set({"Location": "./poll?url=" + poll.url + "&err=" + xssFilters.uriComponentInDoubleQuotedAttr("You have already voted!")}).end();
                 }
                 ++poll.options[voted_index][1];
-                poll.usersVoted.push([username, getClientIp(req)]);
+                poll.usersVoted.push([user, getClientIp(req)]);
                 
                 PollSchema.update({_id: id}, poll, function(err) {
                     if (err) return next(err)
