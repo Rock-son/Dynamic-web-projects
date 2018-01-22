@@ -6,7 +6,7 @@ const pollSchema = new Schema({
     
     createdBy:  { type: String, required: true },
     title:      { type: String, required: true},
-    options:    { type: [ [String, Number] ], required: true, validate: [val => val.length <= 20, '{PATH} exceeds the limit of 20'] },
+    options:    { type: [ [String, Number] ], required: true, validate: [val => val.length <= 30, '{PATH} exceeds the limit of 30'] },
     usersVoted: { type: [[String, String]] },
     updatedUTC: { type: Date },
     createdUTC: { type: Date, default: Date.now },
