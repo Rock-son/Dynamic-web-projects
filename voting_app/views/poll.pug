@@ -7,7 +7,10 @@ block content
             form.form(action="/voting-app/poll" method="post" id="poll_form")
                 fieldset#fs.form__fieldset
                     input(type="hidden" name="_csrf" value=csrfTkn)
-                    input(type="hidden" name="voted" id="voted_option" value="null")
+                    if chosen
+                        input(type="hidden" name="voted" id="voted_option" value=data.options.map(item => item[0]).indexOf(chosen))
+                    else
+                        input(type="hidden" name="voted" id="voted_option" value="null")
                     input(type="hidden" name="poll" value=data.id)
                     .form__container
                         each poll, index in data.options
