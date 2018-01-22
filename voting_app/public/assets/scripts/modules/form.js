@@ -1,4 +1,3 @@
-import { basename } from "path";
 
 module.exports = function(e) {
     // ELEMENT IDs
@@ -122,8 +121,7 @@ module.exports = function(e) {
 
     function selectOption(e) {
 
-        const voted_el = document.getElementById(SUBMIT_DATA),
-              target_data = JSON.parse(document.getElementById("poll_data").value);
+        const voted_el = document.getElementById(SUBMIT_DATA);
 
         closeWarning(e);
 
@@ -155,21 +153,23 @@ module.exports = function(e) {
     function submitForm(e) {
 
         const EMPTY_NEW_OPTION = "empty", NO_VALUE = "no_value";
-
+        
         let doc = null;
         // IF NEW INPUT EXISTS: set val else error
         if ((doc = document.getElementById(NEW_OPTION)) != null) {
             if (doc.value !== "") {
                 document.getElementById(SUBMIT_DATA).value = 100;
+            // WHEN INPUT FIELD IS EMPTY AND USER PRESSED SUBMIT
             } else if (doc.value === "" && e.target.id !== "new_option") {
                 e.preventDefault();
                 document.getElementsByClassName("warning").length > 0 ? void 0 : showError(EMPTY_NEW_OPTION);
             }
-        // ELSE CHECK ACTIVE VALUE OR EXISTANCE OF DELETE COMMAND
+        // IF NO OPTION IS SELECTED & SUBMIT DATA IS NOT "DELETE" - SHOW ERROR
         } else if (!document.querySelector(".form__container__options.selected") && document.getElementById(SUBMIT_DATA).value !== "delete") {
                 e.preventDefault();
                 document.getElementsByClassName("warning").length > 0 ? void 0 : showError(NO_VALUE);
         }
+        // ELSE - SUBMIT
                 function showError(type) {
 
                     const fieldset = document.getElementById("fs"),

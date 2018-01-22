@@ -4,10 +4,15 @@
 const drawPlot = require("./modules/drawPlot"),
       formEventListeners = require("./modules/form.js");
 
-document.addEventListener("DOMContentLoaded", onContentLoaded);
 document.addEventListener("DOMContentLoaded", formEventListeners);
+document.addEventListener("DOMContentLoaded", main);
 
+function main() {
 
+      const url = /(.*\?url=\w*)[^&?.*]/.exec(window.location.href)[0] + ".json";
+      console.log(/(.*\?url=\w*)[^&?.*]/.exec(window.location.href)[0]);
+      d3.xhr(url, onDataLoad);
+}
 
 // container object's width and height
   const winSize = +window.innerWidth
@@ -23,7 +28,7 @@ document.addEventListener("DOMContentLoaded", formEventListeners);
 
 
 // onload event listener callback function
-function onContentLoaded() {
+function onDataLoad(event) {
     
       //SHOW ERROR ON PAGE (if exists)      
       setTimeout(() => {            
@@ -33,7 +38,7 @@ function onContentLoaded() {
             }
       }, 3000);
 
-      const poll = JSON.parse(document.getElementById("poll_data").value),
+      const poll = JSON.parse(event.response).data,
             data = poll.options.map((item, index) => { return {key: item[0], value: item[1]} }),
             max = d3.max(data, entry => entry.value),
 
