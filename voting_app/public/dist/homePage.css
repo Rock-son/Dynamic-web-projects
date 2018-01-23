@@ -734,7 +734,7 @@ body {
   background-color: #fff;
   border-radius: 10px;
   z-index: 0;
-  top: -60vh;
+  top: -72vh;
   width: 100%; }
   .context__card__body {
     display: inline-block;
@@ -748,41 +748,44 @@ body {
       background-color: #26c978;
       padding-left: 5%;
       margin: 0 0 2% 0;
-      color: #fff;
+      color: #333;
       border-radius: 10px 10px 0 0;
       text-decoration: none;
       -webkit-text-decoration: 0ox 0px 1px black, 0px 0px 1px black;
               text-decoration: 0ox 0px 1px black, 0px 0px 1px black;
-      -webkit-transition: color .2s ease-in-out;
-      transition: color .2s ease-in-out; }
+      -webkit-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out; }
       .context__card__body__title:visited {
-        color: #fff; }
+        color: #333; }
       .context__card__body__title:hover {
-        text-decoration: underline; }
+        color: #eee; }
     .context__card__body__container {
-      display: inline-block;
+      display: inline-table;
       width: 100%; }
       .context__card__body__container__left {
-        display: inline-block;
+        display: table-cell;
         width: 79%;
         font-size: 1.1rem;
         padding-left: 5%;
-        vertical-align: top; }
+        vertical-align: middle; }
         .context__card__body__container__left .items {
           display: inline-block;
           padding-left: 0; }
           .context__card__body__container__left .items .btn {
             font-size: 1.2rem;
+            font-weight: 700;
             font-variant: all-petite-caps;
-            color: #000; }
+            color: #4d5810;
+            background-color: #c8fff2; }
             .context__card__body__container__left .items .btn:hover {
-              color: #fff; }
+              color: #fff;
+              background-color: #26c978; }
       .context__card__body__container__right {
-        display: inline-block;
+        display: table-cell;
         width: 20%;
         font-size: 1rem;
         text-align: center;
-        vertical-align: top; }
+        vertical-align: middle; }
         .context__card__body__container__right .label {
           display: block; }
         .context__card__body__container__right .votes {
@@ -813,23 +816,20 @@ body {
 
 @media (min-width: 500px) {
   .context__card {
-    top: -60vh;
     width: 100%; } }
 
 @media (min-width: 660px) {
   .context__card {
-    top: -70vh;
-    width: 70%; } }
+    width: 90%;
+    top: -78vh; } }
 
 @media (min-width: 1000px) {
   .context__card {
-    top: -75vh;
-    width: 60%; } }
+    width: 85%; } }
 
 @media (min-width: 1500px) {
   .context__card {
-    top: -75vh;
-    width: 50%; } }
+    width: 70%; } }
 
 @-webkit-keyframes moveInRight {
   0% {
