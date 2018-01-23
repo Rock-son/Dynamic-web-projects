@@ -31,7 +31,7 @@
         background-color: #fff;
         border-radius: 10px;
         z-index: 0;
-        top: -60vh;
+        top: -72vh;
         width: 100%;
         &__body {
             display: inline-block;
@@ -45,46 +45,49 @@
                 background-color: #26c978;
                 padding-left: 5%;
                 margin: 0 0 2% 0;
-                color: #fff;
+                color: #333;
                 border-radius: 10px 10px 0 0;
                 text-decoration: none;
                 text-decoration: 0ox 0px 1px black, 0px 0px 1px black;
-                transition: color .2s ease-in-out;
+                transition: all .2s ease-in-out;
                 &:visited {
-                    color: #fff;
+                    color: #333;
                 }
                 &:hover {
-                    text-decoration: underline;
+                    color: #eee;
                 }
             }
             &__container {
-                    display: inline-block;
+                    display: inline-table;
                     width: 100%;
                 &__left {
-                    display: inline-block;
+                    display: table-cell;
                     width: 79%;
                     font-size: 1.1rem;
                     padding-left: 5%;                    
-                    vertical-align: top;
+                    vertical-align: middle;
                     & .items {
                         display: inline-block;
                         padding-left: 0;
                         & .btn {
                             font-size: 1.2rem;
+                            font-weight: 700;
                             font-variant: all-petite-caps;
-                            color: #000;
+                            color: #4d5810;
+                            background-color: #c8fff2;
                             &:hover {
                                 color: #fff;
+                                background-color: #26c978;
                             }
                         }
                     }
                 }
                 &__right {
-                    display: inline-block;
+                    display: table-cell;
                     width: 20%;
                     font-size: 1rem;
                     text-align: center;                    
-                    vertical-align: top;
+                    vertical-align: middle;
                     & .label {
                         display: block;
                     }
@@ -125,28 +128,25 @@
     }
 @include atSmall {
     .context__card {
-        top: -60vh;
         width: 100%;
     }
 }
 @include atMedium{
     .context__card {
-        top:-70vh;
-        width: 70%;
+        width: 90%;
+        top: -78vh;
     }
 }
 
 @include atLarge{
     .context__card {
-        top: -75vh;
-        width: 60%;
+        width: 85%;
     }
 }
 
 @include atXLarge{
     .context__card {
-        top: -75vh;
-        width: 50%;
+        width: 70%;
     }
 }
 
