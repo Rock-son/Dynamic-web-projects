@@ -16,28 +16,71 @@
 .subHeader {
     position: relative;
     width: 100%;
-    color: #fff;
+    height: 8rem;
     background-color: #296DAD;
     box-shadow: 1px 1px 15px black;
-    font-family: "Vollkorn SC", Colibri, Arial, sans-serif;
-    font-size: 2.6rem;;
-    line-height: 2.6rem;
+    font-family: "Vollkorn SC", Arial, sans-serif;
     text-align: center;
-    &__title { 
+    letter-spacing: 1px;
+    font-weight: 700;
+    &__title {
         width: auto;
         position: relative;
         margin-top: 0;
         padding: 2% 0;
+        text-decoration: none;
         text-shadow: 1px 1px 2px black, -1px -1px 2px black;
-    }
-    @include atLarge {
-        & {
-            font-size: 3rem;
+        &__link {
+            color: #bababa;
+            font-size: 3.2rem;
+            text-decoration: none;
+            color: #ababab;
+            text-align: center;
+            transition: all 2s cubic-bezier(.15,.85,.85,1);
+            &:visited {
+                color: #bababa;
+            }        
+            &:before, &:after {
+                position: absolute;
+                color: orange;
+                font-size: 2rem;
+                transition: inherit;
+                white-space: nowrap;
+                letter-spacing: .5px;
+            }
+            &:before {
+                content: attr(data-bf);
+                margin-top: -1.7rem;
+                margin-left: -5rem;
+            }
+            &:after {
+                content: attr(data-af);
+                margin-top: 3rem;
+                margin-left: -5rem
+            }
+            &:hover {
+                font-size: 3.5rem;
+                &:before{
+                    font-size: 2.4rem;
+                    transform: translate(-15px, -5px);
+                }
+                &:after{
+                    font-size: 2.4rem;
+                    transform: translate(15px, 5px);
+                }
+            }
         }
     }
-    @include atXLarge {
-        & {
-            font-size: 3.6rem;
-        }
+}
+
+
+@include atLarge {
+    .subheader__title {
+        font-size: 3rem;
+    }
+}
+@include atXLarge {
+    .subheader__title {
+        font-size: 3.6rem;
     }
 }
