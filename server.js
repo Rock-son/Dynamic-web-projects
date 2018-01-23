@@ -26,8 +26,13 @@ const express = require("express"),
       // PORT & ROUTER
       port = process.env.PORT || 3000,
       app = express(),
-      RateLimit = require('express-rate-limit');
-
+      // LIMITER
+      RateLimit = require('express-rate-limit'),
+      limiter = new RateLimit({
+            windowMs: 15*60*1000, // 15 minutes
+            max: 200, // limit each IP to 200 requests per windowMs (fonts, jpeg, css)
+            delayMs: 0 // disable delaying - full speed until the max limit is reached
+      });
 
 
       // COOKIE & BODY PARSERS
@@ -58,13 +63,8 @@ const express = require("express"),
             res.status(403)
             res.send('form tampered with')
       });
-
-      // LIMITER
-      const limiter = new RateLimit({
-            windowMs: 15*60*1000, // 15 minutes
-            max: 200, // limit each IP to 10 requests per windowMs
-            delayMs: 0 // disable delaying - full speed until the max limit is reached
-          });
+      
+      //LIMITER
       app.use(limiter);
 
       // ROUTER
