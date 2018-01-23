@@ -103,7 +103,7 @@ const gitHubStrategy = new GitHubStrategy({
       scope: "user:email",
       clientID: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      callbackURL: "http://localhost:3000/auth/github/callback"
+      callbackURL: "https://fcc-dynamic-webapps-roky.herokuapp.com/auth/github/callback"
       },
       function(accessToken, refreshToken, profile, done) {
 
@@ -125,7 +125,7 @@ const googleStrategy = new GoogleStrategy({
       scope: "profile",
       clientID: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback"
+      callbackURL: "https://fcc-dynamic-webapps-roky.herokuapp.com/auth/google/callback"
       },
       function(accessToken, refreshToken, profile, done) {
 
@@ -148,7 +148,7 @@ const facebookStrategy = new FacebookStrategy({
       scope: "public_profile",
       clientID: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/callback",
+      callbackURL: "https://fcc-dynamic-webapps-roky.herokuapp.com/auth/facebook/callback",
       profileFields: ['id', 'displayName'],
       enableProof: true
       },
