@@ -56,6 +56,13 @@
                 &:hover {
                     color: #eee;
                 }
+                &.voted {
+                    background-color: #c93126;
+                    color: #eee;
+                    &:hover {
+                        color: #d0bcbc;
+                    }
+                }
             }
             &__container {
                     display: inline-table;
@@ -78,6 +85,14 @@
                             &:hover {
                                 color: #fff;
                                 background-color: #26c978;
+                            }
+                            &.voted {
+                                color: #36382c;
+                                background-color: #daa2a2;
+                                &:hover {
+                                    color: #eee;
+                                    background-color: #ca4545;
+                                }
                             }
                         }
                     }

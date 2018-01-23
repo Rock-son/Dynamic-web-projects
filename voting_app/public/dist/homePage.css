@@ -759,6 +759,11 @@ body {
         color: #333; }
       .context__card__body__title:hover {
         color: #eee; }
+      .context__card__body__title.voted {
+        background-color: #c93126;
+        color: #eee; }
+        .context__card__body__title.voted:hover {
+          color: #d0bcbc; }
     .context__card__body__container {
       display: inline-table;
       width: 100%; }
@@ -780,6 +785,12 @@ body {
             .context__card__body__container__left .items .btn:hover {
               color: #fff;
               background-color: #26c978; }
+            .context__card__body__container__left .items .btn.voted {
+              color: #36382c;
+              background-color: #daa2a2; }
+              .context__card__body__container__left .items .btn.voted:hover {
+                color: #eee;
+                background-color: #ca4545; }
       .context__card__body__container__right {
         display: table-cell;
         width: 20%;

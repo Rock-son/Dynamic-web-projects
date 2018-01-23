@@ -6,6 +6,7 @@ var fs = require("fs"),
     pug = require("pug"),
     // DB
     db = require("../db/controllers/controller"),
+    getClientIp = require("../db/controllers/modules/getIp"),
     // SECURITY
     csrf = require("csurf"),
     csrfProtection = csrf({ cookie: true }),
@@ -40,10 +41,10 @@ var fs = require("fs"),
           passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
                 if (err) { return next(err) }
                 if (!user) { 
-                    const options = { fetch: {}, cssPath: homeCSS, auth: false, user: "" };
+                    const options = { fetch: {}, cssPath: homeCSS, auth: false, user: "", ip: getClientIp(req)};
                     return db.showMyPolls(req, res, next, options);
                 }
-                const options = { fetch: {}, cssPath: homeCSS, auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+                const options = { fetch: {}, cssPath: homeCSS, auth: true, user: xssFilters.inHTMLData(user.username || user.displayName), loginType: info, ip: getClientIp(req) };
                 return db.showMyPolls(req, res, next, options);
         })(req, res, next);
     });
@@ -57,7 +58,7 @@ var fs = require("fs"),
             passport.authenticate('jwt', {session: false, failureRedirect: "/auth/login"}, function(err, user, info, status) {
                 if (err) { return next(err) }
                 if (!user) { return res.redirect("/auth/login"); }
-                return res.render("createPoll", { js: createPollJS, cssPath: createPollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) });
+                return res.render("createPoll", { js: createPollJS, cssPath: createPollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName), loginType: info });
             })(req, res, next);
         })
         .post(ensureAuthenticated, csrfProtection, db.insertPollData);
@@ -72,10 +73,10 @@ var fs = require("fs"),
                 if (err) { return next(err) }
 
                 if (!user) {
-                    const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false };
+                    const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: false};
                     return db.showPollData(req, res, next, options);
                 } 
-                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+                const options = { js: pollJS, cssPath: pollCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName), loginType: info };
                 return db.showPollData(req, res, next, options);
             
             })(req, res, next);
@@ -99,10 +100,10 @@ var fs = require("fs"),
     app.get("/myPolls", csrfProtection, function(req, res, next) {
         passport.authenticate('jwt', {session: false}, function(err, user, info, status) {
             if (err) { return next(err) }
-
+            
             if (!user) { return res.redirect("/auth/login"); }
             
-            const options = { fetch: { createdBy: user.username || user.displayName }, cssPath: homeCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName) };
+            const options = { fetch: { createdBy: user.username || user.displayName }, cssPath: homeCSS, csrfTkn: req.csrfToken(), auth: true, user: xssFilters.inHTMLData(user.username || user.displayName), loginType: info, ip: getClientIp(req) };
             return db.showMyPolls(req, res, next, options);
         
         })(req, res, next);
