@@ -83,6 +83,7 @@ body {
     -webkit-font-smoothing: antialiased;
     font-size: 1rem;
     color:#666b70;
+    overflow-x: hidden;
 }
 
 @import "../mixins/sizes.scss";
