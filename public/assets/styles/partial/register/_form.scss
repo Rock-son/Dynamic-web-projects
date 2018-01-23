@@ -7,7 +7,7 @@
 .form__container {
     position: relative;
     height: auto;
-    width: 25vw;
+    width: 80%;
     margin: auto;
     top: 40%;
     transform: translateY(-50%);
@@ -47,7 +47,28 @@
             color: #3ea1c9;
         }
     }
+    @include atSmall {
+        & {
+            width: 70%;
+        }
+    }
+    @include atMedium {
+        & {
+            width: 50%;
+        }
+    }
+    @include atLarge {
+        & {
+            width: 35%;
+        }
+    }
+    @include atLarge {
+        & {
+            width: 25%;
+        }
+    }
 }
+
 .form {
     margin: 5% auto 5% auto;
     padding: 1%;

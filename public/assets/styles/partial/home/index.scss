@@ -64,13 +64,13 @@ $path: "/public/assets";
 body {
     height: 100vh;
     width: 100vw;
-    min-width: 530px;
+    min-width: 330px;
     -webkit-font-smoothing: antialiased;
     font-size: 1rem;
     color:#666b70;
 }
 
-@import "../mixins/mixin.scss";
+@import "../mixins/sizes.scss";
 @import "./_header.scss";
 @import "./_body.scss";
 @import "./_footer.scss";
