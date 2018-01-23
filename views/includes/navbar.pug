@@ -17,6 +17,13 @@ section.header
                     i(class="fa fa-google-plus-square " title="Login with Google" aria-hidden="true") 
             else 
                 a.header__nav__right__items.authBtn(href="/auth/logout") Logout
-                span.header__nav__right__items.authBtn--no-link 
-                    a(href="/") #[i(class="fa fa-user")] 
+                span.header__nav__right__items.authBtn--no-link
+                    if loginType == "local"
+                        a(href="/") #[i(class="fa fa-user")] 
+                    else if loginType == "facebook"
+                        a(href="https://www.facebook.com/settings?tab=applications") #[i(class="fa fa-user")] 
+                    else if loginType == "google"
+                        a(href="https://myaccount.google.com/permissions") #[i(class="fa fa-user")] 
+                    else if loginType == "github"
+                        a(href="https://github.com/settings/applications") #[i(class="fa fa-user")] 
                     span #{user}
