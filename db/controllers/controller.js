@@ -157,6 +157,7 @@ exports.showMyPolls = function(req, res, next, options) {
         if (err) next(err);
         
         if (!polls) {
+            options.polls = "";
             return res.render("homePage", options);
         }
         options.polls =polls;
