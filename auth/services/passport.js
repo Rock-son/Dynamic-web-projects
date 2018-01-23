@@ -3,7 +3,7 @@
 
 const passport = require("passport"),
       { LocalUser, GitHubUser, FacebookUser, GoogleUser} = require("../models/users"),
-      GOOOGLE="google", FACEBOOK="facebook", GITHUB="github", LOCAL="local",
+      GOOGLE="google", FACEBOOK="facebook", GITHUB="github", LOCAL="local",
       JwtStrategy = require("passport-jwt").Strategy,
       GitHubStrategy = require('passport-github').Strategy,
       FacebookStrategy = require('passport-facebook').Strategy,
