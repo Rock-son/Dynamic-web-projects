@@ -67,28 +67,28 @@ const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
             case LOCAL:
                   LocalUser.findById(payload.sub, function(err, user) {
                         if (err) { return done(err, false);}
-                        if (user) { return done(null, user); }
+                        if (user) { return done(null, user, "local"); }
                         return done(null, false);
                   });
                   break;          
             case FACEBOOK:
                   FacebookUser.findById(payload.sub, function(err, user) {
                         if (err) { return done(err, false);}
-                        if (user) { return done(null, user); }
+                        if (user) { return done(null, user, "facebook"); }
                         return done(null, false);
                   });
                   break;
             case GITHUB:
                   GitHubUser.findById(payload.sub, function(err, user) {
                         if (err) { return done(err, false);}
-                        if (user) { return done(null, user); }
+                        if (user) { return done(null, user, "github"); }
                         return done(null, false);
                   });
                   break;
             case GOOGLE:
                   GoogleUser.findById(payload.sub, function(err, user) {
                         if (err) { return done(err, false);}
-                        if (user) { return done(null, user); }
+                        if (user) { return done(null, user, "google"); }
                         return done(null, false);
                   });
                   break;
