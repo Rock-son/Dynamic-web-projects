@@ -30,7 +30,7 @@ module.exports = function(app) {
                   
                   if (err) { return next(err) }
                   if (!user) {return res.render("index", { cssPath: homepageCSS, auth: false, login: false, user: "" }); }
-                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user.username || user.displayName) });
+                  return res.render("index", {cssPath: homepageCSS, auth: true, login: false, user: xssFilters.inHTMLData(user.username || user.displayName),loginType: info });
             })(req, res, next);
       });
 
