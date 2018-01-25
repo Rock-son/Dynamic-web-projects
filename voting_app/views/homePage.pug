@@ -24,22 +24,22 @@ block content
                                 hr.context__card__footer__line
                                 .context__card__footer__context created on: &nbsp #[span=poll.createdUTC.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'}) ] #[span.small &nbsp #{"["} by ] #[span=poll.createdBy] #[span.small #{"]"}]
                         br
-                    else
-                        .context__card
-                            .context__card__body 
-                                a.context__card__body__title(href="./poll?url=" + poll.url)=poll.title
-                                .context__card__body__container
-                                    .context__card__body__container__left                
-                                        ul.items                        
-                                            each val in poll.options
-                                                a.btn.btn--empty.btn--large(href="./poll?url=" + poll.url + "&chosen=" + val[0])=val[0]
-                                    .context__card__body__container__right
-                                        .label Votes:
-                                        .votes=poll.usersVoted.length              
-                            .context__card__footer
-                                hr.context__card__footer__line
-                                .context__card__footer__context created on: &nbsp #[span=poll.createdUTC.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'}) ] #[span.small &nbsp #{"["} by ] #[span=poll.createdBy] #[span.small #{"]"}]
-                        br
+            else
+                .context__card
+                    .context__card__body 
+                        a.context__card__body__title(href="./poll?url=" + poll.url)=poll.title
+                        .context__card__body__container
+                            .context__card__body__container__left                
+                                ul.items                        
+                                    each val in poll.options
+                                        a.btn.btn--empty.btn--large(href="./poll?url=" + poll.url + "&chosen=" + val[0])=val[0]
+                            .context__card__body__container__right
+                                .label Votes:
+                                .votes=poll.usersVoted.length              
+                    .context__card__footer
+                        hr.context__card__footer__line
+                        .context__card__footer__context created on: &nbsp #[span=poll.createdUTC.toLocaleDateString("en-US", {year: 'numeric', month: 'long', day: 'numeric'}) ] #[span.small &nbsp #{"["} by ] #[span=poll.createdBy] #[span.small #{"]"}]
+                br
     section.context
     section.context
     include includes/footer.pug
