@@ -39,7 +39,7 @@ exports.login = function(req, res, next) {
     const token = (function(req, tokenForUser) { return tokenForUser(req.user, "local")})(req, tokenForUser);
     // User has already auth'd their email and password with verifyLogin - local strategy
     res.cookie("_t1", token, cookieOptions);
-    return res.redirect("/");
+    return res.redirect("/voting-app");
 };
 
 /**
@@ -54,7 +54,7 @@ exports.schemaLogin = function(req, res, user, type) {
     const token = (function(user, type, tokenForUser) { return tokenForUser(user, type)})(user, type, tokenForUser);
     // User has already auth'd their email and password with verifyLogin - local strategy
     res.cookie("_t1", token, cookieOptions);
-    return res.redirect("/");
+    return res.redirect("/voting-app");
 };
 /**
  * Logs out user, deleting his cookie
@@ -71,7 +71,7 @@ exports.logout = function(req, res) {
         exp: new Date(1).getTime()
     });
     res.statusCode = 302;
-    res.set({'Location': req.headers.referer || req.headers.origin || "/"});
+    res.set({'Location': req.headers.referer || req.headers.origin || "/voting-app"});
     res.end();
     return;
 };
@@ -113,7 +113,7 @@ exports.register = function(req, res, next) {
             // send back a cookie with authentication token
             res.cookie('_t1', tokenForUser(user, "local"), cookieOptions);
             res.statusCode = 302;
-            res.setHeader('Location', '/');
+            res.setHeader('Location', '/voting-app');
             res.end();
             return;
         });
