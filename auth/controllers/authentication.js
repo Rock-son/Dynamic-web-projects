@@ -4,7 +4,7 @@ const {LocalUser} = require("../models/users"),
       jwt = require("jsonwebtoken"),
       mongoSanitize = require("mongo-sanitize"),
       cookieOptions = { httpOnly: true,
-                        secure: false,
+                        secure: true,
                         sameSite: false,
                         maxAge: 60 * 60 * 24000// 24 hours
       };
