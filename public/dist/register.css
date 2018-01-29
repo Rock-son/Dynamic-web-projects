@@ -489,7 +489,8 @@ body {
             vertical-align: bottom;
             font-size: 1rem;
             color: #bbb;
-            padding: .6rem; }
+            padding: .6rem;
+            white-space: nowrap; }
         .header__nav__right__items.authBtn:nth-child(2) {
           margin-right: 3%; }
         .header__nav__right__items .fa {

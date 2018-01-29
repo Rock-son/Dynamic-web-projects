@@ -581,7 +581,8 @@ body {
             vertical-align: bottom;
             font-size: 1rem;
             color: #bbb;
-            padding: .6rem; }
+            padding: .6rem;
+            white-space: nowrap; }
         .header__nav__right__items.authBtn:nth-child(2) {
           margin-right: 3%; }
         .header__nav__right__items .fa {
@@ -631,7 +632,8 @@ body {
             text-decoration: none;
             text-shadow: 0px 0px 5px #fff,0px 0px 10px #fff; }
         .header__nav__right__items span {
-          margin-left: 1%; }
+          margin-left: 1%;
+          white-space: nowrap; }
     .header__nav__line {
       opacity: .5;
       display: block;
@@ -852,7 +854,7 @@ body {
   .container__right {
     position: relative;
     z-index: 1;
-    display: inline-table;
+    display: inline-block;
     width: 99%;
     vertical-align: top;
     margin: 5% auto 0 auto;
@@ -987,7 +989,7 @@ body {
 
 @media (min-width: 660px) {
   .container__left {
-    display: inline-table;
+    display: inline-block;
     vertical-align: top;
     width: 29%;
     margin-top: 6%; }
@@ -999,7 +1001,7 @@ body {
 
 @media (min-width: 1000px) {
   .container__left {
-    display: inline-table;
+    display: inline-block;
     vertical-align: top;
     width: 29%;
     margin-top: 6%;
@@ -1012,6 +1014,7 @@ body {
 
 @media (min-width: 1500px) {
   .container__left {
+    display: inline-block;
     margin-top: 3%; }
   .container__right {
     width: 70%;
