@@ -19,7 +19,7 @@ section.header
                     i(class="fa fa-google-plus-square " title="Login with Google" aria-hidden="true") 
             else 
                 a.header__nav__right__items.authBtn(href="/auth/logout") Logout
-                span.header__nav__right__items.authBtn--no-link
+                div.header__nav__right__items.authBtn--no-link
                     if loginType == "local"
                         a(href="/") #[i(class="fa fa-user")] 
                     else if loginType == "facebook"
