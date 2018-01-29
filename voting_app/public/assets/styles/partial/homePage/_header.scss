@@ -23,3 +23,12 @@
 .btn--hidden {
     visibility: hidden;
 }
+
+@include atXSmall {
+    .header {
+        height: 5.3rem;
+    }
+    .header__txt {
+        margin-top: 5.3rem;
+    }
+} 

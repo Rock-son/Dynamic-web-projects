@@ -145,6 +145,7 @@
     }
 @include atSmall {
     .context__card {
+        top: -72vh;
         width: 100%;
     }
 }

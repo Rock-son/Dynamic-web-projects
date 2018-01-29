@@ -440,7 +440,7 @@ template {
 body {
   height: 100vh;
   width: 100vw;
-  min-width: 530px;
+  min-width: 470px;
   -webkit-font-smoothing: antialiased;
   font-size: 1rem;
   color: #666b70;
@@ -695,6 +695,12 @@ body {
 .btn--hidden {
   visibility: hidden; }
 
+@media (max-width: 500px) {
+  .header {
+    height: 5.3rem; }
+  .header__txt {
+    margin-top: 5.3rem; } }
+
 .context {
   height: 100vh;
   width: 100vw;
@@ -831,6 +837,7 @@ body {
 
 @media (min-width: 500px) {
   .context__card {
+    top: -72vh;
     width: 100%; } }
 
 @media (min-width: 660px) {
