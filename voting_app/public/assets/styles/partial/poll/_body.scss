@@ -40,7 +40,7 @@
     &__right {
         position: relative;
         z-index: 1;
-        display: inline-table;
+        display: inline-block;
         width: 99%;
         vertical-align: top;
         margin: 5% auto 0 auto;
@@ -66,7 +66,7 @@
 
 @include atMedium{
   .container__left {
-      display: inline-table;
+      display: inline-block;
       vertical-align: top;
       width: 29%;
       margin-top: 6%;
@@ -82,7 +82,7 @@
 
 @include atLarge{
     .container__left {
-        display: inline-table;
+        display: inline-block;
         vertical-align: top;
         width: 29%;
         margin-top: 6%;
@@ -99,6 +99,7 @@
 
 @include atXLarge{
     .container__left {
+        display: inline-block;
         margin-top: 3%;
     }
     .container__right {
