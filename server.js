@@ -72,7 +72,8 @@ const express = require("express"),
 
 
 
-      // DB
+      // DB      
+      mongoose.Promise = global.Promise;
       mongoose.connect(dbUrl);
 
 
