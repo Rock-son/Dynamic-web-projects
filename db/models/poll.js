@@ -4,9 +4,9 @@ const mongoose = require("mongoose"),
 // Define Model
 const pollSchema = new Schema({    
     
-    createdBy:  { type: String, required: true },
-    title:      { type: String, required: true},
-    options:    { type: [ [String, Number] ], required: true, validate: [val => val.length <= 30, '{PATH} exceeds the limit of 30'] },
+    createdBy:  { type: String, required: true, trim: true },
+    title:      { type: String, required: true, trim: true},
+    options:    { type: [ [String, Number] ], required: true, validate: [val => val.length <= 30, '{PATH} exceeds the limit of 30'], trim: true },
     usersVoted: { type: [[String, String]] },
     updatedUTC: { type: Date },
     createdUTC: { type: Date, default: Date.now },
