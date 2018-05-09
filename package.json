@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha",
-    "webpack": "webpack"
+	"webpack": "webpack",
+	"gulp": "gulp watch"
   },
   "repository": {
     "type": "git",
