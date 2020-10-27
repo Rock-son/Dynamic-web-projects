@@ -74,7 +74,7 @@ const express = require("express"),
 
       // DB      
       mongoose.Promise = global.Promise;
-      mongoose.connect(dbUrl);
+      mongoose.connect(dbUrl, { useMongoClient: true });
 
 
 
