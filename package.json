@@ -2,7 +2,7 @@
   "name": "dynamic-web-projects",
   "version": "1.0.0",
   "engines": {
-    "node": "=8.17.9"
+    "node": "=8.17.0"
   },
   "description": "",
   "main": "server.js",
